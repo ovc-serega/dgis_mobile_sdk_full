@@ -432,8 +432,8 @@ extension _DartTo_CString on String {
   _CString _copyFromDartTo_CString() {
     // Adapted from https://pub.dev/documentation/ffi/latest/ffi/StringUtf8Pointer/toNativeUtf8.html
     final units = utf8.encode(this);
-    final ffi.Pointer<ffi.Uint8> result = ffi_package.malloc<ffi.Uint8>(units.length);
-    final Uint8List nativeString = result.asTypedList(units.length);
+    final result = ffi_package.malloc<ffi.Uint8>(units.length);
+    final nativeString = result.asTypedList(units.length);
     nativeString.setAll(0, units);
     return _CStringCreateWithData(units.length, result.cast());
   }
@@ -64153,8 +64153,8 @@ late final _CDgisObjectIdMakeDefaultPtr = _lookup<ffi.NativeFunction<_CDgisObjec
 late final _CDgisObjectIdMakeDefault = _CDgisObjectIdMakeDefaultPtr.asFunction<_CDgisObjectId Function()>();
 
 
-late final _CContext_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CContext_cg_objectIdentifier');
-late final _CContext_cg_objectIdentifier = _CContext_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CContext_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CContext_cg_objectIdentifier');
+late final _CContext_cg_objectIdentifier = _CContext_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CContext_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CContext_release');
@@ -64165,8 +64165,8 @@ late final _CContextMakeDefaultPtr = _lookup<ffi.NativeFunction<_CContext Functi
 late final _CContextMakeDefault = _CContextMakeDefaultPtr.asFunction<_CContext Function()>();
 
 
-late final _CSystemMemoryManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CSystemMemoryManager_cg_objectIdentifier');
-late final _CSystemMemoryManager_cg_objectIdentifier = _CSystemMemoryManager_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CSystemMemoryManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CSystemMemoryManager_cg_objectIdentifier');
+late final _CSystemMemoryManager_cg_objectIdentifier = _CSystemMemoryManager_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CSystemMemoryManager_reduceMemoryUsagePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CSystemMemoryManager)>>('CSystemMemoryManager_reduceMemoryUsage');
 late final _CSystemMemoryManager_reduceMemoryUsage = _CSystemMemoryManager_reduceMemoryUsagePtr.asFunction<void Function(_CSystemMemoryManager)>();
@@ -64183,9 +64183,9 @@ late final _CLevelIdMakeDefaultPtr = _lookup<ffi.NativeFunction<_CLevelId Functi
 late final _CLevelIdMakeDefault = _CLevelIdMakeDefaultPtr.asFunction<_CLevelId Function()>();
 
 
-late final _CStringCreateWithDataPtr = _lookup<ffi.NativeFunction<_CString Function(ffi.Uint64 size, ffi.Pointer<ffi_package.Utf8>)>>('CString_createWithData');
+late final _CStringCreateWithDataPtr = _lookup<ffi.NativeFunction<_CString Function(ffi.Size size, ffi.Pointer<ffi_package.Utf8>)>>('CString_createWithData');
 late final _CStringCreateWithDataPrivate = _CStringCreateWithDataPtr.asFunction<_CString Function(int, ffi.Pointer<ffi_package.Utf8>)>();
-late final _GetSizeWith_CStringPtr = _lookup<ffi.NativeFunction<ffi.Uint64 Function(_CString)>>('CString_getSize');
+late final _GetSizeWith_CStringPtr = _lookup<ffi.NativeFunction<ffi.Size Function(_CString)>>('CString_getSize');
 late final _GetSizeWith_CString = _GetSizeWith_CStringPtr.asFunction<int Function(_CString)>();
 late final _GetDataWith_CStringPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi_package.Utf8> Function(_CString)>>('CString_getData');
 late final _GetDataWith_CString = _GetDataWith_CStringPtr.asFunction<ffi.Pointer<ffi_package.Utf8> Function(_CString)>();
@@ -64273,8 +64273,8 @@ late final _CLogOptionsMakeDefaultPtr = _lookup<ffi.NativeFunction<_CLogOptions 
 late final _CLogOptionsMakeDefault = _CLogOptionsMakeDefaultPtr.asFunction<_CLogOptions Function()>();
 
 
-late final _CLogSinkCpp_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CLogSinkCpp_cg_objectIdentifier');
-late final _CLogSinkCpp_cg_objectIdentifier = _CLogSinkCpp_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CLogSinkCpp_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CLogSinkCpp_cg_objectIdentifier');
+late final _CLogSinkCpp_cg_objectIdentifier = _CLogSinkCpp_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CLogSinkCpp_write_CLogMessagePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CLogSinkCpp, _CLogMessage)>>('CLogSinkCpp_write_CLogMessage');
 late final _CLogSinkCpp_write_CLogMessage = _CLogSinkCpp_write_CLogMessagePtr.asFunction<void Function(_CLogSinkCpp, _CLogMessage)>();
@@ -64322,8 +64322,8 @@ late final _COptional_CLocationProviderMakeDefault = _COptional_CLocationProvide
 late final _COptional_CLocationProvider_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_COptional_CLocationProvider)>>('COptional_CLocationProvider_release');
 late final _COptional_CLocationProvider_release = _COptional_CLocationProvider_releasePtr.asFunction<void Function(_COptional_CLocationProvider)>();
 
-late final _CLocationProviderCpp_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CLocationProviderCpp_cg_objectIdentifier');
-late final _CLocationProviderCpp_cg_objectIdentifier = _CLocationProviderCpp_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CLocationProviderCpp_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CLocationProviderCpp_cg_objectIdentifier');
+late final _CLocationProviderCpp_cg_objectIdentifier = _CLocationProviderCpp_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CLocationProviderCpp_lastLocationPtr = _lookup<ffi.NativeFunction<_COptional_CLocation Function(_CLocationProviderCpp)>>('CLocationProviderCpp_lastLocation');
 late final _CLocationProviderCpp_lastLocation = _CLocationProviderCpp_lastLocationPtr.asFunction<_COptional_CLocation Function(_CLocationProviderCpp)>();
@@ -64387,8 +64387,8 @@ late final _CLocationMakeDefault = _CLocationMakeDefaultPtr.asFunction<_CLocatio
 late final _COptional_CLocationMakeDefaultPtr = _lookup<ffi.NativeFunction<_COptional_CLocation Function()>>('COptional_CLocationMakeDefault');
 late final _COptional_CLocationMakeDefault = _COptional_CLocationMakeDefaultPtr.asFunction<_COptional_CLocation Function()>();
 
-late final _CLocationNotifier_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CLocationNotifier_cg_objectIdentifier');
-late final _CLocationNotifier_cg_objectIdentifier = _CLocationNotifier_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CLocationNotifier_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CLocationNotifier_cg_objectIdentifier');
+late final _CLocationNotifier_cg_objectIdentifier = _CLocationNotifier_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CLocationNotifier_send_CArray_CLocationPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CLocationNotifier, _CArray_CLocation)>>('CLocationNotifier_send_CArray_CLocation');
 late final _CLocationNotifier_send_CArray_CLocation = _CLocationNotifier_send_CArray_CLocationPtr.asFunction<void Function(_CLocationNotifier, _CArray_CLocation)>();
@@ -64420,8 +64420,8 @@ late final _forEach_CArray_CLocation = _forEach_CArray_CLocationPtr.asFunction<
 late final _CArray_CLocation_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CArray_CLocation)>>('CArray_CLocation_release');
 late final _CArray_CLocation_release = _CArray_CLocation_releasePtr.asFunction<void Function(_CArray_CLocation)>();
 
-late final _CLocationAvailableNotifier_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CLocationAvailableNotifier_cg_objectIdentifier');
-late final _CLocationAvailableNotifier_cg_objectIdentifier = _CLocationAvailableNotifier_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CLocationAvailableNotifier_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CLocationAvailableNotifier_cg_objectIdentifier');
+late final _CLocationAvailableNotifier_cg_objectIdentifier = _CLocationAvailableNotifier_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CLocationAvailableNotifier_send_boolPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CLocationAvailableNotifier, ffi.Bool)>>('CLocationAvailableNotifier_send_bool');
 late final _CLocationAvailableNotifier_send_bool = _CLocationAvailableNotifier_send_boolPtr.asFunction<void Function(_CLocationAvailableNotifier, bool)>();
@@ -64451,8 +64451,8 @@ late final _COptional_CHeadingProviderMakeDefault = _COptional_CHeadingProviderM
 late final _COptional_CHeadingProvider_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_COptional_CHeadingProvider)>>('COptional_CHeadingProvider_release');
 late final _COptional_CHeadingProvider_release = _COptional_CHeadingProvider_releasePtr.asFunction<void Function(_COptional_CHeadingProvider)>();
 
-late final _CHeadingProviderCpp_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CHeadingProviderCpp_cg_objectIdentifier');
-late final _CHeadingProviderCpp_cg_objectIdentifier = _CHeadingProviderCpp_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CHeadingProviderCpp_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CHeadingProviderCpp_cg_objectIdentifier');
+late final _CHeadingProviderCpp_cg_objectIdentifier = _CHeadingProviderCpp_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CHeadingProviderCpp_setNotifiers_COptional_CHeadingNotifier_COptional_CHeadingAvailableNotifierPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CHeadingProviderCpp, _COptional_CHeadingNotifier, _COptional_CHeadingAvailableNotifier)>>('CHeadingProviderCpp_setNotifiers_COptional_CHeadingNotifier_COptional_CHeadingAvailableNotifier');
 late final _CHeadingProviderCpp_setNotifiers_COptional_CHeadingNotifier_COptional_CHeadingAvailableNotifier = _CHeadingProviderCpp_setNotifiers_COptional_CHeadingNotifier_COptional_CHeadingAvailableNotifierPtr.asFunction<void Function(_CHeadingProviderCpp, _COptional_CHeadingNotifier, _COptional_CHeadingAvailableNotifier)>();
@@ -64465,8 +64465,8 @@ late final _CHeadingProviderCppMakeDefaultPtr = _lookup<ffi.NativeFunction<_CHea
 late final _CHeadingProviderCppMakeDefault = _CHeadingProviderCppMakeDefaultPtr.asFunction<_CHeadingProviderCpp Function()>();
 
 
-late final _CHeadingNotifier_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CHeadingNotifier_cg_objectIdentifier');
-late final _CHeadingNotifier_cg_objectIdentifier = _CHeadingNotifier_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CHeadingNotifier_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CHeadingNotifier_cg_objectIdentifier');
+late final _CHeadingNotifier_cg_objectIdentifier = _CHeadingNotifier_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CHeadingNotifier_send_CPlatformHeadingPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CHeadingNotifier, _CPlatformHeading)>>('CHeadingNotifier_send_CPlatformHeading');
 late final _CHeadingNotifier_send_CPlatformHeading = _CHeadingNotifier_send_CPlatformHeadingPtr.asFunction<void Function(_CHeadingNotifier, _CPlatformHeading)>();
@@ -64489,8 +64489,8 @@ late final _CPlatformHeadingMakeDefaultPtr = _lookup<ffi.NativeFunction<_CPlatfo
 late final _CPlatformHeadingMakeDefault = _CPlatformHeadingMakeDefaultPtr.asFunction<_CPlatformHeading Function()>();
 
 
-late final _CHeadingAvailableNotifier_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CHeadingAvailableNotifier_cg_objectIdentifier');
-late final _CHeadingAvailableNotifier_cg_objectIdentifier = _CHeadingAvailableNotifier_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CHeadingAvailableNotifier_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CHeadingAvailableNotifier_cg_objectIdentifier');
+late final _CHeadingAvailableNotifier_cg_objectIdentifier = _CHeadingAvailableNotifier_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CHeadingAvailableNotifier_send_boolPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CHeadingAvailableNotifier, ffi.Bool)>>('CHeadingAvailableNotifier_send_bool');
 late final _CHeadingAvailableNotifier_send_bool = _CHeadingAvailableNotifier_send_boolPtr.asFunction<void Function(_CHeadingAvailableNotifier, bool)>();
@@ -64509,8 +64509,8 @@ late final _COptional_CHeadingAvailableNotifierMakeDefault = _COptional_CHeading
 late final _COptional_CHeadingAvailableNotifier_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_COptional_CHeadingAvailableNotifier)>>('COptional_CHeadingAvailableNotifier_release');
 late final _COptional_CHeadingAvailableNotifier_release = _COptional_CHeadingAvailableNotifier_releasePtr.asFunction<void Function(_COptional_CHeadingAvailableNotifier)>();
 
-late final _CFile_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CFile_cg_objectIdentifier');
-late final _CFile_cg_objectIdentifier = _CFile_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CFile_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CFile_cg_objectIdentifier');
+late final _CFile_cg_objectIdentifier = _CFile_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CFile_S_fromString_CStringPtr = _lookup<ffi.NativeFunction<_CFile Function(_CString)>>('CFile_S_fromString_CString');
 late final _CFile_S_fromString_CString = _CFile_S_fromString_CStringPtr.asFunction<_CFile Function(_CString)>();
@@ -64749,8 +64749,8 @@ late final _CItemMarkerInfo_floorInfo = _CItemMarkerInfo_floorInfoPtr.asFunction
 late final _CItemMarkerInfo_titlePtr = _lookup<ffi.NativeFunction<_COptional_CString Function(_CItemMarkerInfo)>>('CItemMarkerInfo_title');
 late final _CItemMarkerInfo_title = _CItemMarkerInfo_titlePtr.asFunction<_COptional_CString Function(_CItemMarkerInfo)>();
 
-late final _CItemMarkerInfo_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CItemMarkerInfo_cg_objectIdentifier');
-late final _CItemMarkerInfo_cg_objectIdentifier = _CItemMarkerInfo_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CItemMarkerInfo_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CItemMarkerInfo_cg_objectIdentifier');
+late final _CItemMarkerInfo_cg_objectIdentifier = _CItemMarkerInfo_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CItemMarkerInfo_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CItemMarkerInfo_release');
@@ -64984,8 +64984,8 @@ late final _CDirectoryObject_buildingInfo = _CDirectoryObject_buildingInfoPtr.as
 late final _CDirectoryObject_chargingStationPtr = _lookup<ffi.NativeFunction<_COptional_CChargingStation Function(_CDirectoryObject)>>('CDirectoryObject_chargingStation');
 late final _CDirectoryObject_chargingStation = _CDirectoryObject_chargingStationPtr.asFunction<_COptional_CChargingStation Function(_CDirectoryObject)>();
 
-late final _CDirectoryObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CDirectoryObject_cg_objectIdentifier');
-late final _CDirectoryObject_cg_objectIdentifier = _CDirectoryObject_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CDirectoryObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CDirectoryObject_cg_objectIdentifier');
+late final _CDirectoryObject_cg_objectIdentifier = _CDirectoryObject_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CDirectoryObject_formattedAddress_CFormattingTypePtr = _lookup<ffi.NativeFunction<_COptional_CFormattedAddress Function(_CDirectoryObject, _CFormattingType)>>('CDirectoryObject_formattedAddress_CFormattingType');
 late final _CDirectoryObject_formattedAddress_CFormattingType = _CDirectoryObject_formattedAddress_CFormattingTypePtr.asFunction<_COptional_CFormattedAddress Function(_CDirectoryObject, _CFormattingType)>();
@@ -65106,8 +65106,8 @@ late final _COptional_CChargingStation_release = _COptional_CChargingStation_rel
 late final _CPage_itemsPtr = _lookup<ffi.NativeFunction<_CArray_CDirectoryObject Function(_CPage)>>('CPage_items');
 late final _CPage_items = _CPage_itemsPtr.asFunction<_CArray_CDirectoryObject Function(_CPage)>();
 
-late final _CPage_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CPage_cg_objectIdentifier');
-late final _CPage_cg_objectIdentifier = _CPage_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CPage_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CPage_cg_objectIdentifier');
+late final _CPage_cg_objectIdentifier = _CPage_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CPage_fetchPrevPagePtr = _lookup<ffi.NativeFunction<_CFuture_COptional_CPage Function(_CPage)>>('CPage_fetchPrevPage');
 late final _CPage_fetchPrevPage = _CPage_fetchPrevPagePtr.asFunction<_CFuture_COptional_CPage Function(_CPage)>();
@@ -65191,8 +65191,8 @@ late final _CWidget_caption = _CWidget_captionPtr.asFunction<_COptional_CString 
 late final _CWidget_filtersPtr = _lookup<ffi.NativeFunction<_CArray_CDynamicFilter Function(_CWidget)>>('CWidget_filters');
 late final _CWidget_filters = _CWidget_filtersPtr.asFunction<_CArray_CDynamicFilter Function(_CWidget)>();
 
-late final _CWidget_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CWidget_cg_objectIdentifier');
-late final _CWidget_cg_objectIdentifier = _CWidget_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CWidget_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CWidget_cg_objectIdentifier');
+late final _CWidget_cg_objectIdentifier = _CWidget_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CWidget_cg_getSelectorPtr = _lookup<ffi.NativeFunction<ffi.Uint64 Function(_CWidget)>>('CWidget_cg_getSelector');
 late final _CWidget_cg_getSelector = _CWidget_cg_getSelectorPtr.asFunction<int Function(_CWidget)>();
@@ -65217,8 +65217,8 @@ late final _CCheckbox_isChecked = _CCheckbox_isCheckedPtr.asFunction<bool Functi
 late final _CCheckbox_setChecked_boolPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CCheckbox, ffi.Bool)>>('CCheckbox_setChecked_bool');
 late final _CCheckbox_setChecked_bool = _CCheckbox_setChecked_boolPtr.asFunction<void Function(_CCheckbox, bool)>();
 
-late final _CCheckbox_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CCheckbox_cg_objectIdentifier');
-late final _CCheckbox_cg_objectIdentifier = _CCheckbox_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CCheckbox_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CCheckbox_cg_objectIdentifier');
+late final _CCheckbox_cg_objectIdentifier = _CCheckbox_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CCheckbox_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CCheckbox_release');
@@ -65249,8 +65249,8 @@ late final _CCheckableItem_type = _CCheckableItem_typePtr.asFunction<_CCheckable
 late final _CCheckableItem_filterTypePtr = _lookup<ffi.NativeFunction<_CFilterType Function(_CCheckableItem)>>('CCheckableItem_filterType');
 late final _CCheckableItem_filterType = _CCheckableItem_filterTypePtr.asFunction<_CFilterType Function(_CCheckableItem)>();
 
-late final _CCheckableItem_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CCheckableItem_cg_objectIdentifier');
-late final _CCheckableItem_cg_objectIdentifier = _CCheckableItem_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CCheckableItem_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CCheckableItem_cg_objectIdentifier');
+late final _CCheckableItem_cg_objectIdentifier = _CCheckableItem_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CCheckableItem_cg_getSelectorPtr = _lookup<ffi.NativeFunction<ffi.Uint64 Function(_CCheckableItem)>>('CCheckableItem_cg_getSelector');
 late final _CCheckableItem_cg_getSelector = _CCheckableItem_cg_getSelectorPtr.asFunction<int Function(_CCheckableItem)>();
@@ -65271,8 +65271,8 @@ late final _CCheckableGroupedItem_isChecked = _CCheckableGroupedItem_isCheckedPt
 late final _CCheckableGroupedItem_setChecked_boolPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CCheckableGroupedItem, ffi.Bool)>>('CCheckableGroupedItem_setChecked_bool');
 late final _CCheckableGroupedItem_setChecked_bool = _CCheckableGroupedItem_setChecked_boolPtr.asFunction<void Function(_CCheckableGroupedItem, bool)>();
 
-late final _CCheckableGroupedItem_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CCheckableGroupedItem_cg_objectIdentifier');
-late final _CCheckableGroupedItem_cg_objectIdentifier = _CCheckableGroupedItem_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CCheckableGroupedItem_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CCheckableGroupedItem_cg_objectIdentifier');
+late final _CCheckableGroupedItem_cg_objectIdentifier = _CCheckableGroupedItem_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CCheckableGroupedItem_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CCheckableGroupedItem_release');
@@ -65285,8 +65285,8 @@ late final _CCheckableGroupedItemMakeDefault = _CCheckableGroupedItemMakeDefault
 late final _CCheckableItemsGroup_itemsPtr = _lookup<ffi.NativeFunction<_CArray_CCheckableItem Function(_CCheckableItemsGroup)>>('CCheckableItemsGroup_items');
 late final _CCheckableItemsGroup_items = _CCheckableItemsGroup_itemsPtr.asFunction<_CArray_CCheckableItem Function(_CCheckableItemsGroup)>();
 
-late final _CCheckableItemsGroup_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CCheckableItemsGroup_cg_objectIdentifier');
-late final _CCheckableItemsGroup_cg_objectIdentifier = _CCheckableItemsGroup_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CCheckableItemsGroup_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CCheckableItemsGroup_cg_objectIdentifier');
+late final _CCheckableItemsGroup_cg_objectIdentifier = _CCheckableItemsGroup_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CCheckableItemsGroup_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CCheckableItemsGroup_release');
@@ -65318,8 +65318,8 @@ late final _CSimpleCheckableItem_isChecked = _CSimpleCheckableItem_isCheckedPtr.
 late final _CSimpleCheckableItem_setChecked_boolPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CSimpleCheckableItem, ffi.Bool)>>('CSimpleCheckableItem_setChecked_bool');
 late final _CSimpleCheckableItem_setChecked_bool = _CSimpleCheckableItem_setChecked_boolPtr.asFunction<void Function(_CSimpleCheckableItem, bool)>();
 
-late final _CSimpleCheckableItem_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CSimpleCheckableItem_cg_objectIdentifier');
-late final _CSimpleCheckableItem_cg_objectIdentifier = _CSimpleCheckableItem_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CSimpleCheckableItem_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CSimpleCheckableItem_cg_objectIdentifier');
+late final _CSimpleCheckableItem_cg_objectIdentifier = _CSimpleCheckableItem_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CSimpleCheckableItem_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CSimpleCheckableItem_release');
@@ -65332,8 +65332,8 @@ late final _CSimpleCheckableItemMakeDefault = _CSimpleCheckableItemMakeDefaultPt
 late final _CGroupCheckableItem_itemsPtr = _lookup<ffi.NativeFunction<_CArray_CCheckableGroupedItem Function(_CGroupCheckableItem)>>('CGroupCheckableItem_items');
 late final _CGroupCheckableItem_items = _CGroupCheckableItem_itemsPtr.asFunction<_CArray_CCheckableGroupedItem Function(_CGroupCheckableItem)>();
 
-late final _CGroupCheckableItem_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CGroupCheckableItem_cg_objectIdentifier');
-late final _CGroupCheckableItem_cg_objectIdentifier = _CGroupCheckableItem_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CGroupCheckableItem_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CGroupCheckableItem_cg_objectIdentifier');
+late final _CGroupCheckableItem_cg_objectIdentifier = _CGroupCheckableItem_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CGroupCheckableItem_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CGroupCheckableItem_release');
@@ -65389,8 +65389,8 @@ late final _CRangeMakeDefault = _CRangeMakeDefaultPtr.asFunction<_CRange Functio
 late final _CRangeWidget_rangePtr = _lookup<ffi.NativeFunction<_CRange Function(_CRangeWidget)>>('CRangeWidget_range');
 late final _CRangeWidget_range = _CRangeWidget_rangePtr.asFunction<_CRange Function(_CRangeWidget)>();
 
-late final _CRangeWidget_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRangeWidget_cg_objectIdentifier');
-late final _CRangeWidget_cg_objectIdentifier = _CRangeWidget_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRangeWidget_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRangeWidget_cg_objectIdentifier');
+late final _CRangeWidget_cg_objectIdentifier = _CRangeWidget_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CRangeWidget_setValues_double_doublePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CRangeWidget, ffi.Double, ffi.Double)>>('CRangeWidget_setValues_double_double');
 late final _CRangeWidget_setValues_double_double = _CRangeWidget_setValues_double_doublePtr.asFunction<void Function(_CRangeWidget, double, double)>();
@@ -65419,8 +65419,8 @@ late final _CSearchResult_mainWidgets = _CSearchResult_mainWidgetsPtr.asFunction
 late final _CSearchResult_autoUseFirstResultPtr = _lookup<ffi.NativeFunction<ffi.Bool Function(_CSearchResult)>>('CSearchResult_autoUseFirstResult');
 late final _CSearchResult_autoUseFirstResult = _CSearchResult_autoUseFirstResultPtr.asFunction<bool Function(_CSearchResult)>();
 
-late final _CSearchResult_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CSearchResult_cg_objectIdentifier');
-late final _CSearchResult_cg_objectIdentifier = _CSearchResult_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CSearchResult_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CSearchResult_cg_objectIdentifier');
+late final _CSearchResult_cg_objectIdentifier = _CSearchResult_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CSearchResult_markerTitles_CArray_CDgisObjectIdPtr = _lookup<ffi.NativeFunction<_CArray_CFuture_CArray_CUIMarkerInfo Function(_CSearchResult, _CArray_CDgisObjectId)>>('CSearchResult_markerTitles_CArray_CDgisObjectId');
 late final _CSearchResult_markerTitles_CArray_CDgisObjectId = _CSearchResult_markerTitles_CArray_CDgisObjectIdPtr.asFunction<_CArray_CFuture_CArray_CUIMarkerInfo Function(_CSearchResult, _CArray_CDgisObjectId)>();
@@ -65444,8 +65444,8 @@ late final _CGeometry_minPoint = _CGeometry_minPointPtr.asFunction<_CGeoPoint Fu
 late final _CGeometry_maxPointPtr = _lookup<ffi.NativeFunction<_CGeoPoint Function(_CGeometry)>>('CGeometry_maxPoint');
 late final _CGeometry_maxPoint = _CGeometry_maxPointPtr.asFunction<_CGeoPoint Function(_CGeometry)>();
 
-late final _CGeometry_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CGeometry_cg_objectIdentifier');
-late final _CGeometry_cg_objectIdentifier = _CGeometry_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CGeometry_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CGeometry_cg_objectIdentifier');
+late final _CGeometry_cg_objectIdentifier = _CGeometry_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CGeometry_intersects_CGeometryPtr = _lookup<ffi.NativeFunction<ffi.Bool Function(_CGeometry, _CGeometry)>>('CGeometry_intersects_CGeometry');
 late final _CGeometry_intersects_CGeometry = _CGeometry_intersects_CGeometryPtr.asFunction<bool Function(_CGeometry, _CGeometry)>();
@@ -65583,8 +65583,8 @@ late final _forEach_CArray_CWidget = _forEach_CArray_CWidgetPtr.asFunction<
 late final _CArray_CWidget_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CArray_CWidget)>>('CArray_CWidget_release');
 late final _CArray_CWidget_release = _CArray_CWidget_releasePtr.asFunction<void Function(_CArray_CWidget)>();
 
-late final _CSearchQuery_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CSearchQuery_cg_objectIdentifier');
-late final _CSearchQuery_cg_objectIdentifier = _CSearchQuery_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CSearchQuery_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CSearchQuery_cg_objectIdentifier');
+late final _CSearchQuery_cg_objectIdentifier = _CSearchQuery_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CSearchQuery_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CSearchQuery_release');
@@ -65597,8 +65597,8 @@ late final _CSearchQueryMakeDefault = _CSearchQueryMakeDefaultPtr.asFunction<_CS
 late final _CSuggestObjectHandler_itemPtr = _lookup<ffi.NativeFunction<_CDirectoryObject Function(_CSuggestObjectHandler)>>('CSuggestObjectHandler_item');
 late final _CSuggestObjectHandler_item = _CSuggestObjectHandler_itemPtr.asFunction<_CDirectoryObject Function(_CSuggestObjectHandler)>();
 
-late final _CSuggestObjectHandler_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CSuggestObjectHandler_cg_objectIdentifier');
-late final _CSuggestObjectHandler_cg_objectIdentifier = _CSuggestObjectHandler_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CSuggestObjectHandler_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CSuggestObjectHandler_cg_objectIdentifier');
+late final _CSuggestObjectHandler_cg_objectIdentifier = _CSuggestObjectHandler_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CSuggestObjectHandler_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CSuggestObjectHandler_release');
@@ -65611,8 +65611,8 @@ late final _CSuggestObjectHandlerMakeDefault = _CSuggestObjectHandlerMakeDefault
 late final _CPerformSearchHandler_searchQueryPtr = _lookup<ffi.NativeFunction<_CSearchQuery Function(_CPerformSearchHandler)>>('CPerformSearchHandler_searchQuery');
 late final _CPerformSearchHandler_searchQuery = _CPerformSearchHandler_searchQueryPtr.asFunction<_CSearchQuery Function(_CPerformSearchHandler)>();
 
-late final _CPerformSearchHandler_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CPerformSearchHandler_cg_objectIdentifier');
-late final _CPerformSearchHandler_cg_objectIdentifier = _CPerformSearchHandler_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CPerformSearchHandler_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CPerformSearchHandler_cg_objectIdentifier');
+late final _CPerformSearchHandler_cg_objectIdentifier = _CPerformSearchHandler_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CPerformSearchHandler_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CPerformSearchHandler_release');
@@ -65625,8 +65625,8 @@ late final _CPerformSearchHandlerMakeDefault = _CPerformSearchHandlerMakeDefault
 late final _CIncompleteTextHandler_queryTextPtr = _lookup<ffi.NativeFunction<_CString Function(_CIncompleteTextHandler)>>('CIncompleteTextHandler_queryText');
 late final _CIncompleteTextHandler_queryText = _CIncompleteTextHandler_queryTextPtr.asFunction<_CString Function(_CIncompleteTextHandler)>();
 
-late final _CIncompleteTextHandler_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CIncompleteTextHandler_cg_objectIdentifier');
-late final _CIncompleteTextHandler_cg_objectIdentifier = _CIncompleteTextHandler_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CIncompleteTextHandler_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CIncompleteTextHandler_cg_objectIdentifier');
+late final _CIncompleteTextHandler_cg_objectIdentifier = _CIncompleteTextHandler_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CIncompleteTextHandler_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CIncompleteTextHandler_release');
@@ -65695,8 +65695,8 @@ late final _CSuggest_title = _CSuggest_titlePtr.asFunction<_CMarkedUpText Functi
 late final _CSuggest_subtitlePtr = _lookup<ffi.NativeFunction<_CMarkedUpText Function(_CSuggest)>>('CSuggest_subtitle');
 late final _CSuggest_subtitle = _CSuggest_subtitlePtr.asFunction<_CMarkedUpText Function(_CSuggest)>();
 
-late final _CSuggest_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CSuggest_cg_objectIdentifier');
-late final _CSuggest_cg_objectIdentifier = _CSuggest_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CSuggest_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CSuggest_cg_objectIdentifier');
+late final _CSuggest_cg_objectIdentifier = _CSuggest_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CSuggest_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CSuggest_release');
@@ -65709,8 +65709,8 @@ late final _CSuggestMakeDefault = _CSuggestMakeDefaultPtr.asFunction<_CSuggest F
 late final _CSuggestResult_suggestsPtr = _lookup<ffi.NativeFunction<_CArray_CSuggest Function(_CSuggestResult)>>('CSuggestResult_suggests');
 late final _CSuggestResult_suggests = _CSuggestResult_suggestsPtr.asFunction<_CArray_CSuggest Function(_CSuggestResult)>();
 
-late final _CSuggestResult_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CSuggestResult_cg_objectIdentifier');
-late final _CSuggestResult_cg_objectIdentifier = _CSuggestResult_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CSuggestResult_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CSuggestResult_cg_objectIdentifier');
+late final _CSuggestResult_cg_objectIdentifier = _CSuggestResult_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CSuggestResult_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CSuggestResult_release');
@@ -65734,8 +65734,8 @@ late final _forEach_CArray_CSuggest = _forEach_CArray_CSuggestPtr.asFunction<
 late final _CArray_CSuggest_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CArray_CSuggest)>>('CArray_CSuggest_release');
 late final _CArray_CSuggest_release = _CArray_CSuggest_releasePtr.asFunction<void Function(_CArray_CSuggest)>();
 
-late final _CSuggestQuery_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CSuggestQuery_cg_objectIdentifier');
-late final _CSuggestQuery_cg_objectIdentifier = _CSuggestQuery_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CSuggestQuery_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CSuggestQuery_cg_objectIdentifier');
+late final _CSuggestQuery_cg_objectIdentifier = _CSuggestQuery_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CSuggestQuery_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CSuggestQuery_release');
@@ -65746,8 +65746,8 @@ late final _CSuggestQueryMakeDefaultPtr = _lookup<ffi.NativeFunction<_CSuggestQu
 late final _CSuggestQueryMakeDefault = _CSuggestQueryMakeDefaultPtr.asFunction<_CSuggestQuery Function()>();
 
 
-late final _CSearchManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CSearchManager_cg_objectIdentifier');
-late final _CSearchManager_cg_objectIdentifier = _CSearchManager_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CSearchManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CSearchManager_cg_objectIdentifier');
+late final _CSearchManager_cg_objectIdentifier = _CSearchManager_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CSearchManager_S_createOnlineManager_CContextPtr = _lookup<ffi.NativeFunction<_CResult_CSearchManager Function(_CContext)>>('CSearchManager_S_createOnlineManager_CContext');
 late final _CSearchManager_S_createOnlineManager_CContext = _CSearchManager_S_createOnlineManager_CContextPtr.asFunction<_CResult_CSearchManager Function(_CContext)>();
@@ -65850,8 +65850,8 @@ late final _COptional_CDirectoryObjectMakeDefault = _COptional_CDirectoryObjectM
 late final _COptional_CDirectoryObject_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_COptional_CDirectoryObject)>>('COptional_CDirectoryObject_release');
 late final _COptional_CDirectoryObject_release = _COptional_CDirectoryObject_releasePtr.asFunction<void Function(_COptional_CDirectoryObject)>();
 
-late final _CSearchQueryBuilder_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CSearchQueryBuilder_cg_objectIdentifier');
-late final _CSearchQueryBuilder_cg_objectIdentifier = _CSearchQueryBuilder_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CSearchQueryBuilder_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CSearchQueryBuilder_cg_objectIdentifier');
+late final _CSearchQueryBuilder_cg_objectIdentifier = _CSearchQueryBuilder_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CSearchQueryBuilder_S_fromQueryText_CStringPtr = _lookup<ffi.NativeFunction<_CSearchQueryBuilder Function(_CString)>>('CSearchQueryBuilder_S_fromQueryText_CString');
 late final _CSearchQueryBuilder_S_fromQueryText_CString = _CSearchQueryBuilder_S_fromQueryText_CStringPtr.asFunction<_CSearchQueryBuilder Function(_CString)>();
@@ -65906,8 +65906,8 @@ late final _COptional_CArray_CGeoPoint_release = _COptional_CArray_CGeoPoint_rel
 late final _COptional_CGeoRectMakeDefaultPtr = _lookup<ffi.NativeFunction<_COptional_CGeoRect Function()>>('COptional_CGeoRectMakeDefault');
 late final _COptional_CGeoRectMakeDefault = _COptional_CGeoRectMakeDefaultPtr.asFunction<_COptional_CGeoRect Function()>();
 
-late final _CSuggestQueryBuilder_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CSuggestQueryBuilder_cg_objectIdentifier');
-late final _CSuggestQueryBuilder_cg_objectIdentifier = _CSuggestQueryBuilder_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CSuggestQueryBuilder_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CSuggestQueryBuilder_cg_objectIdentifier');
+late final _CSuggestQueryBuilder_cg_objectIdentifier = _CSuggestQueryBuilder_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CSuggestQueryBuilder_S_fromQueryText_CStringPtr = _lookup<ffi.NativeFunction<_CSuggestQueryBuilder Function(_CString)>>('CSuggestQueryBuilder_S_fromQueryText_CString');
 late final _CSuggestQueryBuilder_S_fromQueryText_CString = _CSuggestQueryBuilder_S_fromQueryText_CStringPtr.asFunction<_CSuggestQueryBuilder Function(_CString)>();
@@ -65961,8 +65961,8 @@ late final _CPackedSearchQuery_directoryFilter = _CPackedSearchQuery_directoryFi
 late final _CPackedSearchQuery_sortingTypePtr = _lookup<ffi.NativeFunction<_CSortingType Function(_CPackedSearchQuery)>>('CPackedSearchQuery_sortingType');
 late final _CPackedSearchQuery_sortingType = _CPackedSearchQuery_sortingTypePtr.asFunction<_CSortingType Function(_CPackedSearchQuery)>();
 
-late final _CPackedSearchQuery_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CPackedSearchQuery_cg_objectIdentifier');
-late final _CPackedSearchQuery_cg_objectIdentifier = _CPackedSearchQuery_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CPackedSearchQuery_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CPackedSearchQuery_cg_objectIdentifier');
+late final _CPackedSearchQuery_cg_objectIdentifier = _CPackedSearchQuery_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CPackedSearchQuery_S_fromBytes_CDataPtr = _lookup<ffi.NativeFunction<_CResult_CPackedSearchQuery Function(_CData)>>('CPackedSearchQuery_S_fromBytes_CData');
 late final _CPackedSearchQuery_S_fromBytes_CData = _CPackedSearchQuery_S_fromBytes_CDataPtr.asFunction<_CResult_CPackedSearchQuery Function(_CData)>();
@@ -65984,9 +65984,9 @@ late final _CPackedSearchQueryMakeDefault = _CPackedSearchQueryMakeDefaultPtr.as
 late final _CResult_CPackedSearchQuery_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CResult_CPackedSearchQuery)>>('CResult_CPackedSearchQuery_release');
 late final _CResult_CPackedSearchQuery_release = _CResult_CPackedSearchQuery_releasePtr.asFunction<void Function(_CResult_CPackedSearchQuery)>();
 
-late final _CDataCreateWithDataPtr = _lookup<ffi.NativeFunction<_CData Function(ffi.Uint64 size, ffi.Pointer<ffi.Uint8>)>>('CData_createWithData');
+late final _CDataCreateWithDataPtr = _lookup<ffi.NativeFunction<_CData Function(ffi.Size size, ffi.Pointer<ffi.Uint8>)>>('CData_createWithData');
 late final _CDataCreateWithData = _CDataCreateWithDataPtr.asFunction<_CData Function(int, ffi.Pointer<ffi.Uint8>)>();
-late final _GetSizeWith_CDataPtr = _lookup<ffi.NativeFunction<ffi.Uint64 Function(_CData)>>('CData_getSize');
+late final _GetSizeWith_CDataPtr = _lookup<ffi.NativeFunction<ffi.Size Function(_CData)>>('CData_getSize');
 late final _GetSizeWith_CData = _GetSizeWith_CDataPtr.asFunction<int Function(_CData)>();
 late final _GetDataWith_CDataPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Uint8> Function(_CData)>>('CData_getData');
 late final _GetDataWith_CData = _GetDataWith_CDataPtr.asFunction<ffi.Pointer<ffi.Uint8> Function(_CData)>();
@@ -66000,8 +66000,8 @@ late final _CPointGeometryDataMakeDefault = _CPointGeometryDataMakeDefaultPtr.as
 late final _CPointGeometry_pointPtr = _lookup<ffi.NativeFunction<_CPointGeometryData Function(_CPointGeometry)>>('CPointGeometry_point');
 late final _CPointGeometry_point = _CPointGeometry_pointPtr.asFunction<_CPointGeometryData Function(_CPointGeometry)>();
 
-late final _CPointGeometry_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CPointGeometry_cg_objectIdentifier');
-late final _CPointGeometry_cg_objectIdentifier = _CPointGeometry_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CPointGeometry_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CPointGeometry_cg_objectIdentifier');
+late final _CPointGeometry_cg_objectIdentifier = _CPointGeometry_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CPointGeometry_C_createWith_CGeoPointPtr = _lookup<ffi.NativeFunction<_CPointGeometry Function(_CGeoPoint)>>('CPointGeometry_C_createWith_CGeoPoint');
 late final _CPointGeometry_C_createWith_CGeoPoint = _CPointGeometry_C_createWith_CGeoPointPtr.asFunction<_CPointGeometry Function(_CGeoPoint)>();
@@ -66018,8 +66018,8 @@ late final _CPointGeometryMakeDefault = _CPointGeometryMakeDefaultPtr.asFunction
 late final _CPolygonGeometry_contoursPtr = _lookup<ffi.NativeFunction<_CArray_CArray_CGeoPoint Function(_CPolygonGeometry)>>('CPolygonGeometry_contours');
 late final _CPolygonGeometry_contours = _CPolygonGeometry_contoursPtr.asFunction<_CArray_CArray_CGeoPoint Function(_CPolygonGeometry)>();
 
-late final _CPolygonGeometry_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CPolygonGeometry_cg_objectIdentifier');
-late final _CPolygonGeometry_cg_objectIdentifier = _CPolygonGeometry_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CPolygonGeometry_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CPolygonGeometry_cg_objectIdentifier');
+late final _CPolygonGeometry_cg_objectIdentifier = _CPolygonGeometry_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CPolygonGeometry_C_createWith_CArray_CArray_CGeoPointPtr = _lookup<ffi.NativeFunction<_CPolygonGeometry Function(_CArray_CArray_CGeoPoint)>>('CPolygonGeometry_C_createWith_CArray_CArray_CGeoPoint');
 late final _CPolygonGeometry_C_createWith_CArray_CArray_CGeoPoint = _CPolygonGeometry_C_createWith_CArray_CArray_CGeoPointPtr.asFunction<_CPolygonGeometry Function(_CArray_CArray_CGeoPoint)>();
@@ -66034,8 +66034,8 @@ late final _CPolygonGeometryMakeDefault = _CPolygonGeometryMakeDefaultPtr.asFunc
 late final _CPolylineGeometry_pointsPtr = _lookup<ffi.NativeFunction<_CArray_CGeoPoint Function(_CPolylineGeometry)>>('CPolylineGeometry_points');
 late final _CPolylineGeometry_points = _CPolylineGeometry_pointsPtr.asFunction<_CArray_CGeoPoint Function(_CPolylineGeometry)>();
 
-late final _CPolylineGeometry_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CPolylineGeometry_cg_objectIdentifier');
-late final _CPolylineGeometry_cg_objectIdentifier = _CPolylineGeometry_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CPolylineGeometry_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CPolylineGeometry_cg_objectIdentifier');
+late final _CPolylineGeometry_cg_objectIdentifier = _CPolylineGeometry_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CPolylineGeometry_C_createWith_CArray_CGeoPointPtr = _lookup<ffi.NativeFunction<_CPolylineGeometry Function(_CArray_CGeoPoint)>>('CPolylineGeometry_C_createWith_CArray_CGeoPoint');
 late final _CPolylineGeometry_C_createWith_CArray_CGeoPoint = _CPolylineGeometry_C_createWith_CArray_CGeoPointPtr.asFunction<_CPolylineGeometry Function(_CArray_CGeoPoint)>();
@@ -66050,8 +66050,8 @@ late final _CPolylineGeometryMakeDefault = _CPolylineGeometryMakeDefaultPtr.asFu
 late final _CComplexGeometry_elementsPtr = _lookup<ffi.NativeFunction<_CArray_CGeometry Function(_CComplexGeometry)>>('CComplexGeometry_elements');
 late final _CComplexGeometry_elements = _CComplexGeometry_elementsPtr.asFunction<_CArray_CGeometry Function(_CComplexGeometry)>();
 
-late final _CComplexGeometry_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CComplexGeometry_cg_objectIdentifier');
-late final _CComplexGeometry_cg_objectIdentifier = _CComplexGeometry_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CComplexGeometry_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CComplexGeometry_cg_objectIdentifier');
+late final _CComplexGeometry_cg_objectIdentifier = _CComplexGeometry_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CComplexGeometry_C_createWith_CArray_CGeometryPtr = _lookup<ffi.NativeFunction<_CComplexGeometry Function(_CArray_CGeometry)>>('CComplexGeometry_C_createWith_CArray_CGeometry');
 late final _CComplexGeometry_C_createWith_CArray_CGeometry = _CComplexGeometry_C_createWith_CArray_CGeometryPtr.asFunction<_CComplexGeometry Function(_CArray_CGeometry)>();
@@ -66190,8 +66190,8 @@ late final _CCameraPositionMakeDefaultPtr = _lookup<ffi.NativeFunction<_CCameraP
 late final _CCameraPositionMakeDefault = _CCameraPositionMakeDefaultPtr.asFunction<_CCameraPosition Function()>();
 
 
-late final _CCameraMoveControllerCpp_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CCameraMoveControllerCpp_cg_objectIdentifier');
-late final _CCameraMoveControllerCpp_cg_objectIdentifier = _CCameraMoveControllerCpp_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CCameraMoveControllerCpp_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CCameraMoveControllerCpp_cg_objectIdentifier');
+late final _CCameraMoveControllerCpp_cg_objectIdentifier = _CCameraMoveControllerCpp_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CCameraMoveControllerCpp_position_CTimeIntervalPtr = _lookup<ffi.NativeFunction<_CCameraPosition Function(_CCameraMoveControllerCpp, _CTimeInterval)>>('CCameraMoveControllerCpp_position_CTimeInterval');
 late final _CCameraMoveControllerCpp_position_CTimeInterval = _CCameraMoveControllerCpp_position_CTimeIntervalPtr.asFunction<_CCameraPosition Function(_CCameraMoveControllerCpp, _CTimeInterval)>();
@@ -66211,8 +66211,8 @@ late final _CCameraMoveControllerMakeDefault = _CCameraMoveControllerMakeDefault
 late final _CCameraMoveController_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CCameraMoveController)>>('CCameraMoveController_release');
 late final _CCameraMoveController_release = _CCameraMoveController_releasePtr.asFunction<void Function(_CCameraMoveController)>();
 
-late final _CNewValuesNotifier_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CNewValuesNotifier_cg_objectIdentifier');
-late final _CNewValuesNotifier_cg_objectIdentifier = _CNewValuesNotifier_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CNewValuesNotifier_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CNewValuesNotifier_cg_objectIdentifier');
+late final _CNewValuesNotifier_cg_objectIdentifier = _CNewValuesNotifier_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CNewValuesNotifier_sendNotificationPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CNewValuesNotifier)>>('CNewValuesNotifier_sendNotification');
 late final _CNewValuesNotifier_sendNotification = _CNewValuesNotifier_sendNotificationPtr.asFunction<void Function(_CNewValuesNotifier)>();
@@ -66232,8 +66232,8 @@ late final _CStyleZoomMakeDefaultPtr = _lookup<ffi.NativeFunction<_CStyleZoom Fu
 late final _CStyleZoomMakeDefault = _CStyleZoomMakeDefaultPtr.asFunction<_CStyleZoom Function()>();
 
 
-late final _CCustomFollowControllerCpp_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CCustomFollowControllerCpp_cg_objectIdentifier');
-late final _CCustomFollowControllerCpp_cg_objectIdentifier = _CCustomFollowControllerCpp_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CCustomFollowControllerCpp_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CCustomFollowControllerCpp_cg_objectIdentifier');
+late final _CCustomFollowControllerCpp_cg_objectIdentifier = _CCustomFollowControllerCpp_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CCustomFollowControllerCpp_availableValuesPtr = _lookup<ffi.NativeFunction<_COptionSet_CFollowValue Function(_CCustomFollowControllerCpp)>>('CCustomFollowControllerCpp_availableValues');
 late final _CCustomFollowControllerCpp_availableValues = _CCustomFollowControllerCpp_availableValuesPtr.asFunction<_COptionSet_CFollowValue Function(_CCustomFollowControllerCpp)>();
@@ -66281,8 +66281,8 @@ late final _CCustomFollowControllerMakeDefault = _CCustomFollowControllerMakeDef
 late final _CCustomFollowController_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CCustomFollowController)>>('CCustomFollowController_release');
 late final _CCustomFollowController_release = _CCustomFollowController_releasePtr.asFunction<void Function(_CCustomFollowController)>();
 
-late final _CEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CEvent_cg_objectIdentifier');
-late final _CEvent_cg_objectIdentifier = _CEvent_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CEvent_cg_objectIdentifier');
+late final _CEvent_cg_objectIdentifier = _CEvent_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CEvent_cg_getSelectorPtr = _lookup<ffi.NativeFunction<ffi.Uint64 Function(_CEvent)>>('CEvent_cg_getSelector');
 late final _CEvent_cg_getSelector = _CEvent_cg_getSelectorPtr.asFunction<int Function(_CEvent)>();
@@ -66297,8 +66297,8 @@ late final _CEventMakeDefault = _CEventMakeDefaultPtr.asFunction<_CEvent Functio
 late final _CInputEvent_timestampPtr = _lookup<ffi.NativeFunction<_CTimeInterval Function(_CInputEvent)>>('CInputEvent_timestamp');
 late final _CInputEvent_timestamp = _CInputEvent_timestampPtr.asFunction<_CTimeInterval Function(_CInputEvent)>();
 
-late final _CInputEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CInputEvent_cg_objectIdentifier');
-late final _CInputEvent_cg_objectIdentifier = _CInputEvent_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CInputEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CInputEvent_cg_objectIdentifier');
+late final _CInputEvent_cg_objectIdentifier = _CInputEvent_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CInputEvent_cg_getSelectorPtr = _lookup<ffi.NativeFunction<ffi.Uint64 Function(_CInputEvent)>>('CInputEvent_cg_getSelector');
 late final _CInputEvent_cg_getSelector = _CInputEvent_cg_getSelectorPtr.asFunction<int Function(_CInputEvent)>();
@@ -66311,8 +66311,8 @@ late final _CInputEventMakeDefaultPtr = _lookup<ffi.NativeFunction<_CInputEvent 
 late final _CInputEventMakeDefault = _CInputEventMakeDefaultPtr.asFunction<_CInputEvent Function()>();
 
 
-late final _CCancelEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CCancelEvent_cg_objectIdentifier');
-late final _CCancelEvent_cg_objectIdentifier = _CCancelEvent_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CCancelEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CCancelEvent_cg_objectIdentifier');
+late final _CCancelEvent_cg_objectIdentifier = _CCancelEvent_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CCancelEvent_C_createPtr = _lookup<ffi.NativeFunction<_CCancelEvent Function()>>('CCancelEvent_C_create');
 late final _CCancelEvent_C_create = _CCancelEvent_C_createPtr.asFunction<_CCancelEvent Function()>();
@@ -66328,8 +66328,8 @@ late final _CCancelEventMakeDefault = _CCancelEventMakeDefaultPtr.asFunction<_CC
 late final _CDgisSourceWorkingModeMakeDefaultPtr = _lookup<ffi.NativeFunction<_CDgisSourceWorkingMode Function()>>('CDgisSourceWorkingModeMakeDefault');
 late final _CDgisSourceWorkingModeMakeDefault = _CDgisSourceWorkingModeMakeDefaultPtr.asFunction<_CDgisSourceWorkingMode Function()>();
 
-late final _CDirectMapControlBeginEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CDirectMapControlBeginEvent_cg_objectIdentifier');
-late final _CDirectMapControlBeginEvent_cg_objectIdentifier = _CDirectMapControlBeginEvent_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CDirectMapControlBeginEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CDirectMapControlBeginEvent_cg_objectIdentifier');
+late final _CDirectMapControlBeginEvent_cg_objectIdentifier = _CDirectMapControlBeginEvent_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CDirectMapControlBeginEvent_C_createPtr = _lookup<ffi.NativeFunction<_CDirectMapControlBeginEvent Function()>>('CDirectMapControlBeginEvent_C_create');
 late final _CDirectMapControlBeginEvent_C_create = _CDirectMapControlBeginEvent_C_createPtr.asFunction<_CDirectMapControlBeginEvent Function()>();
@@ -66342,8 +66342,8 @@ late final _CDirectMapControlBeginEventMakeDefaultPtr = _lookup<ffi.NativeFuncti
 late final _CDirectMapControlBeginEventMakeDefault = _CDirectMapControlBeginEventMakeDefaultPtr.asFunction<_CDirectMapControlBeginEvent Function()>();
 
 
-late final _CDirectMapControlEndEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CDirectMapControlEndEvent_cg_objectIdentifier');
-late final _CDirectMapControlEndEvent_cg_objectIdentifier = _CDirectMapControlEndEvent_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CDirectMapControlEndEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CDirectMapControlEndEvent_cg_objectIdentifier');
+late final _CDirectMapControlEndEvent_cg_objectIdentifier = _CDirectMapControlEndEvent_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CDirectMapControlEndEvent_C_createWith_CTimeIntervalPtr = _lookup<ffi.NativeFunction<_CDirectMapControlEndEvent Function(_CTimeInterval)>>('CDirectMapControlEndEvent_C_createWith_CTimeInterval');
 late final _CDirectMapControlEndEvent_C_createWith_CTimeInterval = _CDirectMapControlEndEvent_C_createWith_CTimeIntervalPtr.asFunction<_CDirectMapControlEndEvent Function(_CTimeInterval)>();
@@ -66364,8 +66364,8 @@ late final _CDirectMapRotationEvent_bearingDelta = _CDirectMapRotationEvent_bear
 late final _CDirectMapRotationEvent_rotationCenterPtr = _lookup<ffi.NativeFunction<_COptional_CScreenPoint Function(_CDirectMapRotationEvent)>>('CDirectMapRotationEvent_rotationCenter');
 late final _CDirectMapRotationEvent_rotationCenter = _CDirectMapRotationEvent_rotationCenterPtr.asFunction<_COptional_CScreenPoint Function(_CDirectMapRotationEvent)>();
 
-late final _CDirectMapRotationEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CDirectMapRotationEvent_cg_objectIdentifier');
-late final _CDirectMapRotationEvent_cg_objectIdentifier = _CDirectMapRotationEvent_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CDirectMapRotationEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CDirectMapRotationEvent_cg_objectIdentifier');
+late final _CDirectMapRotationEvent_cg_objectIdentifier = _CDirectMapRotationEvent_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CDirectMapRotationEvent_C_createWith_CBearing_CTimeInterval_COptional_CScreenPointPtr = _lookup<ffi.NativeFunction<_CDirectMapRotationEvent Function(_CBearing, _CTimeInterval, _COptional_CScreenPoint)>>('CDirectMapRotationEvent_C_createWith_CBearing_CTimeInterval_COptional_CScreenPoint');
 late final _CDirectMapRotationEvent_C_createWith_CBearing_CTimeInterval_COptional_CScreenPoint = _CDirectMapRotationEvent_C_createWith_CBearing_CTimeInterval_COptional_CScreenPointPtr.asFunction<_CDirectMapRotationEvent Function(_CBearing, _CTimeInterval, _COptional_CScreenPoint)>();
@@ -66385,8 +66385,8 @@ late final _CDirectMapScalingEvent_zoomDelta = _CDirectMapScalingEvent_zoomDelta
 late final _CDirectMapScalingEvent_scalingCenterPtr = _lookup<ffi.NativeFunction<_COptional_CScreenPoint Function(_CDirectMapScalingEvent)>>('CDirectMapScalingEvent_scalingCenter');
 late final _CDirectMapScalingEvent_scalingCenter = _CDirectMapScalingEvent_scalingCenterPtr.asFunction<_COptional_CScreenPoint Function(_CDirectMapScalingEvent)>();
 
-late final _CDirectMapScalingEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CDirectMapScalingEvent_cg_objectIdentifier');
-late final _CDirectMapScalingEvent_cg_objectIdentifier = _CDirectMapScalingEvent_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CDirectMapScalingEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CDirectMapScalingEvent_cg_objectIdentifier');
+late final _CDirectMapScalingEvent_cg_objectIdentifier = _CDirectMapScalingEvent_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CDirectMapScalingEvent_C_createWith_float_CTimeInterval_COptional_CScreenPointPtr = _lookup<ffi.NativeFunction<_CDirectMapScalingEvent Function(ffi.Float, _CTimeInterval, _COptional_CScreenPoint)>>('CDirectMapScalingEvent_C_createWith_float_CTimeInterval_COptional_CScreenPoint');
 late final _CDirectMapScalingEvent_C_createWith_float_CTimeInterval_COptional_CScreenPoint = _CDirectMapScalingEvent_C_createWith_float_CTimeInterval_COptional_CScreenPointPtr.asFunction<_CDirectMapScalingEvent Function(double, _CTimeInterval, _COptional_CScreenPoint)>();
@@ -66407,8 +66407,8 @@ late final _CDirectMapShiftEvent_screenShift = _CDirectMapShiftEvent_screenShift
 late final _CDirectMapShiftEvent_shiftedPointPtr = _lookup<ffi.NativeFunction<_CScreenPoint Function(_CDirectMapShiftEvent)>>('CDirectMapShiftEvent_shiftedPoint');
 late final _CDirectMapShiftEvent_shiftedPoint = _CDirectMapShiftEvent_shiftedPointPtr.asFunction<_CScreenPoint Function(_CDirectMapShiftEvent)>();
 
-late final _CDirectMapShiftEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CDirectMapShiftEvent_cg_objectIdentifier');
-late final _CDirectMapShiftEvent_cg_objectIdentifier = _CDirectMapShiftEvent_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CDirectMapShiftEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CDirectMapShiftEvent_cg_objectIdentifier');
+late final _CDirectMapShiftEvent_cg_objectIdentifier = _CDirectMapShiftEvent_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CDirectMapShiftEvent_C_createWith_CScreenShift_CScreenPoint_CTimeIntervalPtr = _lookup<ffi.NativeFunction<_CDirectMapShiftEvent Function(_CScreenShift, _CScreenPoint, _CTimeInterval)>>('CDirectMapShiftEvent_C_createWith_CScreenShift_CScreenPoint_CTimeInterval');
 late final _CDirectMapShiftEvent_C_createWith_CScreenShift_CScreenPoint_CTimeInterval = _CDirectMapShiftEvent_C_createWith_CScreenShift_CScreenPoint_CTimeIntervalPtr.asFunction<_CDirectMapShiftEvent Function(_CScreenShift, _CScreenPoint, _CTimeInterval)>();
@@ -66423,8 +66423,8 @@ late final _CDirectMapShiftEventMakeDefault = _CDirectMapShiftEventMakeDefaultPt
 late final _CDirectMapTiltEvent_deltaPtr = _lookup<ffi.NativeFunction<ffi.Float Function(_CDirectMapTiltEvent)>>('CDirectMapTiltEvent_delta');
 late final _CDirectMapTiltEvent_delta = _CDirectMapTiltEvent_deltaPtr.asFunction<double Function(_CDirectMapTiltEvent)>();
 
-late final _CDirectMapTiltEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CDirectMapTiltEvent_cg_objectIdentifier');
-late final _CDirectMapTiltEvent_cg_objectIdentifier = _CDirectMapTiltEvent_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CDirectMapTiltEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CDirectMapTiltEvent_cg_objectIdentifier');
+late final _CDirectMapTiltEvent_cg_objectIdentifier = _CDirectMapTiltEvent_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CDirectMapTiltEvent_C_createWith_float_CTimeIntervalPtr = _lookup<ffi.NativeFunction<_CDirectMapTiltEvent Function(ffi.Float, _CTimeInterval)>>('CDirectMapTiltEvent_C_createWith_float_CTimeInterval');
 late final _CDirectMapTiltEvent_C_createWith_float_CTimeInterval = _CDirectMapTiltEvent_C_createWith_float_CTimeIntervalPtr.asFunction<_CDirectMapTiltEvent Function(double, _CTimeInterval)>();
@@ -66442,8 +66442,8 @@ late final _CMapRotationDirectionMakeDefault = _CMapRotationDirectionMakeDefault
 late final _CMapRotationBeginEvent_directionPtr = _lookup<ffi.NativeFunction<_CMapRotationDirection Function(_CMapRotationBeginEvent)>>('CMapRotationBeginEvent_direction');
 late final _CMapRotationBeginEvent_direction = _CMapRotationBeginEvent_directionPtr.asFunction<_CMapRotationDirection Function(_CMapRotationBeginEvent)>();
 
-late final _CMapRotationBeginEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CMapRotationBeginEvent_cg_objectIdentifier');
-late final _CMapRotationBeginEvent_cg_objectIdentifier = _CMapRotationBeginEvent_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CMapRotationBeginEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CMapRotationBeginEvent_cg_objectIdentifier');
+late final _CMapRotationBeginEvent_cg_objectIdentifier = _CMapRotationBeginEvent_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CMapRotationBeginEvent_C_createWith_CMapRotationDirectionPtr = _lookup<ffi.NativeFunction<_CMapRotationBeginEvent Function(_CMapRotationDirection)>>('CMapRotationBeginEvent_C_createWith_CMapRotationDirection');
 late final _CMapRotationBeginEvent_C_createWith_CMapRotationDirection = _CMapRotationBeginEvent_C_createWith_CMapRotationDirectionPtr.asFunction<_CMapRotationBeginEvent Function(_CMapRotationDirection)>();
@@ -66456,8 +66456,8 @@ late final _CMapRotationBeginEventMakeDefaultPtr = _lookup<ffi.NativeFunction<_C
 late final _CMapRotationBeginEventMakeDefault = _CMapRotationBeginEventMakeDefaultPtr.asFunction<_CMapRotationBeginEvent Function()>();
 
 
-late final _CMapRotationEndEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CMapRotationEndEvent_cg_objectIdentifier');
-late final _CMapRotationEndEvent_cg_objectIdentifier = _CMapRotationEndEvent_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CMapRotationEndEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CMapRotationEndEvent_cg_objectIdentifier');
+late final _CMapRotationEndEvent_cg_objectIdentifier = _CMapRotationEndEvent_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CMapRotationEndEvent_C_createPtr = _lookup<ffi.NativeFunction<_CMapRotationEndEvent Function()>>('CMapRotationEndEvent_C_create');
 late final _CMapRotationEndEvent_C_create = _CMapRotationEndEvent_C_createPtr.asFunction<_CMapRotationEndEvent Function()>();
@@ -66475,8 +66475,8 @@ late final _CMapScalingDirectionMakeDefault = _CMapScalingDirectionMakeDefaultPt
 late final _CMapScalingBeginEvent_directionPtr = _lookup<ffi.NativeFunction<_CMapScalingDirection Function(_CMapScalingBeginEvent)>>('CMapScalingBeginEvent_direction');
 late final _CMapScalingBeginEvent_direction = _CMapScalingBeginEvent_directionPtr.asFunction<_CMapScalingDirection Function(_CMapScalingBeginEvent)>();
 
-late final _CMapScalingBeginEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CMapScalingBeginEvent_cg_objectIdentifier');
-late final _CMapScalingBeginEvent_cg_objectIdentifier = _CMapScalingBeginEvent_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CMapScalingBeginEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CMapScalingBeginEvent_cg_objectIdentifier');
+late final _CMapScalingBeginEvent_cg_objectIdentifier = _CMapScalingBeginEvent_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CMapScalingBeginEvent_C_createWith_CMapScalingDirectionPtr = _lookup<ffi.NativeFunction<_CMapScalingBeginEvent Function(_CMapScalingDirection)>>('CMapScalingBeginEvent_C_createWith_CMapScalingDirection');
 late final _CMapScalingBeginEvent_C_createWith_CMapScalingDirection = _CMapScalingBeginEvent_C_createWith_CMapScalingDirectionPtr.asFunction<_CMapScalingBeginEvent Function(_CMapScalingDirection)>();
@@ -66489,8 +66489,8 @@ late final _CMapScalingBeginEventMakeDefaultPtr = _lookup<ffi.NativeFunction<_CM
 late final _CMapScalingBeginEventMakeDefault = _CMapScalingBeginEventMakeDefaultPtr.asFunction<_CMapScalingBeginEvent Function()>();
 
 
-late final _CMapScalingEndEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CMapScalingEndEvent_cg_objectIdentifier');
-late final _CMapScalingEndEvent_cg_objectIdentifier = _CMapScalingEndEvent_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CMapScalingEndEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CMapScalingEndEvent_cg_objectIdentifier');
+late final _CMapScalingEndEvent_cg_objectIdentifier = _CMapScalingEndEvent_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CMapScalingEndEvent_C_createPtr = _lookup<ffi.NativeFunction<_CMapScalingEndEvent Function()>>('CMapScalingEndEvent_C_create');
 late final _CMapScalingEndEvent_C_create = _CMapScalingEndEvent_C_createPtr.asFunction<_CMapScalingEndEvent Function()>();
@@ -66508,8 +66508,8 @@ late final _CMapShiftDirectionMakeDefault = _CMapShiftDirectionMakeDefaultPtr.as
 late final _CMapShiftBeginEvent_directionPtr = _lookup<ffi.NativeFunction<_CMapShiftDirection Function(_CMapShiftBeginEvent)>>('CMapShiftBeginEvent_direction');
 late final _CMapShiftBeginEvent_direction = _CMapShiftBeginEvent_directionPtr.asFunction<_CMapShiftDirection Function(_CMapShiftBeginEvent)>();
 
-late final _CMapShiftBeginEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CMapShiftBeginEvent_cg_objectIdentifier');
-late final _CMapShiftBeginEvent_cg_objectIdentifier = _CMapShiftBeginEvent_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CMapShiftBeginEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CMapShiftBeginEvent_cg_objectIdentifier');
+late final _CMapShiftBeginEvent_cg_objectIdentifier = _CMapShiftBeginEvent_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CMapShiftBeginEvent_C_createWith_CMapShiftDirectionPtr = _lookup<ffi.NativeFunction<_CMapShiftBeginEvent Function(_CMapShiftDirection)>>('CMapShiftBeginEvent_C_createWith_CMapShiftDirection');
 late final _CMapShiftBeginEvent_C_createWith_CMapShiftDirection = _CMapShiftBeginEvent_C_createWith_CMapShiftDirectionPtr.asFunction<_CMapShiftBeginEvent Function(_CMapShiftDirection)>();
@@ -66522,8 +66522,8 @@ late final _CMapShiftBeginEventMakeDefaultPtr = _lookup<ffi.NativeFunction<_CMap
 late final _CMapShiftBeginEventMakeDefault = _CMapShiftBeginEventMakeDefaultPtr.asFunction<_CMapShiftBeginEvent Function()>();
 
 
-late final _CMapShiftEndEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CMapShiftEndEvent_cg_objectIdentifier');
-late final _CMapShiftEndEvent_cg_objectIdentifier = _CMapShiftEndEvent_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CMapShiftEndEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CMapShiftEndEvent_cg_objectIdentifier');
+late final _CMapShiftEndEvent_cg_objectIdentifier = _CMapShiftEndEvent_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CMapShiftEndEvent_C_createPtr = _lookup<ffi.NativeFunction<_CMapShiftEndEvent Function()>>('CMapShiftEndEvent_C_create');
 late final _CMapShiftEndEvent_C_create = _CMapShiftEndEvent_C_createPtr.asFunction<_CMapShiftEndEvent Function()>();
@@ -66536,8 +66536,8 @@ late final _CMapShiftEndEventMakeDefaultPtr = _lookup<ffi.NativeFunction<_CMapSh
 late final _CMapShiftEndEventMakeDefault = _CMapShiftEndEventMakeDefaultPtr.asFunction<_CMapShiftEndEvent Function()>();
 
 
-late final _CRotateMapToNorthEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRotateMapToNorthEvent_cg_objectIdentifier');
-late final _CRotateMapToNorthEvent_cg_objectIdentifier = _CRotateMapToNorthEvent_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRotateMapToNorthEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRotateMapToNorthEvent_cg_objectIdentifier');
+late final _CRotateMapToNorthEvent_cg_objectIdentifier = _CRotateMapToNorthEvent_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CRotateMapToNorthEvent_C_createPtr = _lookup<ffi.NativeFunction<_CRotateMapToNorthEvent Function()>>('CRotateMapToNorthEvent_C_create');
 late final _CRotateMapToNorthEvent_C_create = _CRotateMapToNorthEvent_C_createPtr.asFunction<_CRotateMapToNorthEvent Function()>();
@@ -66554,8 +66554,8 @@ late final _CScaleMapEvent_zoomDelta = _CScaleMapEvent_zoomDeltaPtr.asFunction<d
 late final _CScaleMapEvent_scalingCenterPtr = _lookup<ffi.NativeFunction<_COptional_CScreenPoint Function(_CScaleMapEvent)>>('CScaleMapEvent_scalingCenter');
 late final _CScaleMapEvent_scalingCenter = _CScaleMapEvent_scalingCenterPtr.asFunction<_COptional_CScreenPoint Function(_CScaleMapEvent)>();
 
-late final _CScaleMapEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CScaleMapEvent_cg_objectIdentifier');
-late final _CScaleMapEvent_cg_objectIdentifier = _CScaleMapEvent_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CScaleMapEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CScaleMapEvent_cg_objectIdentifier');
+late final _CScaleMapEvent_cg_objectIdentifier = _CScaleMapEvent_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CScaleMapEvent_C_createWith_float_COptional_CScreenPointPtr = _lookup<ffi.NativeFunction<_CScaleMapEvent Function(ffi.Float, _COptional_CScreenPoint)>>('CScaleMapEvent_C_createWith_float_COptional_CScreenPoint');
 late final _CScaleMapEvent_C_createWith_float_COptional_CScreenPoint = _CScaleMapEvent_C_createWith_float_COptional_CScreenPointPtr.asFunction<_CScaleMapEvent Function(double, _COptional_CScreenPoint)>();
@@ -66594,8 +66594,8 @@ late final _CAttributes_attributeNames = _CAttributes_attributeNamesPtr.asFuncti
 late final _CAttributes_changedPtr = _lookup<ffi.NativeFunction<_CChannel_CArray_CString Function(_CAttributes)>>('CAttributes_changed');
 late final _CAttributes_changed = _CAttributes_changedPtr.asFunction<_CChannel_CArray_CString Function(_CAttributes)>();
 
-late final _CAttributes_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CAttributes_cg_objectIdentifier');
-late final _CAttributes_cg_objectIdentifier = _CAttributes_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CAttributes_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CAttributes_cg_objectIdentifier');
+late final _CAttributes_cg_objectIdentifier = _CAttributes_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CAttributes_setAttributeValue_CString_CAttributeValuePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CAttributes, _CString, _CAttributeValue)>>('CAttributes_setAttributeValue_CString_CAttributeValue');
 late final _CAttributes_setAttributeValue_CString_CAttributeValue = _CAttributes_setAttributeValue_CString_CAttributeValuePtr.asFunction<void Function(_CAttributes, _CString, _CAttributeValue)>();
@@ -66639,8 +66639,8 @@ late final _CMapObject_userData = _CMapObject_userDataPtr.asFunction<_CAny Funct
 late final _CMapObject_setUserData_CAnyPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CMapObject, _CAny)>>('CMapObject_setUserData_CAny');
 late final _CMapObject_setUserData_CAny = _CMapObject_setUserData_CAnyPtr.asFunction<void Function(_CMapObject, _CAny)>();
 
-late final _CMapObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CMapObject_cg_objectIdentifier');
-late final _CMapObject_cg_objectIdentifier = _CMapObject_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CMapObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CMapObject_cg_objectIdentifier');
+late final _CMapObject_cg_objectIdentifier = _CMapObject_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CMapObject_cg_getSelectorPtr = _lookup<ffi.NativeFunction<ffi.Uint64 Function(_CMapObject)>>('CMapObject_cg_getSelector');
 late final _CMapObject_cg_getSelector = _CMapObject_cg_getSelectorPtr.asFunction<int Function(_CMapObject)>();
@@ -66675,8 +66675,8 @@ late final _CGeometryMapObject_setDraggable_bool = _CGeometryMapObject_setDragga
 late final _CGeometryMapObject_boundsPtr = _lookup<ffi.NativeFunction<_CGeoRect Function(_CGeometryMapObject)>>('CGeometryMapObject_bounds');
 late final _CGeometryMapObject_bounds = _CGeometryMapObject_boundsPtr.asFunction<_CGeoRect Function(_CGeometryMapObject)>();
 
-late final _CGeometryMapObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CGeometryMapObject_cg_objectIdentifier');
-late final _CGeometryMapObject_cg_objectIdentifier = _CGeometryMapObject_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CGeometryMapObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CGeometryMapObject_cg_objectIdentifier');
+late final _CGeometryMapObject_cg_objectIdentifier = _CGeometryMapObject_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CGeometryMapObject_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CGeometryMapObject_release');
@@ -66741,8 +66741,8 @@ late final _CClusterObject_objects = _CClusterObject_objectsPtr.asFunction<_CArr
 late final _CClusterObject_geometryObjectPtr = _lookup<ffi.NativeFunction<_COptional_CGeometryMapObject Function(_CClusterObject)>>('CClusterObject_geometryObject');
 late final _CClusterObject_geometryObject = _CClusterObject_geometryObjectPtr.asFunction<_COptional_CGeometryMapObject Function(_CClusterObject)>();
 
-late final _CClusterObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CClusterObject_cg_objectIdentifier');
-late final _CClusterObject_cg_objectIdentifier = _CClusterObject_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CClusterObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CClusterObject_cg_objectIdentifier');
+late final _CClusterObject_cg_objectIdentifier = _CClusterObject_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CClusterObject_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CClusterObject_release');
@@ -66774,8 +66774,8 @@ late final _COptional_CGeometryMapObject_release = _COptional_CGeometryMapObject
 late final _CDgisMapObject_idPtr = _lookup<ffi.NativeFunction<_CDgisObjectId Function(_CDgisMapObject)>>('CDgisMapObject_id');
 late final _CDgisMapObject_id = _CDgisMapObject_idPtr.asFunction<_CDgisObjectId Function(_CDgisMapObject)>();
 
-late final _CDgisMapObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CDgisMapObject_cg_objectIdentifier');
-late final _CDgisMapObject_cg_objectIdentifier = _CDgisMapObject_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CDgisMapObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CDgisMapObject_cg_objectIdentifier');
+late final _CDgisMapObject_cg_objectIdentifier = _CDgisMapObject_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CDgisMapObject_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CDgisMapObject_release');
@@ -66786,8 +66786,8 @@ late final _CDgisMapObjectMakeDefaultPtr = _lookup<ffi.NativeFunction<_CDgisMapO
 late final _CDgisMapObjectMakeDefault = _CDgisMapObjectMakeDefaultPtr.asFunction<_CDgisMapObject Function()>();
 
 
-late final _CSource_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CSource_cg_objectIdentifier');
-late final _CSource_cg_objectIdentifier = _CSource_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CSource_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CSource_cg_objectIdentifier');
+late final _CSource_cg_objectIdentifier = _CSource_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CSource_cg_getSelectorPtr = _lookup<ffi.NativeFunction<ffi.Uint64 Function(_CSource)>>('CSource_cg_getSelector');
 late final _CSource_cg_getSelector = _CSource_cg_getSelectorPtr.asFunction<int Function(_CSource)>();
@@ -66804,8 +66804,8 @@ late final _CDgisSource_highlightedObjectsChannel = _CDgisSource_highlightedObje
 late final _CDgisSource_highlightedObjectsPtr = _lookup<ffi.NativeFunction<_CArray_CDgisObjectId Function(_CDgisSource)>>('CDgisSource_highlightedObjects');
 late final _CDgisSource_highlightedObjects = _CDgisSource_highlightedObjectsPtr.asFunction<_CArray_CDgisObjectId Function(_CDgisSource)>();
 
-late final _CDgisSource_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CDgisSource_cg_objectIdentifier');
-late final _CDgisSource_cg_objectIdentifier = _CDgisSource_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CDgisSource_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CDgisSource_cg_objectIdentifier');
+late final _CDgisSource_cg_objectIdentifier = _CDgisSource_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CDgisSource_S_createDgisSource_CContext_CDgisSourceWorkingModePtr = _lookup<ffi.NativeFunction<_CSource Function(_CContext, _CDgisSourceWorkingMode)>>('CDgisSource_S_createDgisSource_CContext_CDgisSourceWorkingMode');
 late final _CDgisSource_S_createDgisSource_CContext_CDgisSourceWorkingMode = _CDgisSource_S_createDgisSource_CContext_CDgisSourceWorkingModePtr.asFunction<_CSource Function(_CContext, _CDgisSourceWorkingMode)>();
@@ -66843,8 +66843,8 @@ late final _CStatefulChannel_CArray_CDgisObjectIdConnect = _CStatefulChannel_CAr
   )
 >();
 
-late final _CFollowController_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CFollowController_cg_objectIdentifier');
-late final _CFollowController_cg_objectIdentifier = _CFollowController_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CFollowController_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CFollowController_cg_objectIdentifier');
+late final _CFollowController_cg_objectIdentifier = _CFollowController_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CFollowController_cg_getSelectorPtr = _lookup<ffi.NativeFunction<ffi.Uint64 Function(_CFollowController)>>('CFollowController_cg_getSelector');
 late final _CFollowController_cg_getSelector = _CFollowController_cg_getSelectorPtr.asFunction<int Function(_CFollowController)>();
@@ -66861,8 +66861,8 @@ late final _CGeometryMapObjectSource_objects = _CGeometryMapObjectSource_objects
 late final _CGeometryMapObjectSource_sourceAttributesPtr = _lookup<ffi.NativeFunction<_CAttributes Function(_CGeometryMapObjectSource)>>('CGeometryMapObjectSource_sourceAttributes');
 late final _CGeometryMapObjectSource_sourceAttributes = _CGeometryMapObjectSource_sourceAttributesPtr.asFunction<_CAttributes Function(_CGeometryMapObjectSource)>();
 
-late final _CGeometryMapObjectSource_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CGeometryMapObjectSource_cg_objectIdentifier');
-late final _CGeometryMapObjectSource_cg_objectIdentifier = _CGeometryMapObjectSource_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CGeometryMapObjectSource_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CGeometryMapObjectSource_cg_objectIdentifier');
+late final _CGeometryMapObjectSource_cg_objectIdentifier = _CGeometryMapObjectSource_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CGeometryMapObjectSource_clusteringObjects_CCameraPositionPtr = _lookup<ffi.NativeFunction<_CArray_CMapObject Function(_CGeometryMapObjectSource, _CCameraPosition)>>('CGeometryMapObjectSource_clusteringObjects_CCameraPosition');
 late final _CGeometryMapObjectSource_clusteringObjects_CCameraPosition = _CGeometryMapObjectSource_clusteringObjects_CCameraPositionPtr.asFunction<_CArray_CMapObject Function(_CGeometryMapObjectSource, _CCameraPosition)>();
@@ -66900,8 +66900,8 @@ late final _forEach_CArray_CMapObject = _forEach_CArray_CMapObjectPtr.asFunction
 late final _CArray_CMapObject_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CArray_CMapObject)>>('CArray_CMapObject_release');
 late final _CArray_CMapObject_release = _CArray_CMapObject_releasePtr.asFunction<void Function(_CArray_CMapObject)>();
 
-late final _CImage_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CImage_cg_objectIdentifier');
-late final _CImage_cg_objectIdentifier = _CImage_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CImage_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CImage_cg_objectIdentifier');
+late final _CImage_cg_objectIdentifier = _CImage_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CImage_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CImage_release');
@@ -66919,8 +66919,8 @@ late final _CImageDataMakeDefaultPtr = _lookup<ffi.NativeFunction<_CImageData Fu
 late final _CImageDataMakeDefault = _CImageDataMakeDefaultPtr.asFunction<_CImageData Function()>();
 
 
-late final _CImageLoaderCpp_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CImageLoaderCpp_cg_objectIdentifier');
-late final _CImageLoaderCpp_cg_objectIdentifier = _CImageLoaderCpp_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CImageLoaderCpp_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CImageLoaderCpp_cg_objectIdentifier');
+late final _CImageLoaderCpp_cg_objectIdentifier = _CImageLoaderCpp_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CImageLoaderCpp_loadPtr = _lookup<ffi.NativeFunction<_CImageData Function(_CImageLoaderCpp)>>('CImageLoaderCpp_load');
 late final _CImageLoaderCpp_load = _CImageLoaderCpp_loadPtr.asFunction<_CImageData Function(_CImageLoaderCpp)>();
@@ -66938,8 +66938,8 @@ late final _CImageLoaderMakeDefault = _CImageLoaderMakeDefaultPtr.asFunction<_CI
 late final _CImageLoader_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CImageLoader)>>('CImageLoader_release');
 late final _CImageLoader_release = _CImageLoader_releasePtr.asFunction<void Function(_CImageLoader)>();
 
-late final _CBearingFollowController_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CBearingFollowController_cg_objectIdentifier');
-late final _CBearingFollowController_cg_objectIdentifier = _CBearingFollowController_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CBearingFollowController_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CBearingFollowController_cg_objectIdentifier');
+late final _CBearingFollowController_cg_objectIdentifier = _CBearingFollowController_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CBearingFollowController_C_createWith_CBearingSource_CTimeInterval_CBearingPtr = _lookup<ffi.NativeFunction<_CBearingFollowController Function(_CBearingSource, _CTimeInterval, _CBearing)>>('CBearingFollowController_C_createWith_CBearingSource_CTimeInterval_CBearing');
 late final _CBearingFollowController_C_createWith_CBearingSource_CTimeInterval_CBearing = _CBearingFollowController_C_createWith_CBearingSource_CTimeInterval_CBearingPtr.asFunction<_CBearingFollowController Function(_CBearingSource, _CTimeInterval, _CBearing)>();
@@ -66952,8 +66952,8 @@ late final _CBearingFollowControllerMakeDefaultPtr = _lookup<ffi.NativeFunction<
 late final _CBearingFollowControllerMakeDefault = _CBearingFollowControllerMakeDefaultPtr.asFunction<_CBearingFollowController Function()>();
 
 
-late final _CCoordinatesFollowController_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CCoordinatesFollowController_cg_objectIdentifier');
-late final _CCoordinatesFollowController_cg_objectIdentifier = _CCoordinatesFollowController_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CCoordinatesFollowController_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CCoordinatesFollowController_cg_objectIdentifier');
+late final _CCoordinatesFollowController_cg_objectIdentifier = _CCoordinatesFollowController_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CCoordinatesFollowController_C_createWith_CTimeInterval_CMeterPtr = _lookup<ffi.NativeFunction<_CCoordinatesFollowController Function(_CTimeInterval, _CMeter)>>('CCoordinatesFollowController_C_createWith_CTimeInterval_CMeter');
 late final _CCoordinatesFollowController_C_createWith_CTimeInterval_CMeter = _CCoordinatesFollowController_C_createWith_CTimeInterval_CMeterPtr.asFunction<_CCoordinatesFollowController Function(_CTimeInterval, _CMeter)>();
@@ -66966,8 +66966,8 @@ late final _CCoordinatesFollowControllerMakeDefaultPtr = _lookup<ffi.NativeFunct
 late final _CCoordinatesFollowControllerMakeDefault = _CCoordinatesFollowControllerMakeDefaultPtr.asFunction<_CCoordinatesFollowController Function()>();
 
 
-late final _CMyLocationMapObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CMyLocationMapObject_cg_objectIdentifier');
-late final _CMyLocationMapObject_cg_objectIdentifier = _CMyLocationMapObject_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CMyLocationMapObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CMyLocationMapObject_cg_objectIdentifier');
+late final _CMyLocationMapObject_cg_objectIdentifier = _CMyLocationMapObject_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CMyLocationMapObject_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CMyLocationMapObject_release');
@@ -66990,8 +66990,8 @@ late final _CMyLocationMapObjectMarkerTypeMakeDefault = _CMyLocationMapObjectMar
 late final _CMyLocationMapObjectSource_itemPtr = _lookup<ffi.NativeFunction<_CMyLocationMapObject Function(_CMyLocationMapObjectSource)>>('CMyLocationMapObjectSource_item');
 late final _CMyLocationMapObjectSource_item = _CMyLocationMapObjectSource_itemPtr.asFunction<_CMyLocationMapObject Function(_CMyLocationMapObjectSource)>();
 
-late final _CMyLocationMapObjectSource_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CMyLocationMapObjectSource_cg_objectIdentifier');
-late final _CMyLocationMapObjectSource_cg_objectIdentifier = _CMyLocationMapObjectSource_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CMyLocationMapObjectSource_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CMyLocationMapObjectSource_cg_objectIdentifier');
+late final _CMyLocationMapObjectSource_cg_objectIdentifier = _CMyLocationMapObjectSource_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CMyLocationMapObjectSource_C_createWith_CContext_CMyLocationControllerSettings_CMyLocationMapObjectMarkerTypePtr = _lookup<ffi.NativeFunction<_CMyLocationMapObjectSource Function(_CContext, _CMyLocationControllerSettings, _CMyLocationMapObjectMarkerType)>>('CMyLocationMapObjectSource_C_createWith_CContext_CMyLocationControllerSettings_CMyLocationMapObjectMarkerType');
 late final _CMyLocationMapObjectSource_C_createWith_CContext_CMyLocationControllerSettings_CMyLocationMapObjectMarkerType = _CMyLocationMapObjectSource_C_createWith_CContext_CMyLocationControllerSettings_CMyLocationMapObjectMarkerTypePtr.asFunction<_CMyLocationMapObjectSource Function(_CContext, _CMyLocationControllerSettings, _CMyLocationMapObjectMarkerType)>();
@@ -67008,8 +67008,8 @@ late final _CRoadEventMapObject_id = _CRoadEventMapObject_idPtr.asFunction<_CDgi
 late final _CRoadEventMapObject_eventPtr = _lookup<ffi.NativeFunction<_CRoadEvent Function(_CRoadEventMapObject)>>('CRoadEventMapObject_event');
 late final _CRoadEventMapObject_event = _CRoadEventMapObject_eventPtr.asFunction<_CRoadEvent Function(_CRoadEventMapObject)>();
 
-late final _CRoadEventMapObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRoadEventMapObject_cg_objectIdentifier');
-late final _CRoadEventMapObject_cg_objectIdentifier = _CRoadEventMapObject_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRoadEventMapObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRoadEventMapObject_cg_objectIdentifier');
+late final _CRoadEventMapObject_cg_objectIdentifier = _CRoadEventMapObject_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CRoadEventMapObject_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CRoadEventMapObject_release');
@@ -67045,8 +67045,8 @@ late final _CRoadEvent_availableActions = _CRoadEvent_availableActionsPtr.asFunc
 late final _CRoadEvent_removerPtr = _lookup<ffi.NativeFunction<_COptional_CRemover Function(_CRoadEvent)>>('CRoadEvent_remover');
 late final _CRoadEvent_remover = _CRoadEvent_removerPtr.asFunction<_COptional_CRemover Function(_CRoadEvent)>();
 
-late final _CRoadEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRoadEvent_cg_objectIdentifier');
-late final _CRoadEvent_cg_objectIdentifier = _CRoadEvent_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRoadEvent_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRoadEvent_cg_objectIdentifier');
+late final _CRoadEvent_cg_objectIdentifier = _CRoadEvent_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CRoadEvent_photosPtr = _lookup<ffi.NativeFunction<_CFuture_CArray_CRoadEventPhoto Function(_CRoadEvent)>>('CRoadEvent_photos');
 late final _CRoadEvent_photos = _CRoadEvent_photosPtr.asFunction<_CFuture_CArray_CRoadEventPhoto Function(_CRoadEvent)>();
@@ -67145,8 +67145,8 @@ late final _CRoadEventPhoto_timestamp = _CRoadEventPhoto_timestampPtr.asFunction
 late final _CRoadEventPhoto_removerPtr = _lookup<ffi.NativeFunction<_COptional_CRemover Function(_CRoadEventPhoto)>>('CRoadEventPhoto_remover');
 late final _CRoadEventPhoto_remover = _CRoadEventPhoto_removerPtr.asFunction<_COptional_CRemover Function(_CRoadEventPhoto)>();
 
-late final _CRoadEventPhoto_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRoadEventPhoto_cg_objectIdentifier');
-late final _CRoadEventPhoto_cg_objectIdentifier = _CRoadEventPhoto_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRoadEventPhoto_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRoadEventPhoto_cg_objectIdentifier');
+late final _CRoadEventPhoto_cg_objectIdentifier = _CRoadEventPhoto_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CRoadEventPhoto_previewUrl_CScreenSizePtr = _lookup<ffi.NativeFunction<_CString Function(_CRoadEventPhoto, _CScreenSize)>>('CRoadEventPhoto_previewUrl_CScreenSize');
 late final _CRoadEventPhoto_previewUrl_CScreenSize = _CRoadEventPhoto_previewUrl_CScreenSizePtr.asFunction<_CString Function(_CRoadEventPhoto, _CScreenSize)>();
@@ -67187,8 +67187,8 @@ late final _CFuture_CActionResultReceive = _CFuture_CActionResultReceivePtr.asFu
   )
 >();
 
-late final _CRemover_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRemover_cg_objectIdentifier');
-late final _CRemover_cg_objectIdentifier = _CRemover_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRemover_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRemover_cg_objectIdentifier');
+late final _CRemover_cg_objectIdentifier = _CRemover_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CRemover_removePtr = _lookup<ffi.NativeFunction<_CFuture_CActionResult Function(_CRemover)>>('CRemover_remove');
 late final _CRemover_remove = _CRemover_removePtr.asFunction<_CFuture_CActionResult Function(_CRemover)>();
@@ -67231,8 +67231,8 @@ late final _CRoadEventAction_infoChannel = _CRoadEventAction_infoChannelPtr.asFu
 late final _CRoadEventAction_infoPtr = _lookup<ffi.NativeFunction<_CRoadEventActionInfo Function(_CRoadEventAction)>>('CRoadEventAction_info');
 late final _CRoadEventAction_info = _CRoadEventAction_infoPtr.asFunction<_CRoadEventActionInfo Function(_CRoadEventAction)>();
 
-late final _CRoadEventAction_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRoadEventAction_cg_objectIdentifier');
-late final _CRoadEventAction_cg_objectIdentifier = _CRoadEventAction_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRoadEventAction_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRoadEventAction_cg_objectIdentifier');
+late final _CRoadEventAction_cg_objectIdentifier = _CRoadEventAction_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CRoadEventAction_setPtr = _lookup<ffi.NativeFunction<_CFuture_CActionResult Function(_CRoadEventAction)>>('CRoadEventAction_set');
 late final _CRoadEventAction_set = _CRoadEventAction_setPtr.asFunction<_CFuture_CActionResult Function(_CRoadEventAction)>();
@@ -67282,8 +67282,8 @@ late final _CRoadEventActionInfoMakeDefault = _CRoadEventActionInfoMakeDefaultPt
 late final _CStyle_styleAttributesPtr = _lookup<ffi.NativeFunction<_CAttributes Function(_CStyle)>>('CStyle_styleAttributes');
 late final _CStyle_styleAttributes = _CStyle_styleAttributesPtr.asFunction<_CAttributes Function(_CStyle)>();
 
-late final _CStyle_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CStyle_cg_objectIdentifier');
-late final _CStyle_cg_objectIdentifier = _CStyle_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CStyle_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CStyle_cg_objectIdentifier');
+late final _CStyle_cg_objectIdentifier = _CStyle_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CStyle_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CStyle_release');
@@ -67294,8 +67294,8 @@ late final _CStyleMakeDefaultPtr = _lookup<ffi.NativeFunction<_CStyle Function()
 late final _CStyleMakeDefault = _CStyleMakeDefaultPtr.asFunction<_CStyle Function()>();
 
 
-late final _CStyleZoomFollowController_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CStyleZoomFollowController_cg_objectIdentifier');
-late final _CStyleZoomFollowController_cg_objectIdentifier = _CStyleZoomFollowController_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CStyleZoomFollowController_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CStyleZoomFollowController_cg_objectIdentifier');
+late final _CStyleZoomFollowController_cg_objectIdentifier = _CStyleZoomFollowController_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CStyleZoomFollowController_setStyleZoom_CStyleZoomPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CStyleZoomFollowController, _CStyleZoom)>>('CStyleZoomFollowController_setStyleZoom_CStyleZoom');
 late final _CStyleZoomFollowController_setStyleZoom_CStyleZoom = _CStyleZoomFollowController_setStyleZoom_CStyleZoomPtr.asFunction<void Function(_CStyleZoomFollowController, _CStyleZoom)>();
@@ -67312,8 +67312,8 @@ late final _CStyleZoomFollowControllerMakeDefaultPtr = _lookup<ffi.NativeFunctio
 late final _CStyleZoomFollowControllerMakeDefault = _CStyleZoomFollowControllerMakeDefaultPtr.asFunction<_CStyleZoomFollowController Function()>();
 
 
-late final _CStyleZoomToTiltRelationCpp_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CStyleZoomToTiltRelationCpp_cg_objectIdentifier');
-late final _CStyleZoomToTiltRelationCpp_cg_objectIdentifier = _CStyleZoomToTiltRelationCpp_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CStyleZoomToTiltRelationCpp_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CStyleZoomToTiltRelationCpp_cg_objectIdentifier');
+late final _CStyleZoomToTiltRelationCpp_cg_objectIdentifier = _CStyleZoomToTiltRelationCpp_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CStyleZoomToTiltRelationCpp_styleZoomToTilt_CStyleZoomPtr = _lookup<ffi.NativeFunction<_CTilt Function(_CStyleZoomToTiltRelationCpp, _CStyleZoom)>>('CStyleZoomToTiltRelationCpp_styleZoomToTilt_CStyleZoom');
 late final _CStyleZoomToTiltRelationCpp_styleZoomToTilt_CStyleZoom = _CStyleZoomToTiltRelationCpp_styleZoomToTilt_CStyleZoomPtr.asFunction<_CTilt Function(_CStyleZoomToTiltRelationCpp, _CStyleZoom)>();
@@ -67331,8 +67331,8 @@ late final _CStyleZoomToTiltRelationMakeDefault = _CStyleZoomToTiltRelationMakeD
 late final _CStyleZoomToTiltRelation_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CStyleZoomToTiltRelation)>>('CStyleZoomToTiltRelation_release');
 late final _CStyleZoomToTiltRelation_release = _CStyleZoomToTiltRelation_releasePtr.asFunction<void Function(_CStyleZoomToTiltRelation)>();
 
-late final _CTiltFollowController_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CTiltFollowController_cg_objectIdentifier');
-late final _CTiltFollowController_cg_objectIdentifier = _CTiltFollowController_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CTiltFollowController_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CTiltFollowController_cg_objectIdentifier');
+late final _CTiltFollowController_cg_objectIdentifier = _CTiltFollowController_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CTiltFollowController_C_createWith_CStyleZoomToTiltRelationPtr = _lookup<ffi.NativeFunction<_CTiltFollowController Function(_CStyleZoomToTiltRelation)>>('CTiltFollowController_C_createWith_CStyleZoomToTiltRelation');
 late final _CTiltFollowController_C_createWith_CStyleZoomToTiltRelation = _CTiltFollowController_C_createWith_CStyleZoomToTiltRelationPtr.asFunction<_CTiltFollowController Function(_CStyleZoomToTiltRelation)>();
@@ -67345,8 +67345,8 @@ late final _CTiltFollowControllerMakeDefaultPtr = _lookup<ffi.NativeFunction<_CT
 late final _CTiltFollowControllerMakeDefault = _CTiltFollowControllerMakeDefaultPtr.asFunction<_CTiltFollowController Function()>();
 
 
-late final _CTrafficSource_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CTrafficSource_cg_objectIdentifier');
-late final _CTrafficSource_cg_objectIdentifier = _CTrafficSource_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CTrafficSource_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CTrafficSource_cg_objectIdentifier');
+late final _CTrafficSource_cg_objectIdentifier = _CTrafficSource_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CTrafficSource_C_createWith_CContextPtr = _lookup<ffi.NativeFunction<_CTrafficSource Function(_CContext)>>('CTrafficSource_C_createWith_CContext');
 late final _CTrafficSource_C_createWith_CContext = _CTrafficSource_C_createWith_CContextPtr.asFunction<_CTrafficSource Function(_CContext)>();
@@ -67370,8 +67370,8 @@ late final _CRoadEventSource_highlightedObjectsChannel = _CRoadEventSource_highl
 late final _CRoadEventSource_highlightedObjectsPtr = _lookup<ffi.NativeFunction<_CArray_CDgisObjectId Function(_CRoadEventSource)>>('CRoadEventSource_highlightedObjects');
 late final _CRoadEventSource_highlightedObjects = _CRoadEventSource_highlightedObjectsPtr.asFunction<_CArray_CDgisObjectId Function(_CRoadEventSource)>();
 
-late final _CRoadEventSource_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRoadEventSource_cg_objectIdentifier');
-late final _CRoadEventSource_cg_objectIdentifier = _CRoadEventSource_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRoadEventSource_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRoadEventSource_cg_objectIdentifier');
+late final _CRoadEventSource_cg_objectIdentifier = _CRoadEventSource_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CRoadEventSource_setHighlighted_CArray_CDgisObjectId_boolPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CRoadEventSource, _CArray_CDgisObjectId, ffi.Bool)>>('CRoadEventSource_setHighlighted_CArray_CDgisObjectId_bool');
 late final _CRoadEventSource_setHighlighted_CArray_CDgisObjectId_bool = _CRoadEventSource_setHighlighted_CArray_CDgisObjectId_boolPtr.asFunction<void Function(_CRoadEventSource, _CArray_CDgisObjectId, bool)>();
@@ -67465,8 +67465,8 @@ late final _CCameraZoomRestrictionsMakeDefaultPtr = _lookup<ffi.NativeFunction<_
 late final _CCameraZoomRestrictionsMakeDefault = _CCameraZoomRestrictionsMakeDefaultPtr.asFunction<_CCameraZoomRestrictions Function()>();
 
 
-late final _CGeometryMapObjectBuilder_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CGeometryMapObjectBuilder_cg_objectIdentifier');
-late final _CGeometryMapObjectBuilder_cg_objectIdentifier = _CGeometryMapObjectBuilder_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CGeometryMapObjectBuilder_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CGeometryMapObjectBuilder_cg_objectIdentifier');
+late final _CGeometryMapObjectBuilder_cg_objectIdentifier = _CGeometryMapObjectBuilder_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CGeometryMapObjectBuilder_setObjectAttribute_CString_CAttributeValuePtr = _lookup<ffi.NativeFunction<_CGeometryMapObjectBuilder Function(_CGeometryMapObjectBuilder, _CString, _CAttributeValue)>>('CGeometryMapObjectBuilder_setObjectAttribute_CString_CAttributeValue');
 late final _CGeometryMapObjectBuilder_setObjectAttribute_CString_CAttributeValue = _CGeometryMapObjectBuilder_setObjectAttribute_CString_CAttributeValuePtr.asFunction<_CGeometryMapObjectBuilder Function(_CGeometryMapObjectBuilder, _CString, _CAttributeValue)>();
@@ -67493,8 +67493,8 @@ late final _CGeometryMapObjectBuilderMakeDefaultPtr = _lookup<ffi.NativeFunction
 late final _CGeometryMapObjectBuilderMakeDefault = _CGeometryMapObjectBuilderMakeDefaultPtr.asFunction<_CGeometryMapObjectBuilder Function()>();
 
 
-late final _CGeometryMapObjectSourceBuilder_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CGeometryMapObjectSourceBuilder_cg_objectIdentifier');
-late final _CGeometryMapObjectSourceBuilder_cg_objectIdentifier = _CGeometryMapObjectSourceBuilder_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CGeometryMapObjectSourceBuilder_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CGeometryMapObjectSourceBuilder_cg_objectIdentifier');
+late final _CGeometryMapObjectSourceBuilder_cg_objectIdentifier = _CGeometryMapObjectSourceBuilder_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CGeometryMapObjectSourceBuilder_setSourceAttribute_CString_CAttributeValuePtr = _lookup<ffi.NativeFunction<_CGeometryMapObjectSourceBuilder Function(_CGeometryMapObjectSourceBuilder, _CString, _CAttributeValue)>>('CGeometryMapObjectSourceBuilder_setSourceAttribute_CString_CAttributeValue');
 late final _CGeometryMapObjectSourceBuilder_setSourceAttribute_CString_CAttributeValue = _CGeometryMapObjectSourceBuilder_setSourceAttribute_CString_CAttributeValuePtr.asFunction<_CGeometryMapObjectSourceBuilder Function(_CGeometryMapObjectSourceBuilder, _CString, _CAttributeValue)>();
@@ -67529,8 +67529,8 @@ late final _CIndoorBuilding_activeLevelIndex = _CIndoorBuilding_activeLevelIndex
 late final _CIndoorBuilding_setActiveLevelIndex_uint64_tPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CIndoorBuilding, ffi.Uint64)>>('CIndoorBuilding_setActiveLevelIndex_uint64_t');
 late final _CIndoorBuilding_setActiveLevelIndex_uint64_t = _CIndoorBuilding_setActiveLevelIndex_uint64_tPtr.asFunction<void Function(_CIndoorBuilding, int)>();
 
-late final _CIndoorBuilding_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CIndoorBuilding_cg_objectIdentifier');
-late final _CIndoorBuilding_cg_objectIdentifier = _CIndoorBuilding_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CIndoorBuilding_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CIndoorBuilding_cg_objectIdentifier');
+late final _CIndoorBuilding_cg_objectIdentifier = _CIndoorBuilding_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CIndoorBuilding_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CIndoorBuilding_release');
@@ -67571,8 +67571,8 @@ late final _CIndoorManager_focusedBuildingChannel = _CIndoorManager_focusedBuild
 late final _CIndoorManager_focusedBuildingPtr = _lookup<ffi.NativeFunction<_COptional_CIndoorBuilding Function(_CIndoorManager)>>('CIndoorManager_focusedBuilding');
 late final _CIndoorManager_focusedBuilding = _CIndoorManager_focusedBuildingPtr.asFunction<_COptional_CIndoorBuilding Function(_CIndoorManager)>();
 
-late final _CIndoorManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CIndoorManager_cg_objectIdentifier');
-late final _CIndoorManager_cg_objectIdentifier = _CIndoorManager_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CIndoorManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CIndoorManager_cg_objectIdentifier');
+late final _CIndoorManager_cg_objectIdentifier = _CIndoorManager_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CIndoorManager_setIndoorState_CIndoorManagerStatePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CIndoorManager, _CIndoorManagerState)>>('CIndoorManager_setIndoorState_CIndoorManagerState');
 late final _CIndoorManager_setIndoorState_CIndoorManagerState = _CIndoorManager_setIndoorState_CIndoorManagerStatePtr.asFunction<void Function(_CIndoorManager, _CIndoorManagerState)>();
@@ -67628,8 +67628,8 @@ late final _CIndoorControlModel_levelNamesChannel = _CIndoorControlModel_levelNa
 late final _CIndoorControlModel_levelNamesPtr = _lookup<ffi.NativeFunction<_CArray_CString Function(_CIndoorControlModel)>>('CIndoorControlModel_levelNames');
 late final _CIndoorControlModel_levelNames = _CIndoorControlModel_levelNamesPtr.asFunction<_CArray_CString Function(_CIndoorControlModel)>();
 
-late final _CIndoorControlModel_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CIndoorControlModel_cg_objectIdentifier');
-late final _CIndoorControlModel_cg_objectIdentifier = _CIndoorControlModel_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CIndoorControlModel_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CIndoorControlModel_cg_objectIdentifier');
+late final _CIndoorControlModel_cg_objectIdentifier = _CIndoorControlModel_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CIndoorControlModel_isLevelMarked_uint64_tPtr = _lookup<ffi.NativeFunction<ffi.Bool Function(_CIndoorControlModel, ffi.Uint64)>>('CIndoorControlModel_isLevelMarked_uint64_t');
 late final _CIndoorControlModel_isLevelMarked_uint64_t = _CIndoorControlModel_isLevelMarked_uint64_tPtr.asFunction<bool Function(_CIndoorControlModel, int)>();
@@ -67761,8 +67761,8 @@ late final _CMap_graphicsPreset = _CMap_graphicsPresetPtr.asFunction<_COptional_
 late final _CMap_setGraphicsPreset_COptional_CGraphicsPresetPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CMap, _COptional_CGraphicsPreset)>>('CMap_setGraphicsPreset_COptional_CGraphicsPreset');
 late final _CMap_setGraphicsPreset_COptional_CGraphicsPreset = _CMap_setGraphicsPreset_COptional_CGraphicsPresetPtr.asFunction<void Function(_CMap, _COptional_CGraphicsPreset)>();
 
-late final _CMap_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CMap_cg_objectIdentifier');
-late final _CMap_cg_objectIdentifier = _CMap_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CMap_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CMap_cg_objectIdentifier');
+late final _CMap_cg_objectIdentifier = _CMap_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CMap_resetFontIconSizeMultiplierPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CMap)>>('CMap_resetFontIconSizeMultiplier');
 late final _CMap_resetFontIconSizeMultiplier = _CMap_resetFontIconSizeMultiplierPtr.asFunction<void Function(_CMap)>();
@@ -67797,8 +67797,8 @@ late final _CCamera_behaviourChannel = _CCamera_behaviourChannelPtr.asFunction<_
 late final _CCamera_behaviourPtr = _lookup<ffi.NativeFunction<_CCameraBehaviourChange Function(_CCamera)>>('CCamera_behaviour');
 late final _CCamera_behaviour = _CCamera_behaviourPtr.asFunction<_CCameraBehaviourChange Function(_CCamera)>();
 
-late final _CCamera_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CCamera_cg_objectIdentifier');
-late final _CCamera_cg_objectIdentifier = _CCamera_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CCamera_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CCamera_cg_objectIdentifier');
+late final _CCamera_cg_objectIdentifier = _CCamera_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CCamera_moveToCameraPosition_CCameraPosition_CTimeInterval_CCameraAnimationTypePtr = _lookup<ffi.NativeFunction<_CFuture_CCameraAnimatedMoveResult Function(_CCamera, _CCameraPosition, _CTimeInterval, _CCameraAnimationType)>>('CCamera_moveToCameraPosition_CCameraPosition_CTimeInterval_CCameraAnimationType');
 late final _CCamera_moveToCameraPosition_CCameraPosition_CTimeInterval_CCameraAnimationType = _CCamera_moveToCameraPosition_CCameraPosition_CTimeInterval_CCameraAnimationTypePtr.asFunction<_CFuture_CCameraAnimatedMoveResult Function(_CCamera, _CCameraPosition, _CTimeInterval, _CCameraAnimationType)>();
@@ -68146,8 +68146,8 @@ late final _COptional_CRenderedObjectInfoMakeDefault = _COptional_CRenderedObjec
 late final _COptional_CRenderedObjectInfo_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_COptional_CRenderedObjectInfo)>>('COptional_CRenderedObjectInfo_release');
 late final _COptional_CRenderedObjectInfo_release = _COptional_CRenderedObjectInfo_releasePtr.asFunction<void Function(_COptional_CRenderedObjectInfo)>();
 
-late final _CProjection_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CProjection_cg_objectIdentifier');
-late final _CProjection_cg_objectIdentifier = _CProjection_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CProjection_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CProjection_cg_objectIdentifier');
+late final _CProjection_cg_objectIdentifier = _CProjection_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CProjection_screenToMap_CScreenPointPtr = _lookup<ffi.NativeFunction<_COptional_CGeoPoint Function(_CProjection, _CScreenPoint)>>('CProjection_screenToMap_CScreenPoint');
 late final _CProjection_screenToMap_CScreenPoint = _CProjection_screenToMap_CScreenPointPtr.asFunction<_COptional_CGeoPoint Function(_CProjection, _CScreenPoint)>();
@@ -68224,8 +68224,8 @@ late final _CBaseCamera_viewportRestriction = _CBaseCamera_viewportRestrictionPt
 late final _CBaseCamera_setViewportRestriction_COptional_CGeoRectPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CBaseCamera, _COptional_CGeoRect)>>('CBaseCamera_setViewportRestriction_COptional_CGeoRect');
 late final _CBaseCamera_setViewportRestriction_COptional_CGeoRect = _CBaseCamera_setViewportRestriction_COptional_CGeoRectPtr.asFunction<void Function(_CBaseCamera, _COptional_CGeoRect)>();
 
-late final _CBaseCamera_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CBaseCamera_cg_objectIdentifier');
-late final _CBaseCamera_cg_objectIdentifier = _CBaseCamera_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CBaseCamera_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CBaseCamera_cg_objectIdentifier');
+late final _CBaseCamera_cg_objectIdentifier = _CBaseCamera_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CBaseCamera_clonePtr = _lookup<ffi.NativeFunction<_CBaseCamera Function(_CBaseCamera)>>('CBaseCamera_clone');
 late final _CBaseCamera_clone = _CBaseCamera_clonePtr.asFunction<_CBaseCamera Function(_CBaseCamera)>();
@@ -68494,8 +68494,8 @@ late final _CSimpleMapObject_setLevelId_COptional_CLevelId = _CSimpleMapObject_s
 late final _CSimpleMapObject_boundsPtr = _lookup<ffi.NativeFunction<_CGeoRect Function(_CSimpleMapObject)>>('CSimpleMapObject_bounds');
 late final _CSimpleMapObject_bounds = _CSimpleMapObject_boundsPtr.asFunction<_CGeoRect Function(_CSimpleMapObject)>();
 
-late final _CSimpleMapObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CSimpleMapObject_cg_objectIdentifier');
-late final _CSimpleMapObject_cg_objectIdentifier = _CSimpleMapObject_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CSimpleMapObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CSimpleMapObject_cg_objectIdentifier');
+late final _CSimpleMapObject_cg_objectIdentifier = _CSimpleMapObject_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CSimpleMapObject_cg_getSelectorPtr = _lookup<ffi.NativeFunction<ffi.Uint64 Function(_CSimpleMapObject)>>('CSimpleMapObject_cg_getSelector');
 late final _CSimpleMapObject_cg_getSelector = _CSimpleMapObject_cg_getSelectorPtr.asFunction<int Function(_CSimpleMapObject)>();
@@ -68512,8 +68512,8 @@ late final _CMapObjectManager_isVisible = _CMapObjectManager_isVisiblePtr.asFunc
 late final _CMapObjectManager_setVisible_boolPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CMapObjectManager, ffi.Bool)>>('CMapObjectManager_setVisible_bool');
 late final _CMapObjectManager_setVisible_bool = _CMapObjectManager_setVisible_boolPtr.asFunction<void Function(_CMapObjectManager, bool)>();
 
-late final _CMapObjectManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CMapObjectManager_cg_objectIdentifier');
-late final _CMapObjectManager_cg_objectIdentifier = _CMapObjectManager_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CMapObjectManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CMapObjectManager_cg_objectIdentifier');
+late final _CMapObjectManager_cg_objectIdentifier = _CMapObjectManager_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CMapObjectManager_S_withClustering_CMap_CLogicalPixel_CZoom_CSimpleClusterRenderer_CZoom_COptional_CStringPtr = _lookup<ffi.NativeFunction<_CMapObjectManager Function(_CMap, _CLogicalPixel, _CZoom, _CSimpleClusterRenderer, _CZoom, _COptional_CString)>>('CMapObjectManager_S_withClustering_CMap_CLogicalPixel_CZoom_CSimpleClusterRenderer_CZoom_COptional_CString');
 late final _CMapObjectManager_S_withClustering_CMap_CLogicalPixel_CZoom_CSimpleClusterRenderer_CZoom_COptional_CString = _CMapObjectManager_S_withClustering_CMap_CLogicalPixel_CZoom_CSimpleClusterRenderer_CZoom_COptional_CStringPtr.asFunction<_CMapObjectManager Function(_CMap, _CLogicalPixel, _CZoom, _CSimpleClusterRenderer, _CZoom, _COptional_CString)>();
@@ -68557,8 +68557,8 @@ late final _forEach_CArray_CSimpleMapObject = _forEach_CArray_CSimpleMapObjectPt
 late final _CArray_CSimpleMapObject_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CArray_CSimpleMapObject)>>('CArray_CSimpleMapObject_release');
 late final _CArray_CSimpleMapObject_release = _CArray_CSimpleMapObject_releasePtr.asFunction<void Function(_CArray_CSimpleMapObject)>();
 
-late final _CSimpleClusterRendererCpp_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CSimpleClusterRendererCpp_cg_objectIdentifier');
-late final _CSimpleClusterRendererCpp_cg_objectIdentifier = _CSimpleClusterRendererCpp_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CSimpleClusterRendererCpp_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CSimpleClusterRendererCpp_cg_objectIdentifier');
+late final _CSimpleClusterRendererCpp_cg_objectIdentifier = _CSimpleClusterRendererCpp_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CSimpleClusterRendererCpp_renderCluster_CSimpleClusterObjectPtr = _lookup<ffi.NativeFunction<_CSimpleClusterOptions Function(_CSimpleClusterRendererCpp, _CSimpleClusterObject)>>('CSimpleClusterRendererCpp_renderCluster_CSimpleClusterObject');
 late final _CSimpleClusterRendererCpp_renderCluster_CSimpleClusterObject = _CSimpleClusterRendererCpp_renderCluster_CSimpleClusterObjectPtr.asFunction<_CSimpleClusterOptions Function(_CSimpleClusterRendererCpp, _CSimpleClusterObject)>();
@@ -68628,8 +68628,8 @@ late final _CSimpleClusterObject_zIndex = _CSimpleClusterObject_zIndexPtr.asFunc
 late final _CSimpleClusterObject_setZIndex_CZIndexPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CSimpleClusterObject, _CZIndex)>>('CSimpleClusterObject_setZIndex_CZIndex');
 late final _CSimpleClusterObject_setZIndex_CZIndex = _CSimpleClusterObject_setZIndex_CZIndexPtr.asFunction<void Function(_CSimpleClusterObject, _CZIndex)>();
 
-late final _CSimpleClusterObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CSimpleClusterObject_cg_objectIdentifier');
-late final _CSimpleClusterObject_cg_objectIdentifier = _CSimpleClusterObject_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CSimpleClusterObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CSimpleClusterObject_cg_objectIdentifier');
+late final _CSimpleClusterObject_cg_objectIdentifier = _CSimpleClusterObject_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CSimpleClusterObject_setIcon_COptional_CImagePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CSimpleClusterObject, _COptional_CImage)>>('CSimpleClusterObject_setIcon_COptional_CImage');
 late final _CSimpleClusterObject_setIcon_COptional_CImage = _CSimpleClusterObject_setIcon_COptional_CImagePtr.asFunction<void Function(_CSimpleClusterObject, _COptional_CImage)>();
@@ -68691,8 +68691,8 @@ late final _CMarker_iconAnimationMode = _CMarker_iconAnimationModePtr.asFunction
 late final _CMarker_setIconAnimationMode_CAnimationModePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CMarker, _CAnimationMode)>>('CMarker_setIconAnimationMode_CAnimationMode');
 late final _CMarker_setIconAnimationMode_CAnimationMode = _CMarker_setIconAnimationMode_CAnimationModePtr.asFunction<void Function(_CMarker, _CAnimationMode)>();
 
-late final _CMarker_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CMarker_cg_objectIdentifier');
-late final _CMarker_cg_objectIdentifier = _CMarker_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CMarker_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CMarker_cg_objectIdentifier');
+late final _CMarker_cg_objectIdentifier = _CMarker_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CMarker_C_createWith_CMarkerOptionsPtr = _lookup<ffi.NativeFunction<_CResult_CMarker Function(_CMarkerOptions)>>('CMarker_C_createWith_CMarkerOptions');
 late final _CMarker_C_createWith_CMarkerOptions = _CMarker_C_createWith_CMarkerOptionsPtr.asFunction<_CResult_CMarker Function(_CMarkerOptions)>();
@@ -68740,8 +68740,8 @@ late final _CCircle_dashedStrokeOptions = _CCircle_dashedStrokeOptionsPtr.asFunc
 late final _CCircle_setDashedStrokeOptions_COptional_CDashedStrokeCircleOptionsPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CCircle, _COptional_CDashedStrokeCircleOptions)>>('CCircle_setDashedStrokeOptions_COptional_CDashedStrokeCircleOptions');
 late final _CCircle_setDashedStrokeOptions_COptional_CDashedStrokeCircleOptions = _CCircle_setDashedStrokeOptions_COptional_CDashedStrokeCircleOptionsPtr.asFunction<void Function(_CCircle, _COptional_CDashedStrokeCircleOptions)>();
 
-late final _CCircle_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CCircle_cg_objectIdentifier');
-late final _CCircle_cg_objectIdentifier = _CCircle_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CCircle_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CCircle_cg_objectIdentifier');
+late final _CCircle_cg_objectIdentifier = _CCircle_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CCircle_C_createWith_CCircleOptionsPtr = _lookup<ffi.NativeFunction<_CResult_CCircle Function(_CCircleOptions)>>('CCircle_C_createWith_CCircleOptions');
 late final _CCircle_C_createWith_CCircleOptions = _CCircle_C_createWith_CCircleOptionsPtr.asFunction<_CResult_CCircle Function(_CCircleOptions)>();
@@ -68780,8 +68780,8 @@ late final _CPolygon_strokeColor = _CPolygon_strokeColorPtr.asFunction<_CColor F
 late final _CPolygon_setStrokeColor_CColorPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CPolygon, _CColor)>>('CPolygon_setStrokeColor_CColor');
 late final _CPolygon_setStrokeColor_CColor = _CPolygon_setStrokeColor_CColorPtr.asFunction<void Function(_CPolygon, _CColor)>();
 
-late final _CPolygon_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CPolygon_cg_objectIdentifier');
-late final _CPolygon_cg_objectIdentifier = _CPolygon_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CPolygon_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CPolygon_cg_objectIdentifier');
+late final _CPolygon_cg_objectIdentifier = _CPolygon_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CPolygon_C_createWith_CPolygonOptionsPtr = _lookup<ffi.NativeFunction<_CResult_CPolygon Function(_CPolygonOptions)>>('CPolygon_C_createWith_CPolygonOptions');
 late final _CPolygon_C_createWith_CPolygonOptions = _CPolygon_C_createWith_CPolygonOptionsPtr.asFunction<_CResult_CPolygon Function(_CPolygonOptions)>();
@@ -68846,8 +68846,8 @@ late final _CPolyline_gradientPolylineOptions = _CPolyline_gradientPolylineOptio
 late final _CPolyline_setGradientPolylineOptions_COptional_CGradientPolylineOptionsPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CPolyline, _COptional_CGradientPolylineOptions)>>('CPolyline_setGradientPolylineOptions_COptional_CGradientPolylineOptions');
 late final _CPolyline_setGradientPolylineOptions_COptional_CGradientPolylineOptions = _CPolyline_setGradientPolylineOptions_COptional_CGradientPolylineOptionsPtr.asFunction<void Function(_CPolyline, _COptional_CGradientPolylineOptions)>();
 
-late final _CPolyline_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CPolyline_cg_objectIdentifier');
-late final _CPolyline_cg_objectIdentifier = _CPolyline_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CPolyline_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CPolyline_cg_objectIdentifier');
+late final _CPolyline_cg_objectIdentifier = _CPolyline_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CPolyline_C_createWith_CPolylineOptionsPtr = _lookup<ffi.NativeFunction<_CResult_CPolyline Function(_CPolylineOptions)>>('CPolyline_C_createWith_CPolylineOptions');
 late final _CPolyline_C_createWith_CPolylineOptions = _CPolyline_C_createWith_CPolylineOptionsPtr.asFunction<_CResult_CPolyline Function(_CPolylineOptions)>();
@@ -68887,8 +68887,8 @@ late final _CMyLocationControlModel_followStateChannel = _CMyLocationControlMode
 late final _CMyLocationControlModel_followStatePtr = _lookup<ffi.NativeFunction<_CCameraFollowState Function(_CMyLocationControlModel)>>('CMyLocationControlModel_followState');
 late final _CMyLocationControlModel_followState = _CMyLocationControlModel_followStatePtr.asFunction<_CCameraFollowState Function(_CMyLocationControlModel)>();
 
-late final _CMyLocationControlModel_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CMyLocationControlModel_cg_objectIdentifier');
-late final _CMyLocationControlModel_cg_objectIdentifier = _CMyLocationControlModel_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CMyLocationControlModel_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CMyLocationControlModel_cg_objectIdentifier');
+late final _CMyLocationControlModel_cg_objectIdentifier = _CMyLocationControlModel_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CMyLocationControlModel_onClickedPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CMyLocationControlModel)>>('CMyLocationControlModel_onClicked');
 late final _CMyLocationControlModel_onClicked = _CMyLocationControlModel_onClickedPtr.asFunction<void Function(_CMyLocationControlModel)>();
@@ -68930,8 +68930,8 @@ late final _CCompassControlModel_bearingChannel = _CCompassControlModel_bearingC
 late final _CCompassControlModel_bearingPtr = _lookup<ffi.NativeFunction<_CBearing Function(_CCompassControlModel)>>('CCompassControlModel_bearing');
 late final _CCompassControlModel_bearing = _CCompassControlModel_bearingPtr.asFunction<_CBearing Function(_CCompassControlModel)>();
 
-late final _CCompassControlModel_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CCompassControlModel_cg_objectIdentifier');
-late final _CCompassControlModel_cg_objectIdentifier = _CCompassControlModel_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CCompassControlModel_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CCompassControlModel_cg_objectIdentifier');
+late final _CCompassControlModel_cg_objectIdentifier = _CCompassControlModel_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CCompassControlModel_onClickedPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CCompassControlModel)>>('CCompassControlModel_onClicked');
 late final _CCompassControlModel_onClicked = _CCompassControlModel_onClickedPtr.asFunction<void Function(_CCompassControlModel)>();
@@ -68972,8 +68972,8 @@ late final _CStatefulChannel_CBearingConnect = _CStatefulChannel_CBearingConnect
 late final _CZoomControlButtonMakeDefaultPtr = _lookup<ffi.NativeFunction<_CZoomControlButton Function()>>('CZoomControlButtonMakeDefault');
 late final _CZoomControlButtonMakeDefault = _CZoomControlButtonMakeDefaultPtr.asFunction<_CZoomControlButton Function()>();
 
-late final _CZoomControlModel_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CZoomControlModel_cg_objectIdentifier');
-late final _CZoomControlModel_cg_objectIdentifier = _CZoomControlModel_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CZoomControlModel_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CZoomControlModel_cg_objectIdentifier');
+late final _CZoomControlModel_cg_objectIdentifier = _CZoomControlModel_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CZoomControlModel_isEnabled_CZoomControlButtonPtr = _lookup<ffi.NativeFunction<_CStatefulChannel_bool Function(_CZoomControlModel, _CZoomControlButton)>>('CZoomControlModel_isEnabled_CZoomControlButton');
 late final _CZoomControlModel_isEnabled_CZoomControlButton = _CZoomControlModel_isEnabled_CZoomControlButtonPtr.asFunction<_CStatefulChannel_bool Function(_CZoomControlModel, _CZoomControlButton)>();
@@ -69047,8 +69047,8 @@ late final _CGeoPointRouteAttribute_entries = _CGeoPointRouteAttribute_entriesPt
 late final _CGeoPointRouteAttribute_lengthPtr = _lookup<ffi.NativeFunction<_CRouteDistance Function(_CGeoPointRouteAttribute)>>('CGeoPointRouteAttribute_length');
 late final _CGeoPointRouteAttribute_length = _CGeoPointRouteAttribute_lengthPtr.asFunction<_CRouteDistance Function(_CGeoPointRouteAttribute)>();
 
-late final _CGeoPointRouteAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CGeoPointRouteAttribute_cg_objectIdentifier');
-late final _CGeoPointRouteAttribute_cg_objectIdentifier = _CGeoPointRouteAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CGeoPointRouteAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CGeoPointRouteAttribute_cg_objectIdentifier');
+late final _CGeoPointRouteAttribute_cg_objectIdentifier = _CGeoPointRouteAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CGeoPointRouteAttribute_entriesInRange_CRoutePoint_CRoutePointPtr = _lookup<ffi.NativeFunction<_CArray_CGeoPointRouteEntry Function(_CGeoPointRouteAttribute, _CRoutePoint, _CRoutePoint)>>('CGeoPointRouteAttribute_entriesInRange_CRoutePoint_CRoutePoint');
 late final _CGeoPointRouteAttribute_entriesInRange_CRoutePoint_CRoutePoint = _CGeoPointRouteAttribute_entriesInRange_CRoutePoint_CRoutePointPtr.asFunction<_CArray_CGeoPointRouteEntry Function(_CGeoPointRouteAttribute, _CRoutePoint, _CRoutePoint)>();
@@ -69120,8 +69120,8 @@ late final _CRasterUrlTemplate_release = _CRasterUrlTemplate_releasePtr.asFuncti
 late final _CRasterUrlTemplateMakeDefaultPtr = _lookup<ffi.NativeFunction<_CRasterUrlTemplate Function()>>('CRasterUrlTemplateMakeDefault');
 late final _CRasterUrlTemplateMakeDefault = _CRasterUrlTemplateMakeDefaultPtr.asFunction<_CRasterUrlTemplate Function()>();
 
-late final _CRasterTileSource_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRasterTileSource_cg_objectIdentifier');
-late final _CRasterTileSource_cg_objectIdentifier = _CRasterTileSource_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRasterTileSource_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRasterTileSource_cg_objectIdentifier');
+late final _CRasterTileSource_cg_objectIdentifier = _CRasterTileSource_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CRasterTileSource_setOpacity_COpacityPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CRasterTileSource, _COpacity)>>('CRasterTileSource_setOpacity_COpacity');
 late final _CRasterTileSource_setOpacity_COpacity = _CRasterTileSource_setOpacity_COpacityPtr.asFunction<void Function(_CRasterTileSource, _COpacity)>();
@@ -69148,8 +69148,8 @@ late final _CPackedMapState_cameraBehaviour = _CPackedMapState_cameraBehaviourPt
 late final _CPackedMapState_setCameraBehaviour_CCameraBehaviourPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CPackedMapState, _CCameraBehaviour)>>('CPackedMapState_setCameraBehaviour_CCameraBehaviour');
 late final _CPackedMapState_setCameraBehaviour_CCameraBehaviour = _CPackedMapState_setCameraBehaviour_CCameraBehaviourPtr.asFunction<void Function(_CPackedMapState, _CCameraBehaviour)>();
 
-late final _CPackedMapState_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CPackedMapState_cg_objectIdentifier');
-late final _CPackedMapState_cg_objectIdentifier = _CPackedMapState_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CPackedMapState_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CPackedMapState_cg_objectIdentifier');
+late final _CPackedMapState_cg_objectIdentifier = _CPackedMapState_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CPackedMapState_S_of_CCameraPosition_bool_CCameraBehaviourPtr = _lookup<ffi.NativeFunction<_CPackedMapState Function(_CCameraPosition, ffi.Bool, _CCameraBehaviour)>>('CPackedMapState_S_of_CCameraPosition_bool_CCameraBehaviour');
 late final _CPackedMapState_S_of_CCameraPosition_bool_CCameraBehaviour = _CPackedMapState_S_of_CCameraPosition_bool_CCameraBehaviourPtr.asFunction<_CPackedMapState Function(_CCameraPosition, bool, _CCameraBehaviour)>();
@@ -69186,8 +69186,8 @@ late final _CIndoorRouteLevelsGetter_levelIdsChannel = _CIndoorRouteLevelsGetter
 late final _CIndoorRouteLevelsGetter_levelIdsPtr = _lookup<ffi.NativeFunction<_CSet_CLevelId Function(_CIndoorRouteLevelsGetter)>>('CIndoorRouteLevelsGetter_levelIds');
 late final _CIndoorRouteLevelsGetter_levelIds = _CIndoorRouteLevelsGetter_levelIdsPtr.asFunction<_CSet_CLevelId Function(_CIndoorRouteLevelsGetter)>();
 
-late final _CIndoorRouteLevelsGetter_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CIndoorRouteLevelsGetter_cg_objectIdentifier');
-late final _CIndoorRouteLevelsGetter_cg_objectIdentifier = _CIndoorRouteLevelsGetter_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CIndoorRouteLevelsGetter_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CIndoorRouteLevelsGetter_cg_objectIdentifier');
+late final _CIndoorRouteLevelsGetter_cg_objectIdentifier = _CIndoorRouteLevelsGetter_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CIndoorRouteLevelsGetter_C_createWith_CMapPtr = _lookup<ffi.NativeFunction<_CIndoorRouteLevelsGetter Function(_CMap)>>('CIndoorRouteLevelsGetter_C_createWith_CMap');
 late final _CIndoorRouteLevelsGetter_C_createWith_CMap = _CIndoorRouteLevelsGetter_C_createWith_CMapPtr.asFunction<_CIndoorRouteLevelsGetter Function(_CMap)>();
@@ -69292,8 +69292,8 @@ late final _CRouteMapObject_lanesCalloutPositionsChannel = _CRouteMapObject_lane
 late final _CRouteMapObject_lanesCalloutPositionsPtr = _lookup<ffi.NativeFunction<_CArray_CLanesCalloutMapPosition Function(_CRouteMapObject)>>('CRouteMapObject_lanesCalloutPositions');
 late final _CRouteMapObject_lanesCalloutPositions = _CRouteMapObject_lanesCalloutPositionsPtr.asFunction<_CArray_CLanesCalloutMapPosition Function(_CRouteMapObject)>();
 
-late final _CRouteMapObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRouteMapObject_cg_objectIdentifier');
-late final _CRouteMapObject_cg_objectIdentifier = _CRouteMapObject_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRouteMapObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRouteMapObject_cg_objectIdentifier');
+late final _CRouteMapObject_cg_objectIdentifier = _CRouteMapObject_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CRouteMapObject_C_createWith_CTrafficRoute_bool_CRouteIndex_COptional_COptionSet_CRouteMapObjectDisplayFlag_COptional_COptionSet_CRouteMapObjectCalloutLabelFlag_CRouteMapObjectCalloutLabelDisplayMode_COptional_COptionSet_CRouteMapObjectPermanentDisplayFlagPtr = _lookup<ffi.NativeFunction<_CRouteMapObject Function(_CTrafficRoute, ffi.Bool, _CRouteIndex, _COptional_COptionSet_CRouteMapObjectDisplayFlag, _COptional_COptionSet_CRouteMapObjectCalloutLabelFlag, _CRouteMapObjectCalloutLabelDisplayMode, _COptional_COptionSet_CRouteMapObjectPermanentDisplayFlag)>>('CRouteMapObject_C_createWith_CTrafficRoute_bool_CRouteIndex_COptional_COptionSet_CRouteMapObjectDisplayFlag_COptional_COptionSet_CRouteMapObjectCalloutLabelFlag_CRouteMapObjectCalloutLabelDisplayMode_COptional_COptionSet_CRouteMapObjectPermanentDisplayFlag');
 late final _CRouteMapObject_C_createWith_CTrafficRoute_bool_CRouteIndex_COptional_COptionSet_CRouteMapObjectDisplayFlag_COptional_COptionSet_CRouteMapObjectCalloutLabelFlag_CRouteMapObjectCalloutLabelDisplayMode_COptional_COptionSet_CRouteMapObjectPermanentDisplayFlag = _CRouteMapObject_C_createWith_CTrafficRoute_bool_CRouteIndex_COptional_COptionSet_CRouteMapObjectDisplayFlag_COptional_COptionSet_CRouteMapObjectCalloutLabelFlag_CRouteMapObjectCalloutLabelDisplayMode_COptional_COptionSet_CRouteMapObjectPermanentDisplayFlagPtr.asFunction<_CRouteMapObject Function(_CTrafficRoute, bool, _CRouteIndex, _COptional_COptionSet_CRouteMapObjectDisplayFlag, _COptional_COptionSet_CRouteMapObjectCalloutLabelFlag, _CRouteMapObjectCalloutLabelDisplayMode, _COptional_COptionSet_CRouteMapObjectPermanentDisplayFlag)>();
@@ -69368,8 +69368,8 @@ late final _CTrafficRoute_route = _CTrafficRoute_routePtr.asFunction<_CRoute Fun
 late final _CTrafficRoute_trafficPtr = _lookup<ffi.NativeFunction<_CTraffic Function(_CTrafficRoute)>>('CTrafficRoute_traffic');
 late final _CTrafficRoute_traffic = _CTrafficRoute_trafficPtr.asFunction<_CTraffic Function(_CTrafficRoute)>();
 
-late final _CTrafficRoute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CTrafficRoute_cg_objectIdentifier');
-late final _CTrafficRoute_cg_objectIdentifier = _CTrafficRoute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CTrafficRoute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CTrafficRoute_cg_objectIdentifier');
+late final _CTrafficRoute_cg_objectIdentifier = _CTrafficRoute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CTrafficRoute_S_fromNavigationState_CPackedNavigationState_CContextPtr = _lookup<ffi.NativeFunction<_CTrafficRoute Function(_CPackedNavigationState, _CContext)>>('CTrafficRoute_S_fromNavigationState_CPackedNavigationState_CContext');
 late final _CTrafficRoute_S_fromNavigationState_CPackedNavigationState_CContext = _CTrafficRoute_S_fromNavigationState_CPackedNavigationState_CContextPtr.asFunction<_CTrafficRoute Function(_CPackedNavigationState, _CContext)>();
@@ -69440,8 +69440,8 @@ late final _CRoute_immersiveData = _CRoute_immersiveDataPtr.asFunction<_CBoolRou
 late final _CRoute_publicTransportTransfersPtr = _lookup<ffi.NativeFunction<_CPublicTransportTransferRouteLongAttribute Function(_CRoute)>>('CRoute_publicTransportTransfers');
 late final _CRoute_publicTransportTransfers = _CRoute_publicTransportTransfersPtr.asFunction<_CPublicTransportTransferRouteLongAttribute Function(_CRoute)>();
 
-late final _CRoute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRoute_cg_objectIdentifier');
-late final _CRoute_cg_objectIdentifier = _CRoute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRoute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRoute_cg_objectIdentifier');
+late final _CRoute_cg_objectIdentifier = _CRoute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CRoute_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CRoute_release');
@@ -69462,8 +69462,8 @@ late final _CInstructionRouteAttribute_last = _CInstructionRouteAttribute_lastPt
 late final _CInstructionRouteAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CInstructionRouteEntry Function(_CInstructionRouteAttribute)>>('CInstructionRouteAttribute_entries');
 late final _CInstructionRouteAttribute_entries = _CInstructionRouteAttribute_entriesPtr.asFunction<_CArray_CInstructionRouteEntry Function(_CInstructionRouteAttribute)>();
 
-late final _CInstructionRouteAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CInstructionRouteAttribute_cg_objectIdentifier');
-late final _CInstructionRouteAttribute_cg_objectIdentifier = _CInstructionRouteAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CInstructionRouteAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CInstructionRouteAttribute_cg_objectIdentifier');
+late final _CInstructionRouteAttribute_cg_objectIdentifier = _CInstructionRouteAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CInstructionRouteAttribute_entriesInRange_CRoutePoint_CRoutePointPtr = _lookup<ffi.NativeFunction<_CArray_CInstructionRouteEntry Function(_CInstructionRouteAttribute, _CRoutePoint, _CRoutePoint)>>('CInstructionRouteAttribute_entriesInRange_CRoutePoint_CRoutePoint');
 late final _CInstructionRouteAttribute_entriesInRange_CRoutePoint_CRoutePoint = _CInstructionRouteAttribute_entriesInRange_CRoutePoint_CRoutePointPtr.asFunction<_CArray_CInstructionRouteEntry Function(_CInstructionRouteAttribute, _CRoutePoint, _CRoutePoint)>();
@@ -69671,8 +69671,8 @@ late final _CDoubleRouteAttribute_last = _CDoubleRouteAttribute_lastPtr.asFuncti
 late final _CDoubleRouteAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CDoubleRouteEntry Function(_CDoubleRouteAttribute)>>('CDoubleRouteAttribute_entries');
 late final _CDoubleRouteAttribute_entries = _CDoubleRouteAttribute_entriesPtr.asFunction<_CArray_CDoubleRouteEntry Function(_CDoubleRouteAttribute)>();
 
-late final _CDoubleRouteAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CDoubleRouteAttribute_cg_objectIdentifier');
-late final _CDoubleRouteAttribute_cg_objectIdentifier = _CDoubleRouteAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CDoubleRouteAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CDoubleRouteAttribute_cg_objectIdentifier');
+late final _CDoubleRouteAttribute_cg_objectIdentifier = _CDoubleRouteAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CDoubleRouteAttribute_entriesInRange_CRoutePoint_CRoutePointPtr = _lookup<ffi.NativeFunction<_CArray_CDoubleRouteEntry Function(_CDoubleRouteAttribute, _CRoutePoint, _CRoutePoint)>>('CDoubleRouteAttribute_entriesInRange_CRoutePoint_CRoutePoint');
 late final _CDoubleRouteAttribute_entriesInRange_CRoutePoint_CRoutePoint = _CDoubleRouteAttribute_entriesInRange_CRoutePoint_CRoutePointPtr.asFunction<_CArray_CDoubleRouteEntry Function(_CDoubleRouteAttribute, _CRoutePoint, _CRoutePoint)>();
@@ -69719,8 +69719,8 @@ late final _CBoolRouteLongAttribute_last = _CBoolRouteLongAttribute_lastPtr.asFu
 late final _CBoolRouteLongAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CBoolRouteLongEntry Function(_CBoolRouteLongAttribute)>>('CBoolRouteLongAttribute_entries');
 late final _CBoolRouteLongAttribute_entries = _CBoolRouteLongAttribute_entriesPtr.asFunction<_CArray_CBoolRouteLongEntry Function(_CBoolRouteLongAttribute)>();
 
-late final _CBoolRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CBoolRouteLongAttribute_cg_objectIdentifier');
-late final _CBoolRouteLongAttribute_cg_objectIdentifier = _CBoolRouteLongAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CBoolRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CBoolRouteLongAttribute_cg_objectIdentifier');
+late final _CBoolRouteLongAttribute_cg_objectIdentifier = _CBoolRouteLongAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CBoolRouteLongAttribute_entry_CRoutePointPtr = _lookup<ffi.NativeFunction<_COptional_CBoolRouteLongEntry Function(_CBoolRouteLongAttribute, _CRoutePoint)>>('CBoolRouteLongAttribute_entry_CRoutePoint');
 late final _CBoolRouteLongAttribute_entry_CRoutePoint = _CBoolRouteLongAttribute_entry_CRoutePointPtr.asFunction<_COptional_CBoolRouteLongEntry Function(_CBoolRouteLongAttribute, _CRoutePoint)>();
@@ -69765,8 +69765,8 @@ late final _CObstacleInfoRouteAttribute_last = _CObstacleInfoRouteAttribute_last
 late final _CObstacleInfoRouteAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CObstacleInfoRouteEntry Function(_CObstacleInfoRouteAttribute)>>('CObstacleInfoRouteAttribute_entries');
 late final _CObstacleInfoRouteAttribute_entries = _CObstacleInfoRouteAttribute_entriesPtr.asFunction<_CArray_CObstacleInfoRouteEntry Function(_CObstacleInfoRouteAttribute)>();
 
-late final _CObstacleInfoRouteAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CObstacleInfoRouteAttribute_cg_objectIdentifier');
-late final _CObstacleInfoRouteAttribute_cg_objectIdentifier = _CObstacleInfoRouteAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CObstacleInfoRouteAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CObstacleInfoRouteAttribute_cg_objectIdentifier');
+late final _CObstacleInfoRouteAttribute_cg_objectIdentifier = _CObstacleInfoRouteAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CObstacleInfoRouteAttribute_entriesInRange_CRoutePoint_CRoutePointPtr = _lookup<ffi.NativeFunction<_CArray_CObstacleInfoRouteEntry Function(_CObstacleInfoRouteAttribute, _CRoutePoint, _CRoutePoint)>>('CObstacleInfoRouteAttribute_entriesInRange_CRoutePoint_CRoutePoint');
 late final _CObstacleInfoRouteAttribute_entriesInRange_CRoutePoint_CRoutePoint = _CObstacleInfoRouteAttribute_entriesInRange_CRoutePoint_CRoutePointPtr.asFunction<_CArray_CObstacleInfoRouteEntry Function(_CObstacleInfoRouteAttribute, _CRoutePoint, _CRoutePoint)>();
@@ -69823,8 +69823,8 @@ late final _CStringRouteLongAttribute_last = _CStringRouteLongAttribute_lastPtr.
 late final _CStringRouteLongAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CStringRouteLongEntry Function(_CStringRouteLongAttribute)>>('CStringRouteLongAttribute_entries');
 late final _CStringRouteLongAttribute_entries = _CStringRouteLongAttribute_entriesPtr.asFunction<_CArray_CStringRouteLongEntry Function(_CStringRouteLongAttribute)>();
 
-late final _CStringRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CStringRouteLongAttribute_cg_objectIdentifier');
-late final _CStringRouteLongAttribute_cg_objectIdentifier = _CStringRouteLongAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CStringRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CStringRouteLongAttribute_cg_objectIdentifier');
+late final _CStringRouteLongAttribute_cg_objectIdentifier = _CStringRouteLongAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CStringRouteLongAttribute_entry_CRoutePointPtr = _lookup<ffi.NativeFunction<_COptional_CStringRouteLongEntry Function(_CStringRouteLongAttribute, _CRoutePoint)>>('CStringRouteLongAttribute_entry_CRoutePoint');
 late final _CStringRouteLongAttribute_entry_CRoutePoint = _CStringRouteLongAttribute_entry_CRoutePointPtr.asFunction<_COptional_CStringRouteLongEntry Function(_CStringRouteLongAttribute, _CRoutePoint)>();
@@ -69872,8 +69872,8 @@ late final _CSettlementRouteLongAttribute_last = _CSettlementRouteLongAttribute_
 late final _CSettlementRouteLongAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CSettlementRouteLongEntry Function(_CSettlementRouteLongAttribute)>>('CSettlementRouteLongAttribute_entries');
 late final _CSettlementRouteLongAttribute_entries = _CSettlementRouteLongAttribute_entriesPtr.asFunction<_CArray_CSettlementRouteLongEntry Function(_CSettlementRouteLongAttribute)>();
 
-late final _CSettlementRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CSettlementRouteLongAttribute_cg_objectIdentifier');
-late final _CSettlementRouteLongAttribute_cg_objectIdentifier = _CSettlementRouteLongAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CSettlementRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CSettlementRouteLongAttribute_cg_objectIdentifier');
+late final _CSettlementRouteLongAttribute_cg_objectIdentifier = _CSettlementRouteLongAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CSettlementRouteLongAttribute_entry_CRoutePointPtr = _lookup<ffi.NativeFunction<_COptional_CSettlementRouteLongEntry Function(_CSettlementRouteLongAttribute, _CRoutePoint)>>('CSettlementRouteLongAttribute_entry_CRoutePoint');
 late final _CSettlementRouteLongAttribute_entry_CRoutePoint = _CSettlementRouteLongAttribute_entry_CRoutePointPtr.asFunction<_COptional_CSettlementRouteLongEntry Function(_CSettlementRouteLongAttribute, _CRoutePoint)>();
@@ -69921,8 +69921,8 @@ late final _CTransportTypeRouteLongAttribute_last = _CTransportTypeRouteLongAttr
 late final _CTransportTypeRouteLongAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CTransportTypeRouteLongEntry Function(_CTransportTypeRouteLongAttribute)>>('CTransportTypeRouteLongAttribute_entries');
 late final _CTransportTypeRouteLongAttribute_entries = _CTransportTypeRouteLongAttribute_entriesPtr.asFunction<_CArray_CTransportTypeRouteLongEntry Function(_CTransportTypeRouteLongAttribute)>();
 
-late final _CTransportTypeRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CTransportTypeRouteLongAttribute_cg_objectIdentifier');
-late final _CTransportTypeRouteLongAttribute_cg_objectIdentifier = _CTransportTypeRouteLongAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CTransportTypeRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CTransportTypeRouteLongAttribute_cg_objectIdentifier');
+late final _CTransportTypeRouteLongAttribute_cg_objectIdentifier = _CTransportTypeRouteLongAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CTransportTypeRouteLongAttribute_entry_CRoutePointPtr = _lookup<ffi.NativeFunction<_COptional_CTransportTypeRouteLongEntry Function(_CTransportTypeRouteLongAttribute, _CRoutePoint)>>('CTransportTypeRouteLongAttribute_entry_CRoutePoint');
 late final _CTransportTypeRouteLongAttribute_entry_CRoutePoint = _CTransportTypeRouteLongAttribute_entry_CRoutePointPtr.asFunction<_COptional_CTransportTypeRouteLongEntry Function(_CTransportTypeRouteLongAttribute, _CRoutePoint)>();
@@ -69970,8 +69970,8 @@ late final _CCameraRouteAttribute_last = _CCameraRouteAttribute_lastPtr.asFuncti
 late final _CCameraRouteAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CCameraRouteEntry Function(_CCameraRouteAttribute)>>('CCameraRouteAttribute_entries');
 late final _CCameraRouteAttribute_entries = _CCameraRouteAttribute_entriesPtr.asFunction<_CArray_CCameraRouteEntry Function(_CCameraRouteAttribute)>();
 
-late final _CCameraRouteAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CCameraRouteAttribute_cg_objectIdentifier');
-late final _CCameraRouteAttribute_cg_objectIdentifier = _CCameraRouteAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CCameraRouteAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CCameraRouteAttribute_cg_objectIdentifier');
+late final _CCameraRouteAttribute_cg_objectIdentifier = _CCameraRouteAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CCameraRouteAttribute_entriesInRange_CRoutePoint_CRoutePointPtr = _lookup<ffi.NativeFunction<_CArray_CCameraRouteEntry Function(_CCameraRouteAttribute, _CRoutePoint, _CRoutePoint)>>('CCameraRouteAttribute_entriesInRange_CRoutePoint_CRoutePoint');
 late final _CCameraRouteAttribute_entriesInRange_CRoutePoint_CRoutePoint = _CCameraRouteAttribute_entriesInRange_CRoutePoint_CRoutePointPtr.asFunction<_CArray_CCameraRouteEntry Function(_CCameraRouteAttribute, _CRoutePoint, _CRoutePoint)>();
@@ -70034,8 +70034,8 @@ late final _CUIntRouteLongAttribute_last = _CUIntRouteLongAttribute_lastPtr.asFu
 late final _CUIntRouteLongAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CUIntRouteLongEntry Function(_CUIntRouteLongAttribute)>>('CUIntRouteLongAttribute_entries');
 late final _CUIntRouteLongAttribute_entries = _CUIntRouteLongAttribute_entriesPtr.asFunction<_CArray_CUIntRouteLongEntry Function(_CUIntRouteLongAttribute)>();
 
-late final _CUIntRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CUIntRouteLongAttribute_cg_objectIdentifier');
-late final _CUIntRouteLongAttribute_cg_objectIdentifier = _CUIntRouteLongAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CUIntRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CUIntRouteLongAttribute_cg_objectIdentifier');
+late final _CUIntRouteLongAttribute_cg_objectIdentifier = _CUIntRouteLongAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CUIntRouteLongAttribute_entry_CRoutePointPtr = _lookup<ffi.NativeFunction<_COptional_CUIntRouteLongEntry Function(_CUIntRouteLongAttribute, _CRoutePoint)>>('CUIntRouteLongAttribute_entry_CRoutePoint');
 late final _CUIntRouteLongAttribute_entry_CRoutePoint = _CUIntRouteLongAttribute_entry_CRoutePointPtr.asFunction<_COptional_CUIntRouteLongEntry Function(_CUIntRouteLongAttribute, _CRoutePoint)>();
@@ -70080,8 +70080,8 @@ late final _CRouteExitSignRouteAttribute_last = _CRouteExitSignRouteAttribute_la
 late final _CRouteExitSignRouteAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CRouteExitSignRouteEntry Function(_CRouteExitSignRouteAttribute)>>('CRouteExitSignRouteAttribute_entries');
 late final _CRouteExitSignRouteAttribute_entries = _CRouteExitSignRouteAttribute_entriesPtr.asFunction<_CArray_CRouteExitSignRouteEntry Function(_CRouteExitSignRouteAttribute)>();
 
-late final _CRouteExitSignRouteAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRouteExitSignRouteAttribute_cg_objectIdentifier');
-late final _CRouteExitSignRouteAttribute_cg_objectIdentifier = _CRouteExitSignRouteAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRouteExitSignRouteAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRouteExitSignRouteAttribute_cg_objectIdentifier');
+late final _CRouteExitSignRouteAttribute_cg_objectIdentifier = _CRouteExitSignRouteAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CRouteExitSignRouteAttribute_entriesInRange_CRoutePoint_CRoutePointPtr = _lookup<ffi.NativeFunction<_CArray_CRouteExitSignRouteEntry Function(_CRouteExitSignRouteAttribute, _CRoutePoint, _CRoutePoint)>>('CRouteExitSignRouteAttribute_entriesInRange_CRoutePoint_CRoutePoint');
 late final _CRouteExitSignRouteAttribute_entriesInRange_CRoutePoint_CRoutePoint = _CRouteExitSignRouteAttribute_entriesInRange_CRoutePoint_CRoutePointPtr.asFunction<_CArray_CRouteExitSignRouteEntry Function(_CRouteExitSignRouteAttribute, _CRoutePoint, _CRoutePoint)>();
@@ -70151,8 +70151,8 @@ late final _CVoidRouteAttribute_last = _CVoidRouteAttribute_lastPtr.asFunction<_
 late final _CVoidRouteAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CRoutePoint Function(_CVoidRouteAttribute)>>('CVoidRouteAttribute_entries');
 late final _CVoidRouteAttribute_entries = _CVoidRouteAttribute_entriesPtr.asFunction<_CArray_CRoutePoint Function(_CVoidRouteAttribute)>();
 
-late final _CVoidRouteAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CVoidRouteAttribute_cg_objectIdentifier');
-late final _CVoidRouteAttribute_cg_objectIdentifier = _CVoidRouteAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CVoidRouteAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CVoidRouteAttribute_cg_objectIdentifier');
+late final _CVoidRouteAttribute_cg_objectIdentifier = _CVoidRouteAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CVoidRouteAttribute_entriesInRange_CRoutePoint_CRoutePointPtr = _lookup<ffi.NativeFunction<_CArray_CRoutePoint Function(_CVoidRouteAttribute, _CRoutePoint, _CRoutePoint)>>('CVoidRouteAttribute_entriesInRange_CRoutePoint_CRoutePoint');
 late final _CVoidRouteAttribute_entriesInRange_CRoutePoint_CRoutePoint = _CVoidRouteAttribute_entriesInRange_CRoutePoint_CRoutePointPtr.asFunction<_CArray_CRoutePoint Function(_CVoidRouteAttribute, _CRoutePoint, _CRoutePoint)>();
@@ -70192,8 +70192,8 @@ late final _CLaneSignRouteLongAttribute_last = _CLaneSignRouteLongAttribute_last
 late final _CLaneSignRouteLongAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CLaneSignRouteLongEntry Function(_CLaneSignRouteLongAttribute)>>('CLaneSignRouteLongAttribute_entries');
 late final _CLaneSignRouteLongAttribute_entries = _CLaneSignRouteLongAttribute_entriesPtr.asFunction<_CArray_CLaneSignRouteLongEntry Function(_CLaneSignRouteLongAttribute)>();
 
-late final _CLaneSignRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CLaneSignRouteLongAttribute_cg_objectIdentifier');
-late final _CLaneSignRouteLongAttribute_cg_objectIdentifier = _CLaneSignRouteLongAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CLaneSignRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CLaneSignRouteLongAttribute_cg_objectIdentifier');
+late final _CLaneSignRouteLongAttribute_cg_objectIdentifier = _CLaneSignRouteLongAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CLaneSignRouteLongAttribute_entry_CRoutePointPtr = _lookup<ffi.NativeFunction<_COptional_CLaneSignRouteLongEntry Function(_CLaneSignRouteLongAttribute, _CRoutePoint)>>('CLaneSignRouteLongAttribute_entry_CRoutePoint');
 late final _CLaneSignRouteLongAttribute_entry_CRoutePoint = _CLaneSignRouteLongAttribute_entry_CRoutePointPtr.asFunction<_COptional_CLaneSignRouteLongEntry Function(_CLaneSignRouteLongAttribute, _CRoutePoint)>();
@@ -70268,8 +70268,8 @@ late final _CRouteLevelInfoRouteLongAttribute_last = _CRouteLevelInfoRouteLongAt
 late final _CRouteLevelInfoRouteLongAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CRouteLevelInfoRouteLongEntry Function(_CRouteLevelInfoRouteLongAttribute)>>('CRouteLevelInfoRouteLongAttribute_entries');
 late final _CRouteLevelInfoRouteLongAttribute_entries = _CRouteLevelInfoRouteLongAttribute_entriesPtr.asFunction<_CArray_CRouteLevelInfoRouteLongEntry Function(_CRouteLevelInfoRouteLongAttribute)>();
 
-late final _CRouteLevelInfoRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRouteLevelInfoRouteLongAttribute_cg_objectIdentifier');
-late final _CRouteLevelInfoRouteLongAttribute_cg_objectIdentifier = _CRouteLevelInfoRouteLongAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRouteLevelInfoRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRouteLevelInfoRouteLongAttribute_cg_objectIdentifier');
+late final _CRouteLevelInfoRouteLongAttribute_cg_objectIdentifier = _CRouteLevelInfoRouteLongAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CRouteLevelInfoRouteLongAttribute_entry_CRoutePointPtr = _lookup<ffi.NativeFunction<_COptional_CRouteLevelInfoRouteLongEntry Function(_CRouteLevelInfoRouteLongAttribute, _CRoutePoint)>>('CRouteLevelInfoRouteLongAttribute_entry_CRoutePoint');
 late final _CRouteLevelInfoRouteLongAttribute_entry_CRoutePoint = _CRouteLevelInfoRouteLongAttribute_entry_CRoutePointPtr.asFunction<_COptional_CRouteLevelInfoRouteLongEntry Function(_CRouteLevelInfoRouteLongAttribute, _CRoutePoint)>();
@@ -70321,8 +70321,8 @@ late final _CFloatRouteLongAttribute_last = _CFloatRouteLongAttribute_lastPtr.as
 late final _CFloatRouteLongAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CFloatRouteLongEntry Function(_CFloatRouteLongAttribute)>>('CFloatRouteLongAttribute_entries');
 late final _CFloatRouteLongAttribute_entries = _CFloatRouteLongAttribute_entriesPtr.asFunction<_CArray_CFloatRouteLongEntry Function(_CFloatRouteLongAttribute)>();
 
-late final _CFloatRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CFloatRouteLongAttribute_cg_objectIdentifier');
-late final _CFloatRouteLongAttribute_cg_objectIdentifier = _CFloatRouteLongAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CFloatRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CFloatRouteLongAttribute_cg_objectIdentifier');
+late final _CFloatRouteLongAttribute_cg_objectIdentifier = _CFloatRouteLongAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CFloatRouteLongAttribute_entry_CRoutePointPtr = _lookup<ffi.NativeFunction<_COptional_CFloatRouteLongEntry Function(_CFloatRouteLongAttribute, _CRoutePoint)>>('CFloatRouteLongAttribute_entry_CRoutePoint');
 late final _CFloatRouteLongAttribute_entry_CRoutePoint = _CFloatRouteLongAttribute_entry_CRoutePointPtr.asFunction<_COptional_CFloatRouteLongEntry Function(_CFloatRouteLongAttribute, _CRoutePoint)>();
@@ -70367,8 +70367,8 @@ late final _CRoadRuleRouteLongAttribute_last = _CRoadRuleRouteLongAttribute_last
 late final _CRoadRuleRouteLongAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CRoadRuleRouteLongEntry Function(_CRoadRuleRouteLongAttribute)>>('CRoadRuleRouteLongAttribute_entries');
 late final _CRoadRuleRouteLongAttribute_entries = _CRoadRuleRouteLongAttribute_entriesPtr.asFunction<_CArray_CRoadRuleRouteLongEntry Function(_CRoadRuleRouteLongAttribute)>();
 
-late final _CRoadRuleRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRoadRuleRouteLongAttribute_cg_objectIdentifier');
-late final _CRoadRuleRouteLongAttribute_cg_objectIdentifier = _CRoadRuleRouteLongAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRoadRuleRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRoadRuleRouteLongAttribute_cg_objectIdentifier');
+late final _CRoadRuleRouteLongAttribute_cg_objectIdentifier = _CRoadRuleRouteLongAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CRoadRuleRouteLongAttribute_entry_CRoutePointPtr = _lookup<ffi.NativeFunction<_COptional_CRoadRuleRouteLongEntry Function(_CRoadRuleRouteLongAttribute, _CRoutePoint)>>('CRoadRuleRouteLongAttribute_entry_CRoutePoint');
 late final _CRoadRuleRouteLongAttribute_entry_CRoutePoint = _CRoadRuleRouteLongAttribute_entry_CRoutePointPtr.asFunction<_COptional_CRoadRuleRouteLongEntry Function(_CRoadRuleRouteLongAttribute, _CRoutePoint)>();
@@ -70416,8 +70416,8 @@ late final _CRoadSubtypeRouteLongAttribute_last = _CRoadSubtypeRouteLongAttribut
 late final _CRoadSubtypeRouteLongAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CRoadSubtypeRouteLongEntry Function(_CRoadSubtypeRouteLongAttribute)>>('CRoadSubtypeRouteLongAttribute_entries');
 late final _CRoadSubtypeRouteLongAttribute_entries = _CRoadSubtypeRouteLongAttribute_entriesPtr.asFunction<_CArray_CRoadSubtypeRouteLongEntry Function(_CRoadSubtypeRouteLongAttribute)>();
 
-late final _CRoadSubtypeRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRoadSubtypeRouteLongAttribute_cg_objectIdentifier');
-late final _CRoadSubtypeRouteLongAttribute_cg_objectIdentifier = _CRoadSubtypeRouteLongAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRoadSubtypeRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRoadSubtypeRouteLongAttribute_cg_objectIdentifier');
+late final _CRoadSubtypeRouteLongAttribute_cg_objectIdentifier = _CRoadSubtypeRouteLongAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CRoadSubtypeRouteLongAttribute_entry_CRoutePointPtr = _lookup<ffi.NativeFunction<_COptional_CRoadSubtypeRouteLongEntry Function(_CRoadSubtypeRouteLongAttribute, _CRoutePoint)>>('CRoadSubtypeRouteLongAttribute_entry_CRoutePoint');
 late final _CRoadSubtypeRouteLongAttribute_entry_CRoutePoint = _CRoadSubtypeRouteLongAttribute_entry_CRoutePointPtr.asFunction<_COptional_CRoadSubtypeRouteLongEntry Function(_CRoadSubtypeRouteLongAttribute, _CRoutePoint)>();
@@ -70465,8 +70465,8 @@ late final _CRoadSurfaceRouteLongAttribute_last = _CRoadSurfaceRouteLongAttribut
 late final _CRoadSurfaceRouteLongAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CRoadSurfaceRouteLongEntry Function(_CRoadSurfaceRouteLongAttribute)>>('CRoadSurfaceRouteLongAttribute_entries');
 late final _CRoadSurfaceRouteLongAttribute_entries = _CRoadSurfaceRouteLongAttribute_entriesPtr.asFunction<_CArray_CRoadSurfaceRouteLongEntry Function(_CRoadSurfaceRouteLongAttribute)>();
 
-late final _CRoadSurfaceRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRoadSurfaceRouteLongAttribute_cg_objectIdentifier');
-late final _CRoadSurfaceRouteLongAttribute_cg_objectIdentifier = _CRoadSurfaceRouteLongAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRoadSurfaceRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRoadSurfaceRouteLongAttribute_cg_objectIdentifier');
+late final _CRoadSurfaceRouteLongAttribute_cg_objectIdentifier = _CRoadSurfaceRouteLongAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CRoadSurfaceRouteLongAttribute_entry_CRoutePointPtr = _lookup<ffi.NativeFunction<_COptional_CRoadSurfaceRouteLongEntry Function(_CRoadSurfaceRouteLongAttribute, _CRoutePoint)>>('CRoadSurfaceRouteLongAttribute_entry_CRoutePoint');
 late final _CRoadSurfaceRouteLongAttribute_entry_CRoutePoint = _CRoadSurfaceRouteLongAttribute_entry_CRoutePointPtr.asFunction<_COptional_CRoadSurfaceRouteLongEntry Function(_CRoadSurfaceRouteLongAttribute, _CRoutePoint)>();
@@ -70514,8 +70514,8 @@ late final _CRoadTypeRouteLongAttribute_last = _CRoadTypeRouteLongAttribute_last
 late final _CRoadTypeRouteLongAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CRoadTypeRouteLongEntry Function(_CRoadTypeRouteLongAttribute)>>('CRoadTypeRouteLongAttribute_entries');
 late final _CRoadTypeRouteLongAttribute_entries = _CRoadTypeRouteLongAttribute_entriesPtr.asFunction<_CArray_CRoadTypeRouteLongEntry Function(_CRoadTypeRouteLongAttribute)>();
 
-late final _CRoadTypeRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRoadTypeRouteLongAttribute_cg_objectIdentifier');
-late final _CRoadTypeRouteLongAttribute_cg_objectIdentifier = _CRoadTypeRouteLongAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRoadTypeRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRoadTypeRouteLongAttribute_cg_objectIdentifier');
+late final _CRoadTypeRouteLongAttribute_cg_objectIdentifier = _CRoadTypeRouteLongAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CRoadTypeRouteLongAttribute_entry_CRoutePointPtr = _lookup<ffi.NativeFunction<_COptional_CRoadTypeRouteLongEntry Function(_CRoadTypeRouteLongAttribute, _CRoutePoint)>>('CRoadTypeRouteLongAttribute_entry_CRoutePoint');
 late final _CRoadTypeRouteLongAttribute_entry_CRoutePoint = _CRoadTypeRouteLongAttribute_entry_CRoutePointPtr.asFunction<_COptional_CRoadTypeRouteLongEntry Function(_CRoadTypeRouteLongAttribute, _CRoutePoint)>();
@@ -70563,8 +70563,8 @@ late final _CTruckPassZoneIdRouteLongAttribute_last = _CTruckPassZoneIdRouteLong
 late final _CTruckPassZoneIdRouteLongAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CTruckPassZoneIdRouteLongEntry Function(_CTruckPassZoneIdRouteLongAttribute)>>('CTruckPassZoneIdRouteLongAttribute_entries');
 late final _CTruckPassZoneIdRouteLongAttribute_entries = _CTruckPassZoneIdRouteLongAttribute_entriesPtr.asFunction<_CArray_CTruckPassZoneIdRouteLongEntry Function(_CTruckPassZoneIdRouteLongAttribute)>();
 
-late final _CTruckPassZoneIdRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CTruckPassZoneIdRouteLongAttribute_cg_objectIdentifier');
-late final _CTruckPassZoneIdRouteLongAttribute_cg_objectIdentifier = _CTruckPassZoneIdRouteLongAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CTruckPassZoneIdRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CTruckPassZoneIdRouteLongAttribute_cg_objectIdentifier');
+late final _CTruckPassZoneIdRouteLongAttribute_cg_objectIdentifier = _CTruckPassZoneIdRouteLongAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CTruckPassZoneIdRouteLongAttribute_entry_CRoutePointPtr = _lookup<ffi.NativeFunction<_COptional_CTruckPassZoneIdRouteLongEntry Function(_CTruckPassZoneIdRouteLongAttribute, _CRoutePoint)>>('CTruckPassZoneIdRouteLongAttribute_entry_CRoutePoint');
 late final _CTruckPassZoneIdRouteLongAttribute_entry_CRoutePoint = _CTruckPassZoneIdRouteLongAttribute_entry_CRoutePointPtr.asFunction<_COptional_CTruckPassZoneIdRouteLongEntry Function(_CTruckPassZoneIdRouteLongAttribute, _CRoutePoint)>();
@@ -70613,8 +70613,8 @@ late final _CPublicTransportTransferRouteLongAttribute_last = _CPublicTransportT
 late final _CPublicTransportTransferRouteLongAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CPublicTransportTransferRouteLongEntry Function(_CPublicTransportTransferRouteLongAttribute)>>('CPublicTransportTransferRouteLongAttribute_entries');
 late final _CPublicTransportTransferRouteLongAttribute_entries = _CPublicTransportTransferRouteLongAttribute_entriesPtr.asFunction<_CArray_CPublicTransportTransferRouteLongEntry Function(_CPublicTransportTransferRouteLongAttribute)>();
 
-late final _CPublicTransportTransferRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CPublicTransportTransferRouteLongAttribute_cg_objectIdentifier');
-late final _CPublicTransportTransferRouteLongAttribute_cg_objectIdentifier = _CPublicTransportTransferRouteLongAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CPublicTransportTransferRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CPublicTransportTransferRouteLongAttribute_cg_objectIdentifier');
+late final _CPublicTransportTransferRouteLongAttribute_cg_objectIdentifier = _CPublicTransportTransferRouteLongAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CPublicTransportTransferRouteLongAttribute_entry_CRoutePointPtr = _lookup<ffi.NativeFunction<_COptional_CPublicTransportTransferRouteLongEntry Function(_CPublicTransportTransferRouteLongAttribute, _CRoutePoint)>>('CPublicTransportTransferRouteLongAttribute_entry_CRoutePoint');
 late final _CPublicTransportTransferRouteLongAttribute_entry_CRoutePoint = _CPublicTransportTransferRouteLongAttribute_entry_CRoutePointPtr.asFunction<_COptional_CPublicTransportTransferRouteLongEntry Function(_CPublicTransportTransferRouteLongAttribute, _CRoutePoint)>();
@@ -70727,8 +70727,8 @@ late final _CTraffic_durations = _CTraffic_durationsPtr.asFunction<_CMillisecond
 late final _CTraffic_speedColorsPtr = _lookup<ffi.NativeFunction<_CTrafficSpeedColorRouteLongAttribute Function(_CTraffic)>>('CTraffic_speedColors');
 late final _CTraffic_speedColors = _CTraffic_speedColorsPtr.asFunction<_CTrafficSpeedColorRouteLongAttribute Function(_CTraffic)>();
 
-late final _CTraffic_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CTraffic_cg_objectIdentifier');
-late final _CTraffic_cg_objectIdentifier = _CTraffic_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CTraffic_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CTraffic_cg_objectIdentifier');
+late final _CTraffic_cg_objectIdentifier = _CTraffic_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CTraffic_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CTraffic_release');
@@ -70751,8 +70751,8 @@ late final _CMillisecondsRouteAttribute_entries = _CMillisecondsRouteAttribute_e
 late final _CMillisecondsRouteAttribute_durationPtr = _lookup<ffi.NativeFunction<_CTimeInterval Function(_CMillisecondsRouteAttribute)>>('CMillisecondsRouteAttribute_duration');
 late final _CMillisecondsRouteAttribute_duration = _CMillisecondsRouteAttribute_durationPtr.asFunction<_CTimeInterval Function(_CMillisecondsRouteAttribute)>();
 
-late final _CMillisecondsRouteAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CMillisecondsRouteAttribute_cg_objectIdentifier');
-late final _CMillisecondsRouteAttribute_cg_objectIdentifier = _CMillisecondsRouteAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CMillisecondsRouteAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CMillisecondsRouteAttribute_cg_objectIdentifier');
+late final _CMillisecondsRouteAttribute_cg_objectIdentifier = _CMillisecondsRouteAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CMillisecondsRouteAttribute_entriesInRange_CRoutePoint_CRoutePointPtr = _lookup<ffi.NativeFunction<_CArray_CMillisecondsRouteEntry Function(_CMillisecondsRouteAttribute, _CRoutePoint, _CRoutePoint)>>('CMillisecondsRouteAttribute_entriesInRange_CRoutePoint_CRoutePoint');
 late final _CMillisecondsRouteAttribute_entriesInRange_CRoutePoint_CRoutePoint = _CMillisecondsRouteAttribute_entriesInRange_CRoutePoint_CRoutePointPtr.asFunction<_CArray_CMillisecondsRouteEntry Function(_CMillisecondsRouteAttribute, _CRoutePoint, _CRoutePoint)>();
@@ -70803,8 +70803,8 @@ late final _CTrafficSpeedColorRouteLongAttribute_last = _CTrafficSpeedColorRoute
 late final _CTrafficSpeedColorRouteLongAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CTrafficSpeedColorRouteLongEntry Function(_CTrafficSpeedColorRouteLongAttribute)>>('CTrafficSpeedColorRouteLongAttribute_entries');
 late final _CTrafficSpeedColorRouteLongAttribute_entries = _CTrafficSpeedColorRouteLongAttribute_entriesPtr.asFunction<_CArray_CTrafficSpeedColorRouteLongEntry Function(_CTrafficSpeedColorRouteLongAttribute)>();
 
-late final _CTrafficSpeedColorRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CTrafficSpeedColorRouteLongAttribute_cg_objectIdentifier');
-late final _CTrafficSpeedColorRouteLongAttribute_cg_objectIdentifier = _CTrafficSpeedColorRouteLongAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CTrafficSpeedColorRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CTrafficSpeedColorRouteLongAttribute_cg_objectIdentifier');
+late final _CTrafficSpeedColorRouteLongAttribute_cg_objectIdentifier = _CTrafficSpeedColorRouteLongAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CTrafficSpeedColorRouteLongAttribute_entry_CRoutePointPtr = _lookup<ffi.NativeFunction<_COptional_CTrafficSpeedColorRouteLongEntry Function(_CTrafficSpeedColorRouteLongAttribute, _CRoutePoint)>>('CTrafficSpeedColorRouteLongAttribute_entry_CRoutePoint');
 late final _CTrafficSpeedColorRouteLongAttribute_entry_CRoutePoint = _CTrafficSpeedColorRouteLongAttribute_entry_CRoutePointPtr.asFunction<_COptional_CTrafficSpeedColorRouteLongEntry Function(_CTrafficSpeedColorRouteLongAttribute, _CRoutePoint)>();
@@ -70865,8 +70865,8 @@ late final _CPackedNavigationState_state = _CPackedNavigationState_statePtr.asFu
 late final _CPackedNavigationState_setState_CStatePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CPackedNavigationState, _CState)>>('CPackedNavigationState_setState_CState');
 late final _CPackedNavigationState_setState_CState = _CPackedNavigationState_setState_CStatePtr.asFunction<void Function(_CPackedNavigationState, _CState)>();
 
-late final _CPackedNavigationState_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CPackedNavigationState_cg_objectIdentifier');
-late final _CPackedNavigationState_cg_objectIdentifier = _CPackedNavigationState_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CPackedNavigationState_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CPackedNavigationState_cg_objectIdentifier');
+late final _CPackedNavigationState_cg_objectIdentifier = _CPackedNavigationState_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CPackedNavigationState_S_of_CTrafficRoute_COptional_CRouteSearchOptions_COptional_CRouteSearchPoint_COptional_CRoutePoint_CStatePtr = _lookup<ffi.NativeFunction<_CPackedNavigationState Function(_CTrafficRoute, _COptional_CRouteSearchOptions, _COptional_CRouteSearchPoint, _COptional_CRoutePoint, _CState)>>('CPackedNavigationState_S_of_CTrafficRoute_COptional_CRouteSearchOptions_COptional_CRouteSearchPoint_COptional_CRoutePoint_CState');
 late final _CPackedNavigationState_S_of_CTrafficRoute_COptional_CRouteSearchOptions_COptional_CRouteSearchPoint_COptional_CRoutePoint_CState = _CPackedNavigationState_S_of_CTrafficRoute_COptional_CRouteSearchOptions_COptional_CRouteSearchPoint_COptional_CRoutePoint_CStatePtr.asFunction<_CPackedNavigationState Function(_CTrafficRoute, _COptional_CRouteSearchOptions, _COptional_CRouteSearchPoint, _COptional_CRoutePoint, _CState)>();
@@ -71015,8 +71015,8 @@ late final _CModel_betterRouteChannel = _CModel_betterRouteChannelPtr.asFunction
 late final _CModel_betterRoutePtr = _lookup<ffi.NativeFunction<_COptional_CBetterRouteInfo Function(_CModel)>>('CModel_betterRoute');
 late final _CModel_betterRoute = _CModel_betterRoutePtr.asFunction<_COptional_CBetterRouteInfo Function(_CModel)>();
 
-late final _CModel_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CModel_cg_objectIdentifier');
-late final _CModel_cg_objectIdentifier = _CModel_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CModel_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CModel_cg_objectIdentifier');
+late final _CModel_cg_objectIdentifier = _CModel_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CModel_betterRouteResponse_CBetterRouteResponsePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CModel, _CBetterRouteResponse)>>('CModel_betterRouteResponse_CBetterRouteResponse');
 late final _CModel_betterRouteResponse_CBetterRouteResponse = _CModel_betterRouteResponse_CBetterRouteResponsePtr.asFunction<void Function(_CModel, _CBetterRouteResponse)>();
@@ -71145,8 +71145,8 @@ late final _CRoadEventRouteAttribute_last = _CRoadEventRouteAttribute_lastPtr.as
 late final _CRoadEventRouteAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CRoadEventRouteEntry Function(_CRoadEventRouteAttribute)>>('CRoadEventRouteAttribute_entries');
 late final _CRoadEventRouteAttribute_entries = _CRoadEventRouteAttribute_entriesPtr.asFunction<_CArray_CRoadEventRouteEntry Function(_CRoadEventRouteAttribute)>();
 
-late final _CRoadEventRouteAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRoadEventRouteAttribute_cg_objectIdentifier');
-late final _CRoadEventRouteAttribute_cg_objectIdentifier = _CRoadEventRouteAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRoadEventRouteAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRoadEventRouteAttribute_cg_objectIdentifier');
+late final _CRoadEventRouteAttribute_cg_objectIdentifier = _CRoadEventRouteAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CRoadEventRouteAttribute_entriesInRange_CRoutePoint_CRoutePointPtr = _lookup<ffi.NativeFunction<_CArray_CRoadEventRouteEntry Function(_CRoadEventRouteAttribute, _CRoutePoint, _CRoutePoint)>>('CRoadEventRouteAttribute_entriesInRange_CRoutePoint_CRoutePoint');
 late final _CRoadEventRouteAttribute_entriesInRange_CRoutePoint_CRoutePoint = _CRoadEventRouteAttribute_entriesInRange_CRoutePoint_CRoutePointPtr.asFunction<_CArray_CRoadEventRouteEntry Function(_CRoadEventRouteAttribute, _CRoutePoint, _CRoutePoint)>();
@@ -71433,8 +71433,8 @@ late final _CRouteSourceSettings_calloutVisualizationMode = _CRouteSourceSetting
 late final _CRouteSourceSettings_setCalloutVisualizationMode_CCalloutVisualizationModePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CRouteSourceSettings, _CCalloutVisualizationMode)>>('CRouteSourceSettings_setCalloutVisualizationMode_CCalloutVisualizationMode');
 late final _CRouteSourceSettings_setCalloutVisualizationMode_CCalloutVisualizationMode = _CRouteSourceSettings_setCalloutVisualizationMode_CCalloutVisualizationModePtr.asFunction<void Function(_CRouteSourceSettings, _CCalloutVisualizationMode)>();
 
-late final _CRouteSourceSettings_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRouteSourceSettings_cg_objectIdentifier');
-late final _CRouteSourceSettings_cg_objectIdentifier = _CRouteSourceSettings_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRouteSourceSettings_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRouteSourceSettings_cg_objectIdentifier');
+late final _CRouteSourceSettings_cg_objectIdentifier = _CRouteSourceSettings_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CRouteSourceSettings_getLargeScaleMergeDistanceMeters_CTransportTypePtr = _lookup<ffi.NativeFunction<ffi.Float Function(_CRouteSourceSettings, _CTransportType)>>('CRouteSourceSettings_getLargeScaleMergeDistanceMeters_CTransportType');
 late final _CRouteSourceSettings_getLargeScaleMergeDistanceMeters_CTransportType = _CRouteSourceSettings_getLargeScaleMergeDistanceMeters_CTransportTypePtr.asFunction<double Function(_CRouteSourceSettings, _CTransportType)>();
@@ -71493,8 +71493,8 @@ late final _CRouteEditorSource_inactivePermanentDisplayFlags = _CRouteEditorSour
 late final _CRouteEditorSource_setInactivePermanentDisplayFlags_COptional_COptionSet_CRouteMapObjectPermanentDisplayFlagPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CRouteEditorSource, _COptional_COptionSet_CRouteMapObjectPermanentDisplayFlag)>>('CRouteEditorSource_setInactivePermanentDisplayFlags_COptional_COptionSet_CRouteMapObjectPermanentDisplayFlag');
 late final _CRouteEditorSource_setInactivePermanentDisplayFlags_COptional_COptionSet_CRouteMapObjectPermanentDisplayFlag = _CRouteEditorSource_setInactivePermanentDisplayFlags_COptional_COptionSet_CRouteMapObjectPermanentDisplayFlagPtr.asFunction<void Function(_CRouteEditorSource, _COptional_COptionSet_CRouteMapObjectPermanentDisplayFlag)>();
 
-late final _CRouteEditorSource_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRouteEditorSource_cg_objectIdentifier');
-late final _CRouteEditorSource_cg_objectIdentifier = _CRouteEditorSource_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRouteEditorSource_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRouteEditorSource_cg_objectIdentifier');
+late final _CRouteEditorSource_cg_objectIdentifier = _CRouteEditorSource_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CRouteEditorSource_setRoutesVisible_boolPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CRouteEditorSource, ffi.Bool)>>('CRouteEditorSource_setRoutesVisible_bool');
 late final _CRouteEditorSource_setRoutesVisible_bool = _CRouteEditorSource_setRoutesVisible_boolPtr.asFunction<void Function(_CRouteEditorSource, bool)>();
@@ -71534,8 +71534,8 @@ late final _CRouteEditor_activeRouteIndexChannel = _CRouteEditor_activeRouteInde
 late final _CRouteEditor_activeRouteIndexPtr = _lookup<ffi.NativeFunction<_COptional_CRouteIndex Function(_CRouteEditor)>>('CRouteEditor_activeRouteIndex');
 late final _CRouteEditor_activeRouteIndex = _CRouteEditor_activeRouteIndexPtr.asFunction<_COptional_CRouteIndex Function(_CRouteEditor)>();
 
-late final _CRouteEditor_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRouteEditor_cg_objectIdentifier');
-late final _CRouteEditor_cg_objectIdentifier = _CRouteEditor_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRouteEditor_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRouteEditor_cg_objectIdentifier');
+late final _CRouteEditor_cg_objectIdentifier = _CRouteEditor_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CRouteEditor_setRouteParams_CRouteEditorRouteParamsPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CRouteEditor, _CRouteEditorRouteParams)>>('CRouteEditor_setRouteParams_CRouteEditorRouteParams');
 late final _CRouteEditor_setRouteParams_CRouteEditorRouteParams = _CRouteEditor_setRouteParams_CRouteEditorRouteParamsPtr.asFunction<void Function(_CRouteEditor, _CRouteEditorRouteParams)>();
@@ -71642,8 +71642,8 @@ late final _CRouteMapObjectSource_objects = _CRouteMapObjectSource_objectsPtr.as
 late final _CRouteMapObjectSource_routeSourceSettingsPtr = _lookup<ffi.NativeFunction<_CRouteSourceSettings Function(_CRouteMapObjectSource)>>('CRouteMapObjectSource_routeSourceSettings');
 late final _CRouteMapObjectSource_routeSourceSettings = _CRouteMapObjectSource_routeSourceSettingsPtr.asFunction<_CRouteSourceSettings Function(_CRouteMapObjectSource)>();
 
-late final _CRouteMapObjectSource_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRouteMapObjectSource_cg_objectIdentifier');
-late final _CRouteMapObjectSource_cg_objectIdentifier = _CRouteMapObjectSource_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRouteMapObjectSource_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRouteMapObjectSource_cg_objectIdentifier');
+late final _CRouteMapObjectSource_cg_objectIdentifier = _CRouteMapObjectSource_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CRouteMapObjectSource_addObject_CRouteMapObjectPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CRouteMapObjectSource, _CRouteMapObject)>>('CRouteMapObjectSource_addObject_CRouteMapObject');
 late final _CRouteMapObjectSource_addObject_CRouteMapObject = _CRouteMapObjectSource_addObject_CRouteMapObjectPtr.asFunction<void Function(_CRouteMapObjectSource, _CRouteMapObject)>();
@@ -71672,8 +71672,8 @@ late final _CRouteInfoCalloutMapObject_routeIndex = _CRouteInfoCalloutMapObject_
 late final _CRouteInfoCalloutMapObject_routePointPtr = _lookup<ffi.NativeFunction<_CRoutePoint Function(_CRouteInfoCalloutMapObject)>>('CRouteInfoCalloutMapObject_routePoint');
 late final _CRouteInfoCalloutMapObject_routePoint = _CRouteInfoCalloutMapObject_routePointPtr.asFunction<_CRoutePoint Function(_CRouteInfoCalloutMapObject)>();
 
-late final _CRouteInfoCalloutMapObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRouteInfoCalloutMapObject_cg_objectIdentifier');
-late final _CRouteInfoCalloutMapObject_cg_objectIdentifier = _CRouteInfoCalloutMapObject_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRouteInfoCalloutMapObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRouteInfoCalloutMapObject_cg_objectIdentifier');
+late final _CRouteInfoCalloutMapObject_cg_objectIdentifier = _CRouteInfoCalloutMapObject_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CRouteInfoCalloutMapObject_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CRouteInfoCalloutMapObject_release');
@@ -71701,8 +71701,8 @@ late final _CRoutePointMapObject_point = _CRoutePointMapObject_pointPtr.asFuncti
 late final _CRoutePointMapObject_setPoint_CGeoPointPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CRoutePointMapObject, _CGeoPoint)>>('CRoutePointMapObject_setPoint_CGeoPoint');
 late final _CRoutePointMapObject_setPoint_CGeoPoint = _CRoutePointMapObject_setPoint_CGeoPointPtr.asFunction<void Function(_CRoutePointMapObject, _CGeoPoint)>();
 
-late final _CRoutePointMapObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRoutePointMapObject_cg_objectIdentifier');
-late final _CRoutePointMapObject_cg_objectIdentifier = _CRoutePointMapObject_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRoutePointMapObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRoutePointMapObject_cg_objectIdentifier');
+late final _CRoutePointMapObject_cg_objectIdentifier = _CRoutePointMapObject_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CRoutePointMapObject_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CRoutePointMapObject_release');
@@ -71742,8 +71742,8 @@ late final _CFpsMakeDefault = _CFpsMakeDefaultPtr.asFunction<_CFps Function()>()
 late final _CMapSurfaceProvider_idPtr = _lookup<ffi.NativeFunction<ffi.Uint64 Function(_CMapSurfaceProvider)>>('CMapSurfaceProvider_id');
 late final _CMapSurfaceProvider_id = _CMapSurfaceProvider_idPtr.asFunction<int Function(_CMapSurfaceProvider)>();
 
-late final _CMapSurfaceProvider_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CMapSurfaceProvider_cg_objectIdentifier');
-late final _CMapSurfaceProvider_cg_objectIdentifier = _CMapSurfaceProvider_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CMapSurfaceProvider_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CMapSurfaceProvider_cg_objectIdentifier');
+late final _CMapSurfaceProvider_cg_objectIdentifier = _CMapSurfaceProvider_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CMapSurfaceProvider_S_create_CMapPtr = _lookup<ffi.NativeFunction<_CMapSurfaceProvider Function(_CMap)>>('CMapSurfaceProvider_S_create_CMap');
 late final _CMapSurfaceProvider_S_create_CMap = _CMapSurfaceProvider_S_create_CMapPtr.asFunction<_CMapSurfaceProvider Function(_CMap)>();
@@ -71797,8 +71797,8 @@ late final _CMapRenderer_fpsChannel = _CMapRenderer_fpsChannelPtr.asFunction<_CS
 late final _CMapRenderer_fpsPtr = _lookup<ffi.NativeFunction<_CFps Function(_CMapRenderer)>>('CMapRenderer_fps');
 late final _CMapRenderer_fps = _CMapRenderer_fpsPtr.asFunction<_CFps Function(_CMapRenderer)>();
 
-late final _CMapRenderer_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CMapRenderer_cg_objectIdentifier');
-late final _CMapRenderer_cg_objectIdentifier = _CMapRenderer_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CMapRenderer_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CMapRenderer_cg_objectIdentifier');
+late final _CMapRenderer_cg_objectIdentifier = _CMapRenderer_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CMapRenderer_S_create_CMapPtr = _lookup<ffi.NativeFunction<_CMapRenderer Function(_CMap)>>('CMapRenderer_S_create_CMap');
 late final _CMapRenderer_S_create_CMap = _CMapRenderer_S_create_CMapPtr.asFunction<_CMapRenderer Function(_CMap)>();
@@ -71868,8 +71868,8 @@ late final _CFuture_CImageDataReceive = _CFuture_CImageDataReceivePtr.asFunction
   )
 >();
 
-late final _CMapBuilder_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CMapBuilder_cg_objectIdentifier');
-late final _CMapBuilder_cg_objectIdentifier = _CMapBuilder_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CMapBuilder_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CMapBuilder_cg_objectIdentifier');
+late final _CMapBuilder_cg_objectIdentifier = _CMapBuilder_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CMapBuilder_setSize_CScreenSizePtr = _lookup<ffi.NativeFunction<_CMapBuilder Function(_CMapBuilder, _CScreenSize)>>('CMapBuilder_setSize_CScreenSize');
 late final _CMapBuilder_setSize_CScreenSize = _CMapBuilder_setSize_CScreenSizePtr.asFunction<_CMapBuilder Function(_CMapBuilder, _CScreenSize)>();
@@ -71941,8 +71941,8 @@ late final _CFuture_CMapReceive = _CFuture_CMapReceivePtr.asFunction<
   )
 >();
 
-late final _CStyleBuilder_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CStyleBuilder_cg_objectIdentifier');
-late final _CStyleBuilder_cg_objectIdentifier = _CStyleBuilder_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CStyleBuilder_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CStyleBuilder_cg_objectIdentifier');
+late final _CStyleBuilder_cg_objectIdentifier = _CStyleBuilder_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CStyleBuilder_setStyleAttribute_CString_CAttributeValuePtr = _lookup<ffi.NativeFunction<_CStyleBuilder Function(_CStyleBuilder, _CString, _CAttributeValue)>>('CStyleBuilder_setStyleAttribute_CString_CAttributeValue');
 late final _CStyleBuilder_setStyleAttribute_CString_CAttributeValue = _CStyleBuilder_setStyleAttribute_CString_CAttributeValuePtr.asFunction<_CStyleBuilder Function(_CStyleBuilder, _CString, _CAttributeValue)>();
@@ -72037,8 +72037,8 @@ late final _CGestureManager_tiltSettings = _CGestureManager_tiltSettingsPtr.asFu
 late final _CGestureManager_setTiltSettings_CTiltSettingsPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CGestureManager, _CTiltSettings)>>('CGestureManager_setTiltSettings_CTiltSettings');
 late final _CGestureManager_setTiltSettings_CTiltSettings = _CGestureManager_setTiltSettings_CTiltSettingsPtr.asFunction<void Function(_CGestureManager, _CTiltSettings)>();
 
-late final _CGestureManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CGestureManager_cg_objectIdentifier');
-late final _CGestureManager_cg_objectIdentifier = _CGestureManager_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CGestureManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CGestureManager_cg_objectIdentifier');
+late final _CGestureManager_cg_objectIdentifier = _CGestureManager_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CGestureManager_enableGesture_CGesturePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CGestureManager, _CGesture)>>('CGestureManager_enableGesture_CGesture');
 late final _CGestureManager_enableGesture_CGesture = _CGestureManager_enableGesture_CGesturePtr.asFunction<void Function(_CGestureManager, _CGesture)>();
@@ -72092,8 +72092,8 @@ late final _CMapGestureRecognizer_longTouch = _CMapGestureRecognizer_longTouchPt
 late final _CMapGestureRecognizer_gestureManagerPtr = _lookup<ffi.NativeFunction<_COptional_CGestureManager Function(_CMapGestureRecognizer)>>('CMapGestureRecognizer_gestureManager');
 late final _CMapGestureRecognizer_gestureManager = _CMapGestureRecognizer_gestureManagerPtr.asFunction<_COptional_CGestureManager Function(_CMapGestureRecognizer)>();
 
-late final _CMapGestureRecognizer_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CMapGestureRecognizer_cg_objectIdentifier');
-late final _CMapGestureRecognizer_cg_objectIdentifier = _CMapGestureRecognizer_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CMapGestureRecognizer_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CMapGestureRecognizer_cg_objectIdentifier');
+late final _CMapGestureRecognizer_cg_objectIdentifier = _CMapGestureRecognizer_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CMapGestureRecognizer_S_create_CMapPtr = _lookup<ffi.NativeFunction<_CMapGestureRecognizer Function(_CMap)>>('CMapGestureRecognizer_S_create_CMap');
 late final _CMapGestureRecognizer_S_create_CMap = _CMapGestureRecognizer_S_create_CMapPtr.asFunction<_CMapGestureRecognizer Function(_CMap)>();
@@ -72166,8 +72166,8 @@ late final _CIndoorDetector_indoorChannel = _CIndoorDetector_indoorChannelPtr.as
 late final _CIndoorDetector_indoorPtr = _lookup<ffi.NativeFunction<ffi.Bool Function(_CIndoorDetector)>>('CIndoorDetector_indoor');
 late final _CIndoorDetector_indoor = _CIndoorDetector_indoorPtr.asFunction<bool Function(_CIndoorDetector)>();
 
-late final _CIndoorDetector_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CIndoorDetector_cg_objectIdentifier');
-late final _CIndoorDetector_cg_objectIdentifier = _CIndoorDetector_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CIndoorDetector_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CIndoorDetector_cg_objectIdentifier');
+late final _CIndoorDetector_cg_objectIdentifier = _CIndoorDetector_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CIndoorDetector_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CIndoorDetector_release');
@@ -72186,8 +72186,8 @@ late final _CNavigationFollowController_cameraBehaviour = _CNavigationFollowCont
 late final _CNavigationFollowController_setCameraBehaviour_CCameraBehaviourPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CNavigationFollowController, _CCameraBehaviour)>>('CNavigationFollowController_setCameraBehaviour_CCameraBehaviour');
 late final _CNavigationFollowController_setCameraBehaviour_CCameraBehaviour = _CNavigationFollowController_setCameraBehaviour_CCameraBehaviourPtr.asFunction<void Function(_CNavigationFollowController, _CCameraBehaviour)>();
 
-late final _CNavigationFollowController_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CNavigationFollowController_cg_objectIdentifier');
-late final _CNavigationFollowController_cg_objectIdentifier = _CNavigationFollowController_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CNavigationFollowController_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CNavigationFollowController_cg_objectIdentifier');
+late final _CNavigationFollowController_cg_objectIdentifier = _CNavigationFollowController_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CNavigationFollowController_setFollow_boolPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CNavigationFollowController, ffi.Bool)>>('CNavigationFollowController_setFollow_bool');
 late final _CNavigationFollowController_setFollow_bool = _CNavigationFollowController_setFollow_boolPtr.asFunction<void Function(_CNavigationFollowController, bool)>();
@@ -72204,8 +72204,8 @@ late final _CMapLocationController_mapToNorthOrientation = _CMapLocationControll
 late final _CMapLocationController_setMapToNorthOrientation_boolPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CMapLocationController, ffi.Bool)>>('CMapLocationController_setMapToNorthOrientation_bool');
 late final _CMapLocationController_setMapToNorthOrientation_bool = _CMapLocationController_setMapToNorthOrientation_boolPtr.asFunction<void Function(_CMapLocationController, bool)>();
 
-late final _CMapLocationController_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CMapLocationController_cg_objectIdentifier');
-late final _CMapLocationController_cg_objectIdentifier = _CMapLocationController_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CMapLocationController_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CMapLocationController_cg_objectIdentifier');
+late final _CMapLocationController_cg_objectIdentifier = _CMapLocationController_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CMapLocationController_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CMapLocationController_release');
@@ -72216,8 +72216,8 @@ late final _CMapLocationControllerMakeDefaultPtr = _lookup<ffi.NativeFunction<_C
 late final _CMapLocationControllerMakeDefault = _CMapLocationControllerMakeDefaultPtr.asFunction<_CMapLocationController Function()>();
 
 
-late final _CMapManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CMapManager_cg_objectIdentifier');
-late final _CMapManager_cg_objectIdentifier = _CMapManager_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CMapManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CMapManager_cg_objectIdentifier');
+late final _CMapManager_cg_objectIdentifier = _CMapManager_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CMapManager_addMap_CMapPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CMapManager, _CMap)>>('CMapManager_addMap_CMap');
 late final _CMapManager_addMap_CMap = _CMapManager_addMap_CMapPtr.asFunction<void Function(_CMapManager, _CMap)>();
@@ -72276,8 +72276,8 @@ late final _CZoomFollowSettings_getMinAnimationDuration = _CZoomFollowSettings_g
 late final _CZoomFollowSettings_setMinAnimationDuration_CTimeIntervalPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CZoomFollowSettings, _CTimeInterval)>>('CZoomFollowSettings_setMinAnimationDuration_CTimeInterval');
 late final _CZoomFollowSettings_setMinAnimationDuration_CTimeInterval = _CZoomFollowSettings_setMinAnimationDuration_CTimeIntervalPtr.asFunction<void Function(_CZoomFollowSettings, _CTimeInterval)>();
 
-late final _CZoomFollowSettings_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CZoomFollowSettings_cg_objectIdentifier');
-late final _CZoomFollowSettings_cg_objectIdentifier = _CZoomFollowSettings_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CZoomFollowSettings_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CZoomFollowSettings_cg_objectIdentifier');
+late final _CZoomFollowSettings_cg_objectIdentifier = _CZoomFollowSettings_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CZoomFollowSettings_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CZoomFollowSettings_release');
@@ -72317,8 +72317,8 @@ late final _CRouteMapSettings_freeRoamPermanentDisplayFlags = _CRouteMapSettings
 late final _CRouteMapSettings_setFreeRoamPermanentDisplayFlags_COptionSet_CRouteMapObjectPermanentDisplayFlagPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CRouteMapSettings, _COptionSet_CRouteMapObjectPermanentDisplayFlag)>>('CRouteMapSettings_setFreeRoamPermanentDisplayFlags_COptionSet_CRouteMapObjectPermanentDisplayFlag');
 late final _CRouteMapSettings_setFreeRoamPermanentDisplayFlags_COptionSet_CRouteMapObjectPermanentDisplayFlag = _CRouteMapSettings_setFreeRoamPermanentDisplayFlags_COptionSet_CRouteMapObjectPermanentDisplayFlagPtr.asFunction<void Function(_CRouteMapSettings, _COptionSet_CRouteMapObjectPermanentDisplayFlag)>();
 
-late final _CRouteMapSettings_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRouteMapSettings_cg_objectIdentifier');
-late final _CRouteMapSettings_cg_objectIdentifier = _CRouteMapSettings_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRouteMapSettings_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRouteMapSettings_cg_objectIdentifier');
+late final _CRouteMapSettings_cg_objectIdentifier = _CRouteMapSettings_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CRouteMapSettings_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CRouteMapSettings_release');
@@ -72346,8 +72346,8 @@ late final _CSimulationSettings_speedMode = _CSimulationSettings_speedModePtr.as
 late final _CSimulationSettings_setSpeedMode_CSimulationSpeedModePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CSimulationSettings, _CSimulationSpeedMode)>>('CSimulationSettings_setSpeedMode_CSimulationSpeedMode');
 late final _CSimulationSettings_setSpeedMode_CSimulationSpeedMode = _CSimulationSettings_setSpeedMode_CSimulationSpeedModePtr.asFunction<void Function(_CSimulationSettings, _CSimulationSpeedMode)>();
 
-late final _CSimulationSettings_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CSimulationSettings_cg_objectIdentifier');
-late final _CSimulationSettings_cg_objectIdentifier = _CSimulationSettings_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CSimulationSettings_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CSimulationSettings_cg_objectIdentifier');
+late final _CSimulationSettings_cg_objectIdentifier = _CSimulationSettings_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CSimulationSettings_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CSimulationSettings_release');
@@ -72358,8 +72358,8 @@ late final _CSimulationSettingsMakeDefaultPtr = _lookup<ffi.NativeFunction<_CSim
 late final _CSimulationSettingsMakeDefault = _CSimulationSettingsMakeDefaultPtr.asFunction<_CSimulationSettings Function()>();
 
 
-late final _CNavigationVoice_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CNavigationVoice_cg_objectIdentifier');
-late final _CNavigationVoice_cg_objectIdentifier = _CNavigationVoice_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CNavigationVoice_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CNavigationVoice_cg_objectIdentifier');
+late final _CNavigationVoice_cg_objectIdentifier = _CNavigationVoice_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CNavigationVoice_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CNavigationVoice_release');
@@ -72374,8 +72374,8 @@ late final _CVoiceSelector_voice = _CVoiceSelector_voicePtr.asFunction<_COptiona
 late final _CVoiceSelector_setVoice_COptional_CNavigationVoicePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CVoiceSelector, _COptional_CNavigationVoice)>>('CVoiceSelector_setVoice_COptional_CNavigationVoice');
 late final _CVoiceSelector_setVoice_COptional_CNavigationVoice = _CVoiceSelector_setVoice_COptional_CNavigationVoicePtr.asFunction<void Function(_CVoiceSelector, _COptional_CNavigationVoice)>();
 
-late final _CVoiceSelector_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CVoiceSelector_cg_objectIdentifier');
-late final _CVoiceSelector_cg_objectIdentifier = _CVoiceSelector_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CVoiceSelector_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CVoiceSelector_cg_objectIdentifier');
+late final _CVoiceSelector_cg_objectIdentifier = _CVoiceSelector_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CVoiceSelector_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CVoiceSelector_release');
@@ -72400,8 +72400,8 @@ late final _CExceedSpeedLimitSettings_allowableSpeedExcess = _CExceedSpeedLimitS
 late final _CExceedSpeedLimitSettings_setAllowableSpeedExcess_floatPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CExceedSpeedLimitSettings, ffi.Float)>>('CExceedSpeedLimitSettings_setAllowableSpeedExcess_float');
 late final _CExceedSpeedLimitSettings_setAllowableSpeedExcess_float = _CExceedSpeedLimitSettings_setAllowableSpeedExcess_floatPtr.asFunction<void Function(_CExceedSpeedLimitSettings, double)>();
 
-late final _CExceedSpeedLimitSettings_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CExceedSpeedLimitSettings_cg_objectIdentifier');
-late final _CExceedSpeedLimitSettings_cg_objectIdentifier = _CExceedSpeedLimitSettings_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CExceedSpeedLimitSettings_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CExceedSpeedLimitSettings_cg_objectIdentifier');
+late final _CExceedSpeedLimitSettings_cg_objectIdentifier = _CExceedSpeedLimitSettings_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CExceedSpeedLimitSettings_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CExceedSpeedLimitSettings_release');
@@ -72416,8 +72416,8 @@ late final _CDynamicRouteInfoSettings_updatePeriod = _CDynamicRouteInfoSettings_
 late final _CDynamicRouteInfoSettings_setUpdatePeriod_CTimeIntervalPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CDynamicRouteInfoSettings, _CTimeInterval)>>('CDynamicRouteInfoSettings_setUpdatePeriod_CTimeInterval');
 late final _CDynamicRouteInfoSettings_setUpdatePeriod_CTimeInterval = _CDynamicRouteInfoSettings_setUpdatePeriod_CTimeIntervalPtr.asFunction<void Function(_CDynamicRouteInfoSettings, _CTimeInterval)>();
 
-late final _CDynamicRouteInfoSettings_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CDynamicRouteInfoSettings_cg_objectIdentifier');
-late final _CDynamicRouteInfoSettings_cg_objectIdentifier = _CDynamicRouteInfoSettings_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CDynamicRouteInfoSettings_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CDynamicRouteInfoSettings_cg_objectIdentifier');
+late final _CDynamicRouteInfoSettings_cg_objectIdentifier = _CDynamicRouteInfoSettings_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CDynamicRouteInfoSettings_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CDynamicRouteInfoSettings_release');
@@ -72435,8 +72435,8 @@ late final _CSoundNotificationSettings_enabledSoundCategories = _CSoundNotificat
 late final _CSoundNotificationSettings_setEnabledSoundCategories_COptionSet_CSoundCategoryPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CSoundNotificationSettings, _COptionSet_CSoundCategory)>>('CSoundNotificationSettings_setEnabledSoundCategories_COptionSet_CSoundCategory');
 late final _CSoundNotificationSettings_setEnabledSoundCategories_COptionSet_CSoundCategory = _CSoundNotificationSettings_setEnabledSoundCategories_COptionSet_CSoundCategoryPtr.asFunction<void Function(_CSoundNotificationSettings, _COptionSet_CSoundCategory)>();
 
-late final _CSoundNotificationSettings_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CSoundNotificationSettings_cg_objectIdentifier');
-late final _CSoundNotificationSettings_cg_objectIdentifier = _CSoundNotificationSettings_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CSoundNotificationSettings_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CSoundNotificationSettings_cg_objectIdentifier');
+late final _CSoundNotificationSettings_cg_objectIdentifier = _CSoundNotificationSettings_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CSoundNotificationSettings_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CSoundNotificationSettings_release');
@@ -72462,8 +72462,8 @@ late final _CFreeRoamSettings_prefetchRadiusMeters = _CFreeRoamSettings_prefetch
 late final _CFreeRoamSettings_setPrefetchRadiusMeters_doublePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CFreeRoamSettings, ffi.Double)>>('CFreeRoamSettings_setPrefetchRadiusMeters_double');
 late final _CFreeRoamSettings_setPrefetchRadiusMeters_double = _CFreeRoamSettings_setPrefetchRadiusMeters_doublePtr.asFunction<void Function(_CFreeRoamSettings, double)>();
 
-late final _CFreeRoamSettings_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CFreeRoamSettings_cg_objectIdentifier');
-late final _CFreeRoamSettings_cg_objectIdentifier = _CFreeRoamSettings_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CFreeRoamSettings_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CFreeRoamSettings_cg_objectIdentifier');
+late final _CFreeRoamSettings_cg_objectIdentifier = _CFreeRoamSettings_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CFreeRoamSettings_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CFreeRoamSettings_release');
@@ -72501,8 +72501,8 @@ late final _CAlternativeRoutesProviderSettings_routerType = _CAlternativeRoutesP
 late final _CAlternativeRoutesProviderSettings_setRouterType_CRouterTypePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CAlternativeRoutesProviderSettings, _CRouterType)>>('CAlternativeRoutesProviderSettings_setRouterType_CRouterType');
 late final _CAlternativeRoutesProviderSettings_setRouterType_CRouterType = _CAlternativeRoutesProviderSettings_setRouterType_CRouterTypePtr.asFunction<void Function(_CAlternativeRoutesProviderSettings, _CRouterType)>();
 
-late final _CAlternativeRoutesProviderSettings_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CAlternativeRoutesProviderSettings_cg_objectIdentifier');
-late final _CAlternativeRoutesProviderSettings_cg_objectIdentifier = _CAlternativeRoutesProviderSettings_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CAlternativeRoutesProviderSettings_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CAlternativeRoutesProviderSettings_cg_objectIdentifier');
+late final _CAlternativeRoutesProviderSettings_cg_objectIdentifier = _CAlternativeRoutesProviderSettings_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CAlternativeRoutesProviderSettings_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CAlternativeRoutesProviderSettings_release');
@@ -72513,8 +72513,8 @@ late final _CAlternativeRoutesProviderSettingsMakeDefaultPtr = _lookup<ffi.Nativ
 late final _CAlternativeRoutesProviderSettingsMakeDefault = _CAlternativeRoutesProviderSettingsMakeDefaultPtr.asFunction<_CAlternativeRoutesProviderSettings Function()>();
 
 
-late final _CAlternativeRouteSelector_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CAlternativeRouteSelector_cg_objectIdentifier');
-late final _CAlternativeRouteSelector_cg_objectIdentifier = _CAlternativeRouteSelector_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CAlternativeRouteSelector_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CAlternativeRouteSelector_cg_objectIdentifier');
+late final _CAlternativeRouteSelector_cg_objectIdentifier = _CAlternativeRouteSelector_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CAlternativeRouteSelector_selectAlternativeRoute_CTrafficRoutePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CAlternativeRouteSelector, _CTrafficRoute)>>('CAlternativeRouteSelector_selectAlternativeRoute_CTrafficRoute');
 late final _CAlternativeRouteSelector_selectAlternativeRoute_CTrafficRoute = _CAlternativeRouteSelector_selectAlternativeRoute_CTrafficRoutePtr.asFunction<void Function(_CAlternativeRouteSelector, _CTrafficRoute)>();
@@ -72559,8 +72559,8 @@ late final _CNavigationManager_alternativeRoutesProviderSettings = _CNavigationM
 late final _CNavigationManager_alternativeRouteSelectorPtr = _lookup<ffi.NativeFunction<_CAlternativeRouteSelector Function(_CNavigationManager)>>('CNavigationManager_alternativeRouteSelector');
 late final _CNavigationManager_alternativeRouteSelector = _CNavigationManager_alternativeRouteSelectorPtr.asFunction<_CAlternativeRouteSelector Function(_CNavigationManager)>();
 
-late final _CNavigationManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CNavigationManager_cg_objectIdentifier');
-late final _CNavigationManager_cg_objectIdentifier = _CNavigationManager_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CNavigationManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CNavigationManager_cg_objectIdentifier');
+late final _CNavigationManager_cg_objectIdentifier = _CNavigationManager_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CNavigationManager_startFreeRoamPtr = _lookup<ffi.NativeFunction<_CResult_CEmpty Function(_CNavigationManager)>>('CNavigationManager_startFreeRoam');
 late final _CNavigationManager_startFreeRoam = _CNavigationManager_startFreeRoamPtr.asFunction<_CResult_CEmpty Function(_CNavigationManager)>();
@@ -72619,8 +72619,8 @@ late final _CVoiceManager_voicesChannel = _CVoiceManager_voicesChannelPtr.asFunc
 late final _CVoiceManager_voicesPtr = _lookup<ffi.NativeFunction<_CArray_CVoice Function(_CVoiceManager)>>('CVoiceManager_voices');
 late final _CVoiceManager_voices = _CVoiceManager_voicesPtr.asFunction<_CArray_CVoice Function(_CVoiceManager)>();
 
-late final _CVoiceManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CVoiceManager_cg_objectIdentifier');
-late final _CVoiceManager_cg_objectIdentifier = _CVoiceManager_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CVoiceManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CVoiceManager_cg_objectIdentifier');
+late final _CVoiceManager_cg_objectIdentifier = _CVoiceManager_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CVoiceManager_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CVoiceManager_release');
@@ -72671,8 +72671,8 @@ late final _CVoice_navigationVoice = _CVoice_navigationVoicePtr.asFunction<_CNav
 late final _CVoice_languagePtr = _lookup<ffi.NativeFunction<_CString Function(_CVoice)>>('CVoice_language');
 late final _CVoice_language = _CVoice_languagePtr.asFunction<_CString Function(_CVoice)>();
 
-late final _CVoice_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CVoice_cg_objectIdentifier');
-late final _CVoice_cg_objectIdentifier = _CVoice_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CVoice_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CVoice_cg_objectIdentifier');
+late final _CVoice_cg_objectIdentifier = _CVoice_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CVoice_playWelcomePtr = _lookup<ffi.NativeFunction<_CFuture_void Function(_CVoice)>>('CVoice_playWelcome');
 late final _CVoice_playWelcome = _CVoice_playWelcomePtr.asFunction<_CFuture_void Function(_CVoice)>();
@@ -72712,8 +72712,8 @@ late final _CActivityTracker_stopChannel = _CActivityTracker_stopChannelPtr.asFu
 late final _CActivityTracker_stopPtr = _lookup<ffi.NativeFunction<ffi.Bool Function(_CActivityTracker)>>('CActivityTracker_stop');
 late final _CActivityTracker_stop = _CActivityTracker_stopPtr.asFunction<bool Function(_CActivityTracker)>();
 
-late final _CActivityTracker_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CActivityTracker_cg_objectIdentifier');
-late final _CActivityTracker_cg_objectIdentifier = _CActivityTracker_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CActivityTracker_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CActivityTracker_cg_objectIdentifier');
+late final _CActivityTracker_cg_objectIdentifier = _CActivityTracker_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CActivityTracker_C_createWith_CContext_CModel_double_CTimeIntervalPtr = _lookup<ffi.NativeFunction<_CActivityTracker Function(_CContext, _CModel, ffi.Double, _CTimeInterval)>>('CActivityTracker_C_createWith_CContext_CModel_double_CTimeInterval');
 late final _CActivityTracker_C_createWith_CContext_CModel_double_CTimeInterval = _CActivityTracker_C_createWith_CContext_CModel_double_CTimeIntervalPtr.asFunction<_CActivityTracker Function(_CContext, _CModel, double, _CTimeInterval)>();
@@ -72734,8 +72734,8 @@ late final _CCameraNotifier_cameraProgressChannel = _CCameraNotifier_cameraProgr
 late final _CCameraNotifier_cameraProgressPtr = _lookup<ffi.NativeFunction<_COptional_CCameraProgressInfo Function(_CCameraNotifier)>>('CCameraNotifier_cameraProgress');
 late final _CCameraNotifier_cameraProgress = _CCameraNotifier_cameraProgressPtr.asFunction<_COptional_CCameraProgressInfo Function(_CCameraNotifier)>();
 
-late final _CCameraNotifier_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CCameraNotifier_cg_objectIdentifier');
-late final _CCameraNotifier_cg_objectIdentifier = _CCameraNotifier_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CCameraNotifier_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CCameraNotifier_cg_objectIdentifier');
+late final _CCameraNotifier_cg_objectIdentifier = _CCameraNotifier_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CCameraNotifier_C_createWith_CModelPtr = _lookup<ffi.NativeFunction<_CCameraNotifier Function(_CModel)>>('CCameraNotifier_C_createWith_CModel');
 late final _CCameraNotifier_C_createWith_CModel = _CCameraNotifier_C_createWith_CModelPtr.asFunction<_CCameraNotifier Function(_CModel)>();
@@ -72789,8 +72789,8 @@ late final _CHttpCacheManager_getMaxSize = _CHttpCacheManager_getMaxSizePtr.asFu
 late final _CHttpCacheManager_setMaxSize_uint64_tPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CHttpCacheManager, ffi.Uint64)>>('CHttpCacheManager_setMaxSize_uint64_t');
 late final _CHttpCacheManager_setMaxSize_uint64_t = _CHttpCacheManager_setMaxSize_uint64_tPtr.asFunction<void Function(_CHttpCacheManager, int)>();
 
-late final _CHttpCacheManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CHttpCacheManager_cg_objectIdentifier');
-late final _CHttpCacheManager_cg_objectIdentifier = _CHttpCacheManager_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CHttpCacheManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CHttpCacheManager_cg_objectIdentifier');
+late final _CHttpCacheManager_cg_objectIdentifier = _CHttpCacheManager_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CHttpCacheManager_clearPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CHttpCacheManager)>>('CHttpCacheManager_clear');
 late final _CHttpCacheManager_clear = _CHttpCacheManager_clearPtr.asFunction<void Function(_CHttpCacheManager)>();
@@ -72803,8 +72803,8 @@ late final _CHttpCacheManagerMakeDefaultPtr = _lookup<ffi.NativeFunction<_CHttpC
 late final _CHttpCacheManagerMakeDefault = _CHttpCacheManagerMakeDefaultPtr.asFunction<_CHttpCacheManager Function()>();
 
 
-late final _CLocaleChangeNotifier_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CLocaleChangeNotifier_cg_objectIdentifier');
-late final _CLocaleChangeNotifier_cg_objectIdentifier = _CLocaleChangeNotifier_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CLocaleChangeNotifier_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CLocaleChangeNotifier_cg_objectIdentifier');
+late final _CLocaleChangeNotifier_cg_objectIdentifier = _CLocaleChangeNotifier_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CLocaleChangeNotifier_changed_CArray_CLocalePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CLocaleChangeNotifier, _CArray_CLocale)>>('CLocaleChangeNotifier_changed_CArray_CLocale');
 late final _CLocaleChangeNotifier_changed_CArray_CLocale = _CLocaleChangeNotifier_changed_CArray_CLocalePtr.asFunction<void Function(_CLocaleChangeNotifier, _CArray_CLocale)>();
@@ -72838,8 +72838,8 @@ late final _CLocaleManager_systemLocalesChannel = _CLocaleManager_systemLocalesC
 late final _CLocaleManager_systemLocalesPtr = _lookup<ffi.NativeFunction<_CArray_CLocale Function(_CLocaleManager)>>('CLocaleManager_systemLocales');
 late final _CLocaleManager_systemLocales = _CLocaleManager_systemLocalesPtr.asFunction<_CArray_CLocale Function(_CLocaleManager)>();
 
-late final _CLocaleManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CLocaleManager_cg_objectIdentifier');
-late final _CLocaleManager_cg_objectIdentifier = _CLocaleManager_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CLocaleManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CLocaleManager_cg_objectIdentifier');
+late final _CLocaleManager_cg_objectIdentifier = _CLocaleManager_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CLocaleManager_overrideLocales_CArray_CLocalePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CLocaleManager, _CArray_CLocale)>>('CLocaleManager_overrideLocales_CArray_CLocale');
 late final _CLocaleManager_overrideLocales_CArray_CLocale = _CLocaleManager_overrideLocales_CArray_CLocalePtr.asFunction<void Function(_CLocaleManager, _CArray_CLocale)>();
@@ -72875,8 +72875,8 @@ late final _CStatefulChannel_CArray_CLocaleConnect = _CStatefulChannel_CArray_CL
   )
 >();
 
-late final _CPlatformLocaleManagerCpp_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CPlatformLocaleManagerCpp_cg_objectIdentifier');
-late final _CPlatformLocaleManagerCpp_cg_objectIdentifier = _CPlatformLocaleManagerCpp_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CPlatformLocaleManagerCpp_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CPlatformLocaleManagerCpp_cg_objectIdentifier');
+late final _CPlatformLocaleManagerCpp_cg_objectIdentifier = _CPlatformLocaleManagerCpp_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CPlatformLocaleManagerCpp_localesPtr = _lookup<ffi.NativeFunction<_CArray_CLocale Function(_CPlatformLocaleManagerCpp)>>('CPlatformLocaleManagerCpp_locales');
 late final _CPlatformLocaleManagerCpp_locales = _CPlatformLocaleManagerCpp_localesPtr.asFunction<_CArray_CLocale Function(_CPlatformLocaleManagerCpp)>();
@@ -72939,8 +72939,8 @@ late final _CAudioSettings_audioFocusPolicy = _CAudioSettings_audioFocusPolicyPt
 late final _CAudioSettings_setAudioFocusPolicy_CAudioFocusPolicyPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CAudioSettings, _CAudioFocusPolicy)>>('CAudioSettings_setAudioFocusPolicy_CAudioFocusPolicy');
 late final _CAudioSettings_setAudioFocusPolicy_CAudioFocusPolicy = _CAudioSettings_setAudioFocusPolicy_CAudioFocusPolicyPtr.asFunction<void Function(_CAudioSettings, _CAudioFocusPolicy)>();
 
-late final _CAudioSettings_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CAudioSettings_cg_objectIdentifier');
-late final _CAudioSettings_cg_objectIdentifier = _CAudioSettings_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CAudioSettings_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CAudioSettings_cg_objectIdentifier');
+late final _CAudioSettings_cg_objectIdentifier = _CAudioSettings_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CAudioSettings_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CAudioSettings_release');
@@ -72957,8 +72957,8 @@ late final _COptional_CAudioSettingsMakeDefault = _COptional_CAudioSettingsMakeD
 late final _COptional_CAudioSettings_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_COptional_CAudioSettings)>>('COptional_CAudioSettings_release');
 late final _COptional_CAudioSettings_release = _COptional_CAudioSettings_releasePtr.asFunction<void Function(_COptional_CAudioSettings)>();
 
-late final _CLocationService_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CLocationService_cg_objectIdentifier');
-late final _CLocationService_cg_objectIdentifier = _CLocationService_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CLocationService_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CLocationService_cg_objectIdentifier');
+late final _CLocationService_cg_objectIdentifier = _CLocationService_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CLocationService_lastLocationPtr = _lookup<ffi.NativeFunction<_CStatefulChannel_COptional_CLocation Function(_CLocationService)>>('CLocationService_lastLocation');
 late final _CLocationService_lastLocation = _CLocationService_lastLocationPtr.asFunction<_CStatefulChannel_COptional_CLocation Function(_CLocationService)>();
@@ -72983,8 +72983,8 @@ late final _CAddEventResult_release = _CAddEventResult_releasePtr.asFunction<voi
 late final _CAddEventResultMakeDefaultPtr = _lookup<ffi.NativeFunction<_CAddEventResult Function()>>('CAddEventResultMakeDefault');
 late final _CAddEventResultMakeDefault = _CAddEventResultMakeDefaultPtr.asFunction<_CAddEventResult Function()>();
 
-late final _CRoadEventManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRoadEventManager_cg_objectIdentifier');
-late final _CRoadEventManager_cg_objectIdentifier = _CRoadEventManager_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRoadEventManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRoadEventManager_cg_objectIdentifier');
+late final _CRoadEventManager_cg_objectIdentifier = _CRoadEventManager_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CRoadEventManager_createAccident_CGeoPoint_COptionSet_CLane_CStringPtr = _lookup<ffi.NativeFunction<_CFuture_CAddEventResult Function(_CRoadEventManager, _CGeoPoint, _COptionSet_CLane, _CString)>>('CRoadEventManager_createAccident_CGeoPoint_COptionSet_CLane_CString');
 late final _CRoadEventManager_createAccident_CGeoPoint_COptionSet_CLane_CString = _CRoadEventManager_createAccident_CGeoPoint_COptionSet_CLane_CStringPtr.asFunction<_CFuture_CAddEventResult Function(_CRoadEventManager, _CGeoPoint, _COptionSet_CLane, _CString)>();
@@ -73042,8 +73042,8 @@ late final _CIntRouteAttribute_last = _CIntRouteAttribute_lastPtr.asFunction<_CO
 late final _CIntRouteAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CIntRouteEntry Function(_CIntRouteAttribute)>>('CIntRouteAttribute_entries');
 late final _CIntRouteAttribute_entries = _CIntRouteAttribute_entriesPtr.asFunction<_CArray_CIntRouteEntry Function(_CIntRouteAttribute)>();
 
-late final _CIntRouteAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CIntRouteAttribute_cg_objectIdentifier');
-late final _CIntRouteAttribute_cg_objectIdentifier = _CIntRouteAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CIntRouteAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CIntRouteAttribute_cg_objectIdentifier');
+late final _CIntRouteAttribute_cg_objectIdentifier = _CIntRouteAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CIntRouteAttribute_entriesInRange_CRoutePoint_CRoutePointPtr = _lookup<ffi.NativeFunction<_CArray_CIntRouteEntry Function(_CIntRouteAttribute, _CRoutePoint, _CRoutePoint)>>('CIntRouteAttribute_entriesInRange_CRoutePoint_CRoutePoint');
 late final _CIntRouteAttribute_entriesInRange_CRoutePoint_CRoutePoint = _CIntRouteAttribute_entriesInRange_CRoutePoint_CRoutePointPtr.asFunction<_CArray_CIntRouteEntry Function(_CIntRouteAttribute, _CRoutePoint, _CRoutePoint)>();
@@ -73090,8 +73090,8 @@ late final _CObstacleInfoRouteLongAttribute_last = _CObstacleInfoRouteLongAttrib
 late final _CObstacleInfoRouteLongAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CObstacleInfoRouteLongEntry Function(_CObstacleInfoRouteLongAttribute)>>('CObstacleInfoRouteLongAttribute_entries');
 late final _CObstacleInfoRouteLongAttribute_entries = _CObstacleInfoRouteLongAttribute_entriesPtr.asFunction<_CArray_CObstacleInfoRouteLongEntry Function(_CObstacleInfoRouteLongAttribute)>();
 
-late final _CObstacleInfoRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CObstacleInfoRouteLongAttribute_cg_objectIdentifier');
-late final _CObstacleInfoRouteLongAttribute_cg_objectIdentifier = _CObstacleInfoRouteLongAttribute_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CObstacleInfoRouteLongAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CObstacleInfoRouteLongAttribute_cg_objectIdentifier');
+late final _CObstacleInfoRouteLongAttribute_cg_objectIdentifier = _CObstacleInfoRouteLongAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CObstacleInfoRouteLongAttribute_entry_CRoutePointPtr = _lookup<ffi.NativeFunction<_COptional_CObstacleInfoRouteLongEntry Function(_CObstacleInfoRouteLongAttribute, _CRoutePoint)>>('CObstacleInfoRouteLongAttribute_entry_CRoutePoint');
 late final _CObstacleInfoRouteLongAttribute_entry_CRoutePoint = _CObstacleInfoRouteLongAttribute_entry_CRoutePointPtr.asFunction<_COptional_CObstacleInfoRouteLongEntry Function(_CObstacleInfoRouteLongAttribute, _CRoutePoint)>();
@@ -73198,8 +73198,8 @@ late final _CTruckPassZonePassMakeDefault = _CTruckPassZonePassMakeDefaultPtr.as
 late final _CTrafficRouter_truckPassZonePassesPtr = _lookup<ffi.NativeFunction<_CFuture_CArray_CTruckPassZonePass Function(_CTrafficRouter)>>('CTrafficRouter_truckPassZonePasses');
 late final _CTrafficRouter_truckPassZonePasses = _CTrafficRouter_truckPassZonePassesPtr.asFunction<_CFuture_CArray_CTruckPassZonePass Function(_CTrafficRouter)>();
 
-late final _CTrafficRouter_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CTrafficRouter_cg_objectIdentifier');
-late final _CTrafficRouter_cg_objectIdentifier = _CTrafficRouter_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CTrafficRouter_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CTrafficRouter_cg_objectIdentifier');
+late final _CTrafficRouter_cg_objectIdentifier = _CTrafficRouter_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CTrafficRouter_findRoute_CRouteSearchPoint_CRouteSearchPoint_CRouteSearchOptions_CArray_CRouteSearchPointPtr = _lookup<ffi.NativeFunction<_CFuture_CArray_CTrafficRoute Function(_CTrafficRouter, _CRouteSearchPoint, _CRouteSearchPoint, _CRouteSearchOptions, _CArray_CRouteSearchPoint)>>('CTrafficRouter_findRoute_CRouteSearchPoint_CRouteSearchPoint_CRouteSearchOptions_CArray_CRouteSearchPoint');
 late final _CTrafficRouter_findRoute_CRouteSearchPoint_CRouteSearchPoint_CRouteSearchOptions_CArray_CRouteSearchPoint = _CTrafficRouter_findRoute_CRouteSearchPoint_CRouteSearchPoint_CRouteSearchOptions_CArray_CRouteSearchPointPtr.asFunction<_CFuture_CArray_CTrafficRoute Function(_CTrafficRouter, _CRouteSearchPoint, _CRouteSearchPoint, _CRouteSearchOptions, _CArray_CRouteSearchPoint)>();
@@ -73330,8 +73330,8 @@ late final _forEach_CArray_CBriefRouteInfoSearchPoints = _forEach_CArray_CBriefR
 late final _CArray_CBriefRouteInfoSearchPoints_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CArray_CBriefRouteInfoSearchPoints)>>('CArray_CBriefRouteInfoSearchPoints_release');
 late final _CArray_CBriefRouteInfoSearchPoints_release = _CArray_CBriefRouteInfoSearchPoints_releasePtr.asFunction<void Function(_CArray_CBriefRouteInfoSearchPoints)>();
 
-late final _CTerritoriesAlongRouteProvider_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CTerritoriesAlongRouteProvider_cg_objectIdentifier');
-late final _CTerritoriesAlongRouteProvider_cg_objectIdentifier = _CTerritoriesAlongRouteProvider_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CTerritoriesAlongRouteProvider_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CTerritoriesAlongRouteProvider_cg_objectIdentifier');
+late final _CTerritoriesAlongRouteProvider_cg_objectIdentifier = _CTerritoriesAlongRouteProvider_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CTerritoriesAlongRouteProvider_getTerritories_CRoutePtr = _lookup<ffi.NativeFunction<_CFuture_CArray_CTerritory Function(_CTerritoriesAlongRouteProvider, _CRoute)>>('CTerritoriesAlongRouteProvider_getTerritories_CRoute');
 late final _CTerritoriesAlongRouteProvider_getTerritories_CRoute = _CTerritoriesAlongRouteProvider_getTerritories_CRoutePtr.asFunction<_CFuture_CArray_CTerritory Function(_CTerritoriesAlongRouteProvider, _CRoute)>();
@@ -73380,8 +73380,8 @@ late final _forEach_CArray_CTerritory = _forEach_CArray_CTerritoryPtr.asFunction
 late final _CArray_CTerritory_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CArray_CTerritory)>>('CArray_CTerritory_release');
 late final _CArray_CTerritory_release = _CArray_CTerritory_releasePtr.asFunction<void Function(_CArray_CTerritory)>();
 
-late final _CTerritory_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CTerritory_cg_objectIdentifier');
-late final _CTerritory_cg_objectIdentifier = _CTerritory_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CTerritory_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CTerritory_cg_objectIdentifier');
+late final _CTerritory_cg_objectIdentifier = _CTerritory_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CTerritory_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CTerritory_release');
@@ -73398,8 +73398,8 @@ late final _CFunction_G_routeMatchesTruckPassZonePasses_With_CTruckPassZoneIdRou
 late final _CFunction_G_getRoadMacroGraph_With_CContextPtr = _lookup<ffi.NativeFunction<_CRoadMacroGraph Function(_CContext)>>('CFunction_G_getRoadMacroGraph_With_CContext');
 late final _CFunction_G_getRoadMacroGraph_With_CContext = _CFunction_G_getRoadMacroGraph_With_CContextPtr.asFunction<_CRoadMacroGraph Function(_CContext)>();
 
-late final _CRoadMacroGraph_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CRoadMacroGraph_cg_objectIdentifier');
-late final _CRoadMacroGraph_cg_objectIdentifier = _CRoadMacroGraph_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CRoadMacroGraph_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRoadMacroGraph_cg_objectIdentifier');
+late final _CRoadMacroGraph_cg_objectIdentifier = _CRoadMacroGraph_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 
 late final _CRoadMacroGraph_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CRoadMacroGraph_release');
@@ -73416,8 +73416,8 @@ late final _CTrafficCollector_trafficCollectingAllowed = _CTrafficCollector_traf
 late final _CTrafficCollector_setTrafficCollectingAllowed_boolPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CTrafficCollector, ffi.Bool)>>('CTrafficCollector_setTrafficCollectingAllowed_bool');
 late final _CTrafficCollector_setTrafficCollectingAllowed_bool = _CTrafficCollector_setTrafficCollectingAllowed_boolPtr.asFunction<void Function(_CTrafficCollector, bool)>();
 
-late final _CTrafficCollector_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CTrafficCollector_cg_objectIdentifier');
-late final _CTrafficCollector_cg_objectIdentifier = _CTrafficCollector_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CTrafficCollector_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CTrafficCollector_cg_objectIdentifier');
+late final _CTrafficCollector_cg_objectIdentifier = _CTrafficCollector_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CTrafficCollector_C_createWith_CContextPtr = _lookup<ffi.NativeFunction<_CTrafficCollector Function(_CContext)>>('CTrafficCollector_C_createWith_CContext');
 late final _CTrafficCollector_C_createWith_CContext = _CTrafficCollector_C_createWith_CContextPtr.asFunction<_CTrafficCollector Function(_CContext)>();
@@ -73441,8 +73441,8 @@ late final _CTrafficScoreProvider_scoreChannel = _CTrafficScoreProvider_scoreCha
 late final _CTrafficScoreProvider_scorePtr = _lookup<ffi.NativeFunction<_CTrafficScore Function(_CTrafficScoreProvider)>>('CTrafficScoreProvider_score');
 late final _CTrafficScoreProvider_score = _CTrafficScoreProvider_scorePtr.asFunction<_CTrafficScore Function(_CTrafficScoreProvider)>();
 
-late final _CTrafficScoreProvider_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CTrafficScoreProvider_cg_objectIdentifier');
-late final _CTrafficScoreProvider_cg_objectIdentifier = _CTrafficScoreProvider_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CTrafficScoreProvider_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CTrafficScoreProvider_cg_objectIdentifier');
+late final _CTrafficScoreProvider_cg_objectIdentifier = _CTrafficScoreProvider_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CTrafficScoreProvider_C_createWith_CMapPtr = _lookup<ffi.NativeFunction<_CTrafficScoreProvider Function(_CMap)>>('CTrafficScoreProvider_C_createWith_CMap');
 late final _CTrafficScoreProvider_C_createWith_CMap = _CTrafficScoreProvider_C_createWith_CMapPtr.asFunction<_CTrafficScoreProvider Function(_CMap)>();
@@ -73491,8 +73491,8 @@ late final _CTrafficControlModel_stateChannel = _CTrafficControlModel_stateChann
 late final _CTrafficControlModel_statePtr = _lookup<ffi.NativeFunction<_CTrafficControlState Function(_CTrafficControlModel)>>('CTrafficControlModel_state');
 late final _CTrafficControlModel_state = _CTrafficControlModel_statePtr.asFunction<_CTrafficControlState Function(_CTrafficControlModel)>();
 
-late final _CTrafficControlModel_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CTrafficControlModel_cg_objectIdentifier');
-late final _CTrafficControlModel_cg_objectIdentifier = _CTrafficControlModel_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CTrafficControlModel_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CTrafficControlModel_cg_objectIdentifier');
+late final _CTrafficControlModel_cg_objectIdentifier = _CTrafficControlModel_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CTrafficControlModel_onClickedPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CTrafficControlModel)>>('CTrafficControlModel_onClicked');
 late final _CTrafficControlModel_onClicked = _CTrafficControlModel_onClickedPtr.asFunction<void Function(_CTrafficControlModel)>();
@@ -73553,8 +73553,8 @@ late final _CPackage_progressChannel = _CPackage_progressChannelPtr.asFunction<_
 late final _CPackage_progressPtr = _lookup<ffi.NativeFunction<ffi.Uint8 Function(_CPackage)>>('CPackage_progress');
 late final _CPackage_progress = _CPackage_progressPtr.asFunction<int Function(_CPackage)>();
 
-late final _CPackage_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CPackage_cg_objectIdentifier');
-late final _CPackage_cg_objectIdentifier = _CPackage_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CPackage_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CPackage_cg_objectIdentifier');
+late final _CPackage_cg_objectIdentifier = _CPackage_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CPackage_installPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CPackage)>>('CPackage_install');
 late final _CPackage_install = _CPackage_installPtr.asFunction<void Function(_CPackage)>();
@@ -73625,8 +73625,8 @@ late final _CPackageManager_packagesChannel = _CPackageManager_packagesChannelPt
 late final _CPackageManager_packagesPtr = _lookup<ffi.NativeFunction<_CArray_CPackage Function(_CPackageManager)>>('CPackageManager_packages');
 late final _CPackageManager_packages = _CPackageManager_packagesPtr.asFunction<_CArray_CPackage Function(_CPackageManager)>();
 
-late final _CPackageManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CPackageManager_cg_objectIdentifier');
-late final _CPackageManager_cg_objectIdentifier = _CPackageManager_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CPackageManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CPackageManager_cg_objectIdentifier');
+late final _CPackageManager_cg_objectIdentifier = _CPackageManager_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CPackageManager_checkForUpdatesPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CPackageManager)>>('CPackageManager_checkForUpdates');
 late final _CPackageManager_checkForUpdates = _CPackageManager_checkForUpdatesPtr.asFunction<void Function(_CPackageManager)>();
@@ -73683,8 +73683,8 @@ late final _CTerritoryManager_territoriesChannel = _CTerritoryManager_territorie
 late final _CTerritoryManager_territoriesPtr = _lookup<ffi.NativeFunction<_CArray_CTerritory Function(_CTerritoryManager)>>('CTerritoryManager_territories');
 late final _CTerritoryManager_territories = _CTerritoryManager_territoriesPtr.asFunction<_CArray_CTerritory Function(_CTerritoryManager)>();
 
-late final _CTerritoryManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Int64 Function(ffi.Pointer<ffi.Void>)>>('CTerritoryManager_cg_objectIdentifier');
-late final _CTerritoryManager_cg_objectIdentifier = _CTerritoryManager_cg_objectIdentifierPtr.asFunction<int Function(ffi.Pointer<ffi.Void>)>();
+late final _CTerritoryManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CTerritoryManager_cg_objectIdentifier');
+late final _CTerritoryManager_cg_objectIdentifier = _CTerritoryManager_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
 late final _CTerritoryManager_findByPoint_CGeoPointPtr = _lookup<ffi.NativeFunction<_CArray_CTerritory Function(_CTerritoryManager, _CGeoPoint)>>('CTerritoryManager_findByPoint_CGeoPoint');
 late final _CTerritoryManager_findByPoint_CGeoPoint = _CTerritoryManager_findByPoint_CGeoPointPtr.asFunction<_CArray_CTerritory Function(_CTerritoryManager, _CGeoPoint)>();

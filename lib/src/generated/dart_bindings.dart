@@ -6527,6 +6527,60 @@ extension _CChargingStationRelease on _CChargingStation {
   }
 }
 
+// MARK: - RubricId
+
+/** Идентификатор рубрики. */
+class RubricId {
+  final int value;
+
+  const RubricId([this.value = 0]);
+
+  RubricId copyWith({
+    int? value
+  }) {
+    return RubricId(
+      value ?? this.value
+    );
+  }
+  @override
+  bool operator ==(Object other) =>
+    identical(this, other) || other is RubricId &&
+    other.runtimeType == runtimeType &&
+    other.value == value;
+
+  @override
+  int get hashCode {
+    return value.hashCode;
+  }
+
+}
+final class _CRubricId extends ffi.Struct {
+  @ffi.Uint64()
+  external int value;
+
+}
+// MARK: - RubricId <-> _CRubricId
+
+extension _CRubricIdToDart on _CRubricId {
+  RubricId _toDart() {
+    return RubricId(
+      this.value
+    );
+  }
+}
+
+extension _DartTo_CRubricId on RubricId {
+  _CRubricId _copyFromDartTo_CRubricId() {
+    final res = _CRubricIdMakeDefault();
+    res.value = this.value;
+    return res;
+  }
+}
+extension _CRubricIdRelease on _CRubricId {
+  void _releaseIntermediate() {
+  }
+}
+
 // MARK: - ItemMarkerInfo
 
 /** Идентификатор объекта и его координаты. */
@@ -6547,6 +6601,12 @@ class ItemMarkerInfo implements ffi.Finalizable {
   }
   String? get title {
     _COptional_CString res = _CItemMarkerInfo_title(_CItemMarkerInfoMakeDefault().._impl=_self);
+    final t = res._toDart();
+    res._releaseIntermediate();
+    return t;
+  }
+  List<RubricId> get rubricIds {
+    _CArray_CRubricId res = _CItemMarkerInfo_rubricIds(_CItemMarkerInfoMakeDefault().._impl=_self);
     final t = res._toDart();
     res._releaseIntermediate();
     return t;
@@ -6806,6 +6866,49 @@ extension _DartTo_COptional_CFloorInfo on FloorInfo? {
     return cOptional;
   }
 }
+// MARK: - List<RubricId> <-> _CArray_CRubricId
+
+final class _CArray_CRubricId extends ffi.Struct {
+  external ffi.Pointer<ffi.Void> _impl;
+}
+
+extension _CArray_CRubricIdToDart on _CArray_CRubricId {
+  List<RubricId> _toDart() {
+    return _fillFromC();
+  }
+}
+
+extension _DartTo_CArray_CRubricId on List<RubricId> {
+  _CArray_CRubricId _copyFromDartTo_CArray_CRubricId() {
+    final cArray = _CArray_CRubricIdmakeEmpty();
+    forEach((item) {
+        final cItem = item._copyFromDartTo_CRubricId();
+        _CArray_CRubricIdaddElement(cArray, cItem);
+        
+    });
+    return cArray;
+  }
+}
+
+extension _CArray_CRubricIdBasicFunctions on _CArray_CRubricId {
+  void _releaseIntermediate() {
+    _CArray_CRubricId_release(this);
+  }
+
+  static final _listToFill = <RubricId>[];
+
+  static void _iterate(_CRubricId item) {
+    _listToFill.add(item._toDart());
+  }
+
+  List<RubricId> _fillFromC() {
+    _forEach_CArray_CRubricId(this, ffi.Pointer.fromFunction<ffi.Void Function(_CRubricId)>(_iterate));
+    final result = List<RubricId>.from(_listToFill);
+    _listToFill.clear();
+    return result;
+  }
+}
+	
 // MARK: - ObjectType
 
 /** Тип объекта справочника. */
@@ -7818,60 +7921,6 @@ extension _DartTo_CReviews on Reviews {
   }
 }
 extension _CReviewsRelease on _CReviews {
-  void _releaseIntermediate() {
-  }
-}
-
-// MARK: - RubricId
-
-/** Идентификатор рубрики. */
-class RubricId {
-  final int value;
-
-  const RubricId([this.value = 0]);
-
-  RubricId copyWith({
-    int? value
-  }) {
-    return RubricId(
-      value ?? this.value
-    );
-  }
-  @override
-  bool operator ==(Object other) =>
-    identical(this, other) || other is RubricId &&
-    other.runtimeType == runtimeType &&
-    other.value == value;
-
-  @override
-  int get hashCode {
-    return value.hashCode;
-  }
-
-}
-final class _CRubricId extends ffi.Struct {
-  @ffi.Uint64()
-  external int value;
-
-}
-// MARK: - RubricId <-> _CRubricId
-
-extension _CRubricIdToDart on _CRubricId {
-  RubricId _toDart() {
-    return RubricId(
-      this.value
-    );
-  }
-}
-
-extension _DartTo_CRubricId on RubricId {
-  _CRubricId _copyFromDartTo_CRubricId() {
-    final res = _CRubricIdMakeDefault();
-    res.value = this.value;
-    return res;
-  }
-}
-extension _CRubricIdRelease on _CRubricId {
   void _releaseIntermediate() {
   }
 }
@@ -13816,49 +13865,6 @@ extension _DartToCSearchQueryBuilder on SearchQueryBuilder {
     return (_CSearchQueryBuilderMakeDefault().._impl=_self)._retain();
   }
 }
-// MARK: - List<RubricId> <-> _CArray_CRubricId
-
-final class _CArray_CRubricId extends ffi.Struct {
-  external ffi.Pointer<ffi.Void> _impl;
-}
-
-extension _CArray_CRubricIdToDart on _CArray_CRubricId {
-  List<RubricId> _toDart() {
-    return _fillFromC();
-  }
-}
-
-extension _DartTo_CArray_CRubricId on List<RubricId> {
-  _CArray_CRubricId _copyFromDartTo_CArray_CRubricId() {
-    final cArray = _CArray_CRubricIdmakeEmpty();
-    forEach((item) {
-        final cItem = item._copyFromDartTo_CRubricId();
-        _CArray_CRubricIdaddElement(cArray, cItem);
-        
-    });
-    return cArray;
-  }
-}
-
-extension _CArray_CRubricIdBasicFunctions on _CArray_CRubricId {
-  void _releaseIntermediate() {
-    _CArray_CRubricId_release(this);
-  }
-
-  static final _listToFill = <RubricId>[];
-
-  static void _iterate(_CRubricId item) {
-    _listToFill.add(item._toDart());
-  }
-
-  List<RubricId> _fillFromC() {
-    _forEach_CArray_CRubricId(this, ffi.Pointer.fromFunction<ffi.Void Function(_CRubricId)>(_iterate));
-    final result = List<RubricId>.from(_listToFill);
-    _listToFill.clear();
-    return result;
-  }
-}
-	
 // MARK: - List<GeoPoint>? <-> _COptional_CArray_CGeoPoint
 
 final class _COptional_CArray_CGeoPoint extends ffi.Struct {
@@ -20805,6 +20811,208 @@ extension _DartTo_CImageLoader on ImageLoader {
 
 }
 
+// MARK: - AnimationSettings
+
+/**
+ Настройки анимаций объектов карты.
+ Применяются для слоев стилей, в которых указан источник модели.
+ Например, такими слоями являются слои с типами "3D model" и "Directional model".
+*/
+class AnimationSettings implements ffi.Finalizable {
+  final ffi.Pointer<ffi.Void> _self;
+
+  /**
+   Получение индекса текущей анимации модели.
+   Если null, то используется значение из стилей.
+  */
+  int? get animationIndex {
+    _COptional_int32_t res = _CAnimationSettings_animationIndex(_CAnimationSettingsMakeDefault().._impl=_self);
+    return res._toDart();
+  }
+  set animationIndex(int? index) {
+    var _a1 = index._copyFromDartTo_COptional_int32_t();
+    void res = _CAnimationSettings_setAnimationIndex_COptional_int32_t(_CAnimationSettingsMakeDefault().._impl=_self, _a1);
+    return res;
+  }
+  /**
+   Получение индекса текущей сцены модели.
+   Если null, то используется значение из стилей.
+  */
+  int? get sceneIndex {
+    _COptional_int32_t res = _CAnimationSettings_sceneIndex(_CAnimationSettingsMakeDefault().._impl=_self);
+    return res._toDart();
+  }
+  set sceneIndex(int? index) {
+    var _a1 = index._copyFromDartTo_COptional_int32_t();
+    void res = _CAnimationSettings_setSceneIndex_COptional_int32_t(_CAnimationSettingsMakeDefault().._impl=_self, _a1);
+    return res;
+  }
+  /**
+   Получение названия текущей сцены модели.
+   Если null, то используется значение из стилей.
+  */
+  String? get sceneName {
+    _COptional_CString res = _CAnimationSettings_sceneName(_CAnimationSettingsMakeDefault().._impl=_self);
+    final t = res._toDart();
+    res._releaseIntermediate();
+    return t;
+  }
+  set sceneName(String? name) {
+    var _a1 = name._copyFromDartTo_COptional_CString();
+    void res = _CAnimationSettings_setSceneName_COptional_CString(_CAnimationSettingsMakeDefault().._impl=_self, _a1);
+    _a1._releaseIntermediate();
+    return res;
+  }
+  /**
+   Получение количества повторений анимации модели.
+   Если null, то используется значение из стилей.
+  */
+  int? get animationRepeatCount {
+    _COptional_int32_t res = _CAnimationSettings_animationRepeatCount(_CAnimationSettingsMakeDefault().._impl=_self);
+    return res._toDart();
+  }
+  set animationRepeatCount(int? count) {
+    var _a1 = count._copyFromDartTo_COptional_int32_t();
+    void res = _CAnimationSettings_setAnimationRepeatCount_COptional_int32_t(_CAnimationSettingsMakeDefault().._impl=_self, _a1);
+    return res;
+  }
+  /**
+   Получение скорости проигрывания анимации модели.
+   Если null, то используется значение из стилей.
+  */
+  double? get animationSpeed {
+    _COptional_float res = _CAnimationSettings_animationSpeed(_CAnimationSettingsMakeDefault().._impl=_self);
+    return res._toDart();
+  }
+  set animationSpeed(double? speed) {
+    var _a1 = speed._copyFromDartTo_COptional_float();
+    void res = _CAnimationSettings_setAnimationSpeed_COptional_float(_CAnimationSettingsMakeDefault().._impl=_self, _a1);
+    return res;
+  }
+
+  static final _finalizer = ffi.NativeFinalizer(_CAnimationSettings_releasePtr);
+
+  AnimationSettings._raw(this._self);
+  factory AnimationSettings._create(ffi.Pointer<ffi.Void> self) {
+    final classObject = AnimationSettings._raw(self);
+    _finalizer.attach(classObject, self, detach: classObject, externalSize: 10000);
+    return classObject;
+  }
+
+  @override
+  bool operator ==(Object other) =>
+    identical(this, other) || other is AnimationSettings &&
+    other.runtimeType == runtimeType &&
+    _CAnimationSettings_cg_objectIdentifier(this._self) == _CAnimationSettings_cg_objectIdentifier(other._self);
+
+  @override
+  int get hashCode {
+    final identifier = _CAnimationSettings_cg_objectIdentifier(this._self);
+    return identifier.hashCode;
+  }
+
+}
+
+// MARK: - AnimationSettings <-> CAnimationSettings
+
+final class _CAnimationSettings extends ffi.Struct {
+  external ffi.Pointer<ffi.Void> _impl;
+}
+
+extension _CAnimationSettingsBasicFunctions on _CAnimationSettings {
+  void _releaseIntermediate() {
+    _CAnimationSettings_release(_impl);
+  }
+
+  _CAnimationSettings _retain() {
+    return _CAnimationSettings_retain(_impl);
+  }
+}
+
+extension _CAnimationSettingsToDart on _CAnimationSettings {
+  AnimationSettings _toDart() {
+    return AnimationSettings._create(_retain()._impl);
+  }
+}
+
+
+extension _DartToCAnimationSettings on AnimationSettings {
+  _CAnimationSettings _copyFromDartTo_CAnimationSettings() {
+    return (_CAnimationSettingsMakeDefault().._impl=_self)._retain();
+  }
+}
+// MARK: - int? <-> _COptional_int32_t
+
+final class _COptional_int32_t extends ffi.Struct {
+  @ffi.Int32()
+  external int value;
+  @ffi.Bool()
+  external bool hasValue;
+}
+
+extension _COptional_int32_tBasicFunctions on _COptional_int32_t {
+  void _releaseIntermediate() {
+    
+  }
+}
+
+extension _COptional_int32_tToDart on _COptional_int32_t {
+  int? _toDart() {
+    if (!this.hasValue) {
+      return null;
+    }
+    return this.value;
+  }
+}
+
+extension _DartTo_COptional_int32_t on int? {
+  _COptional_int32_t _copyFromDartTo_COptional_int32_t() {
+    final cOptional = _COptional_int32_tMakeDefault();
+    if (this != null) {
+      cOptional.value = this!;
+      cOptional.hasValue = true;
+    } else {
+      cOptional.hasValue = false;
+    }
+    return cOptional;
+  }
+}
+// MARK: - double? <-> _COptional_float
+
+final class _COptional_float extends ffi.Struct {
+  @ffi.Float()
+  external double value;
+  @ffi.Bool()
+  external bool hasValue;
+}
+
+extension _COptional_floatBasicFunctions on _COptional_float {
+  void _releaseIntermediate() {
+    
+  }
+}
+
+extension _COptional_floatToDart on _COptional_float {
+  double? _toDart() {
+    if (!this.hasValue) {
+      return null;
+    }
+    return this.value;
+  }
+}
+
+extension _DartTo_COptional_float on double? {
+  _COptional_float _copyFromDartTo_COptional_float() {
+    final cOptional = _COptional_floatMakeDefault();
+    if (this != null) {
+      cOptional.value = this!;
+      cOptional.hasValue = true;
+    } else {
+      cOptional.hasValue = false;
+    }
+    return cOptional;
+  }
+}
 // MARK: - BearingFollowController
 
 /** Контроллер слежения за направлением карты. */
@@ -20948,61 +21156,6 @@ extension _CCoordinatesFollowControllerToDart on _CCoordinatesFollowController {
 extension _DartToCCoordinatesFollowController on CoordinatesFollowController {
   _CCoordinatesFollowController _copyFromDartTo_CCoordinatesFollowController() {
     return (_CCoordinatesFollowControllerMakeDefault().._impl=_self)._retain();
-  }
-}
-// MARK: - MyLocationMapObject
-
-/** Маркер геопозиции. */
-class MyLocationMapObject extends MapObject implements ffi.Finalizable {
-  static final _finalizer = ffi.NativeFinalizer(_CMyLocationMapObject_releasePtr);
-
-  MyLocationMapObject._raw(ffi.Pointer<ffi.Void> p) : super._raw(p);
-  factory MyLocationMapObject._create(ffi.Pointer<ffi.Void> self) {
-    final classObject = MyLocationMapObject._raw(self);
-    _finalizer.attach(classObject, self, detach: classObject, externalSize: 10000);
-    return classObject;
-  }
-
-  @override
-  bool operator ==(Object other) =>
-    identical(this, other) || other is MyLocationMapObject &&
-    other.runtimeType == runtimeType &&
-    _CMyLocationMapObject_cg_objectIdentifier(this._self) == _CMyLocationMapObject_cg_objectIdentifier(other._self);
-
-  @override
-  int get hashCode {
-    final identifier = _CMyLocationMapObject_cg_objectIdentifier(this._self);
-    return identifier.hashCode;
-  }
-
-}
-
-// MARK: - MyLocationMapObject <-> CMyLocationMapObject
-
-final class _CMyLocationMapObject extends ffi.Struct {
-  external ffi.Pointer<ffi.Void> _impl;
-}
-
-extension _CMyLocationMapObjectBasicFunctions on _CMyLocationMapObject {
-  void _releaseIntermediate() {
-    _CMyLocationMapObject_release(_impl);
-  }
-
-  _CMyLocationMapObject _retain() {
-    return _CMyLocationMapObject_retain(_impl);
-  }
-}
-
-extension _CMyLocationMapObjectToDart on _CMyLocationMapObject {
-  MyLocationMapObject _toDart() {
-    return MyLocationMapObject._create(_retain()._impl);
-  }
-}
-
-
-extension _DartToCMyLocationMapObject on MyLocationMapObject {
-  _CMyLocationMapObject _copyFromDartTo_CMyLocationMapObject() {
-    return (_CMyLocationMapObjectMakeDefault().._impl=_self)._retain();
   }
 }
 // MARK: - BearingSource? <-> _COptional_CBearingSource
@@ -21171,6 +21324,76 @@ extension _DartTo_CMyLocationMapObjectMarkerType on MyLocationMapObjectMarkerTyp
   }
 }
 	
+// MARK: - MyLocationMapObject
+
+/** Маркер геопозиции. */
+class MyLocationMapObject extends MapObject implements ffi.Finalizable {
+  /** Получение настроек анимации для чтения и изменения. */
+  AnimationSettings get animationSettings {
+    _CAnimationSettings res = _CMyLocationMapObject_animationSettings(_CMyLocationMapObjectMakeDefault().._impl=_self);
+    final t = res._toDart();
+    res._releaseIntermediate();
+    return t;
+  }
+  /** Получение свойств объекта карты для чтения и изменения. */
+  Attributes get objectAttributes {
+    _CAttributes res = _CMyLocationMapObject_objectAttributes(_CMyLocationMapObjectMakeDefault().._impl=_self);
+    final t = res._toDart();
+    res._releaseIntermediate();
+    return t;
+  }
+
+  static final _finalizer = ffi.NativeFinalizer(_CMyLocationMapObject_releasePtr);
+
+  MyLocationMapObject._raw(ffi.Pointer<ffi.Void> p) : super._raw(p);
+  factory MyLocationMapObject._create(ffi.Pointer<ffi.Void> self) {
+    final classObject = MyLocationMapObject._raw(self);
+    _finalizer.attach(classObject, self, detach: classObject, externalSize: 10000);
+    return classObject;
+  }
+
+  @override
+  bool operator ==(Object other) =>
+    identical(this, other) || other is MyLocationMapObject &&
+    other.runtimeType == runtimeType &&
+    _CMyLocationMapObject_cg_objectIdentifier(this._self) == _CMyLocationMapObject_cg_objectIdentifier(other._self);
+
+  @override
+  int get hashCode {
+    final identifier = _CMyLocationMapObject_cg_objectIdentifier(this._self);
+    return identifier.hashCode;
+  }
+
+}
+
+// MARK: - MyLocationMapObject <-> CMyLocationMapObject
+
+final class _CMyLocationMapObject extends ffi.Struct {
+  external ffi.Pointer<ffi.Void> _impl;
+}
+
+extension _CMyLocationMapObjectBasicFunctions on _CMyLocationMapObject {
+  void _releaseIntermediate() {
+    _CMyLocationMapObject_release(_impl);
+  }
+
+  _CMyLocationMapObject _retain() {
+    return _CMyLocationMapObject_retain(_impl);
+  }
+}
+
+extension _CMyLocationMapObjectToDart on _CMyLocationMapObject {
+  MyLocationMapObject _toDart() {
+    return MyLocationMapObject._create(_retain()._impl);
+  }
+}
+
+
+extension _DartToCMyLocationMapObject on MyLocationMapObject {
+  _CMyLocationMapObject _copyFromDartTo_CMyLocationMapObject() {
+    return (_CMyLocationMapObjectMakeDefault().._impl=_self)._retain();
+  }
+}
 // MARK: - MyLocationMapObjectSource
 
 /** Источник, содержащий маркер геопозиции. */
@@ -21259,6 +21482,13 @@ class RoadEventMapObject extends MapObject implements ffi.Finalizable {
   /** Получение дорожного события. */
   RoadEvent get event {
     _CRoadEvent res = _CRoadEventMapObject_event(_CRoadEventMapObjectMakeDefault().._impl=_self);
+    final t = res._toDart();
+    res._releaseIntermediate();
+    return t;
+  }
+  /** Получение настроек анимации дорожных событий для чтения и изменения. */
+  AnimationSettings get animationSettings {
+    _CAnimationSettings res = _CRoadEventMapObject_animationSettings(_CRoadEventMapObjectMakeDefault().._impl=_self);
     final t = res._toDart();
     res._releaseIntermediate();
     return t;
@@ -21374,6 +21604,13 @@ class RoadEvent implements ffi.Finalizable {
   RoadEventType get type {
     _CRoadEventType res = _CRoadEvent_type(_CRoadEventMakeDefault().._impl=_self);
     return res._toDart();
+  }
+  /** Идентификатор события. */
+  String get id {
+    _CString res = _CRoadEvent_id(_CRoadEventMakeDefault().._impl=_self);
+    final t = res._toDart();
+    res._releaseIntermediate();
+    return t;
   }
   /** Локализованное название события. */
   String get name {
@@ -24651,6 +24888,51 @@ extension _CStyleLayerIdRelease on _CStyleLayerId {
   }
 }
 
+// MARK: - TextHorizontalAlignment
+
+/** Выравнивание надписи по горизонтали. */
+enum TextHorizontalAlignment {
+  /** Автоматическое выравнивание. */
+  auto(0),
+  /** Выравнивание по центру. */
+  center(1),
+  /** Выравнивание по левому краю. */
+  left(2),
+  /** Выравнивание по правому краю. */
+  right(3),
+  ;
+
+  const TextHorizontalAlignment(this.rawValue);
+  final int rawValue;
+
+  static TextHorizontalAlignment getByValue(int value) {
+    return TextHorizontalAlignment.values.firstWhere((x) => x.rawValue == value);
+  }
+}
+
+
+final class _CTextHorizontalAlignment extends ffi.Struct {
+  @ffi.Uint32()
+  external int rawValue;
+}
+
+extension _CTextHorizontalAlignmentBasicFunctions on _CTextHorizontalAlignment {
+  void _releaseIntermediate() {
+  }
+}
+
+extension _CTextHorizontalAlignmentToDart on _CTextHorizontalAlignment {
+  TextHorizontalAlignment _toDart() {
+    return TextHorizontalAlignment.getByValue(this.rawValue);
+  }
+}
+
+extension _DartTo_CTextHorizontalAlignment on TextHorizontalAlignment {
+  _CTextHorizontalAlignment _copyFromDartTo_CTextHorizontalAlignment() {
+    return _CTextHorizontalAlignmentMakeDefault()..rawValue = this.rawValue;
+  }
+}
+	
 // MARK: - TextPlacement
 
 /**
@@ -24740,6 +25022,7 @@ class TextStyle {
   final Color color;
   final LogicalPixel strokeWidth;
   final Color strokeColor;
+  final TextHorizontalAlignment textHorizontalAlignment;
   final TextPlacement textPlacement;
   final LogicalPixel textOffset;
   final String? fontName;
@@ -24749,6 +25032,7 @@ class TextStyle {
     this.color = const Color(),
     this.strokeWidth = const LogicalPixel(0.3499999940395355),
     this.strokeColor = const Color(4294967295),
+    this.textHorizontalAlignment = TextHorizontalAlignment.auto,
     this.textPlacement = TextPlacement.bottomCenter,
     this.textOffset = const LogicalPixel(0),
     this.fontName = null
@@ -24759,6 +25043,7 @@ class TextStyle {
     Color? color,
     LogicalPixel? strokeWidth,
     Color? strokeColor,
+    TextHorizontalAlignment? textHorizontalAlignment,
     TextPlacement? textPlacement,
     LogicalPixel? textOffset,
     Optional<String?>? fontName
@@ -24768,6 +25053,7 @@ class TextStyle {
       color: color ?? this.color,
       strokeWidth: strokeWidth ?? this.strokeWidth,
       strokeColor: strokeColor ?? this.strokeColor,
+      textHorizontalAlignment: textHorizontalAlignment ?? this.textHorizontalAlignment,
       textPlacement: textPlacement ?? this.textPlacement,
       textOffset: textOffset ?? this.textOffset,
       fontName: fontName != null ? fontName.value : this.fontName
@@ -24781,13 +25067,14 @@ class TextStyle {
     other.color == color &&
     other.strokeWidth == strokeWidth &&
     other.strokeColor == strokeColor &&
+    other.textHorizontalAlignment == textHorizontalAlignment &&
     other.textPlacement == textPlacement &&
     other.textOffset == textOffset &&
     other.fontName == fontName;
 
   @override
   int get hashCode {
-    return Object.hash(fontSize, color, strokeWidth, strokeColor, textPlacement, textOffset, fontName);
+    return Object.hash(fontSize, color, strokeWidth, strokeColor, textHorizontalAlignment, textPlacement, textOffset, fontName);
   }
 
 }
@@ -24799,6 +25086,8 @@ final class _CTextStyle extends ffi.Struct {
   external _CLogicalPixel strokeWidth;
 
   external _CColor strokeColor;
+
+  external _CTextHorizontalAlignment textHorizontalAlignment;
 
   external _CTextPlacement textPlacement;
 
@@ -24816,6 +25105,7 @@ extension _CTextStyleToDart on _CTextStyle {
       color: this.color._toDart(),
       strokeWidth: this.strokeWidth._toDart(),
       strokeColor: this.strokeColor._toDart(),
+      textHorizontalAlignment: this.textHorizontalAlignment._toDart(),
       textPlacement: this.textPlacement._toDart(),
       textOffset: this.textOffset._toDart(),
       fontName: this.fontName._toDart()
@@ -24830,6 +25120,7 @@ extension _DartTo_CTextStyle on TextStyle {
     res.color = this.color._copyFromDartTo_CColor();
     res.strokeWidth = this.strokeWidth._copyFromDartTo_CLogicalPixel();
     res.strokeColor = this.strokeColor._copyFromDartTo_CColor();
+    res.textHorizontalAlignment = this.textHorizontalAlignment._copyFromDartTo_CTextHorizontalAlignment();
     res.textPlacement = this.textPlacement._copyFromDartTo_CTextPlacement();
     res.textOffset = this.textOffset._copyFromDartTo_CLogicalPixel();
     res.fontName = this.fontName._copyFromDartTo_COptional_CString();
@@ -34087,6 +34378,112 @@ extension _DartToCRasterTileSource on RasterTileSource {
     return (_CRasterTileSourceMakeDefault().._impl=_self)._retain();
   }
 }
+// MARK: - ParkingControlModel
+
+/**
+ Модель контрола парковок.
+
+ - Note: Этот интерфейс является потокобезопасным.
+*/
+class ParkingControlModel implements ffi.Finalizable {
+  final ffi.Pointer<ffi.Void> _self;
+
+  /**
+   Состояние элемента управления видимостью парковок.
+   true, если парковки видны.
+  */
+  StatefulChannel<bool> get isEnabledChannel {
+    _CStatefulChannel_bool res = _CParkingControlModel_isEnabledChannel(_CParkingControlModelMakeDefault().._impl=_self);
+    final t = res._toDart();
+    res._releaseIntermediate();
+    return t;
+  }
+  /**
+   Состояние элемента управления видимостью парковок.
+   true, если парковки видны.
+  */
+  bool get isEnabled {
+    bool res = _CParkingControlModel_isEnabled(_CParkingControlModelMakeDefault().._impl=_self);
+    return res;
+  }
+
+  static final _finalizer = ffi.NativeFinalizer(_CParkingControlModel_releasePtr);
+
+  ParkingControlModel._raw(this._self);
+  factory ParkingControlModel._create(ffi.Pointer<ffi.Void> self) {
+    final classObject = ParkingControlModel._raw(self);
+    _finalizer.attach(classObject, self, detach: classObject, externalSize: 10000);
+    return classObject;
+  }
+
+  /**
+   Функция создания модели элемента управления парковками.
+  
+   - Parameter map: карта.
+   - Returns: Модель элемента управления видимостью парковок для карты.
+  */
+  factory ParkingControlModel(
+    Map map
+  ) {
+    var _a0 = map._copyFromDartTo_CMap();
+    _CParkingControlModel res = _CParkingControlModel_C_createWith_CMap(_a0);
+    _a0._releaseIntermediate();
+    return ParkingControlModel._create(res._impl);
+  }
+
+  @override
+  bool operator ==(Object other) =>
+    identical(this, other) || other is ParkingControlModel &&
+    other.runtimeType == runtimeType &&
+    _CParkingControlModel_cg_objectIdentifier(this._self) == _CParkingControlModel_cg_objectIdentifier(other._self);
+
+  @override
+  int get hashCode {
+    final identifier = _CParkingControlModel_cg_objectIdentifier(this._self);
+    return identifier.hashCode;
+  }
+
+  // MARK: ParkingControlModel: Methods
+
+  /**
+   Действие при нажатии на контрол.
+   Переключает видимость парковок на карте.
+  */
+  void toggleParkingsVisibility()  {
+    void res = _CParkingControlModel_toggleParkingsVisibility(_CParkingControlModelMakeDefault().._impl=_self);
+    return res;
+  }
+
+}
+
+// MARK: - ParkingControlModel <-> CParkingControlModel
+
+final class _CParkingControlModel extends ffi.Struct {
+  external ffi.Pointer<ffi.Void> _impl;
+}
+
+extension _CParkingControlModelBasicFunctions on _CParkingControlModel {
+  void _releaseIntermediate() {
+    _CParkingControlModel_release(_impl);
+  }
+
+  _CParkingControlModel _retain() {
+    return _CParkingControlModel_retain(_impl);
+  }
+}
+
+extension _CParkingControlModelToDart on _CParkingControlModel {
+  ParkingControlModel _toDart() {
+    return ParkingControlModel._create(_retain()._impl);
+  }
+}
+
+
+extension _DartToCParkingControlModel on ParkingControlModel {
+  _CParkingControlModel _copyFromDartTo_CParkingControlModel() {
+    return (_CParkingControlModelMakeDefault().._impl=_self)._retain();
+  }
+}
 // MARK: - PackedMapState
 
 /** Сериализованное состояние карты. */
@@ -35127,6 +35524,20 @@ class RouteMapObject extends MapObject implements ffi.Finalizable {
   */
   List<LanesCalloutMapPosition> get lanesCalloutPositions {
     _CArray_CLanesCalloutMapPosition res = _CRouteMapObject_lanesCalloutPositions(_CRouteMapObjectMakeDefault().._impl=_self);
+    final t = res._toDart();
+    res._releaseIntermediate();
+    return t;
+  }
+  /** Отображаемые на карте объекты дорожных событий вдоль маршрута. */
+  StatefulChannel<RoadEventMapObjectRouteAttribute> get roadEventObjectsChannel {
+    _CStatefulChannel_CRoadEventMapObjectRouteAttribute res = _CRouteMapObject_roadEventObjectsChannel(_CRouteMapObjectMakeDefault().._impl=_self);
+    final t = res._toDart();
+    res._releaseIntermediate();
+    return t;
+  }
+  /** Отображаемые на карте объекты дорожных событий вдоль маршрута. */
+  RoadEventMapObjectRouteAttribute get roadEventObjects {
+    _CRoadEventMapObjectRouteAttribute res = _CRouteMapObject_roadEventObjects(_CRouteMapObjectMakeDefault().._impl=_self);
     final t = res._toDart();
     res._releaseIntermediate();
     return t;
@@ -40692,42 +41103,6 @@ extension _DartTo_CRouteCameraDirection on RouteCameraDirection {
   }
 }
 	
-// MARK: - double? <-> _COptional_float
-
-final class _COptional_float extends ffi.Struct {
-  @ffi.Float()
-  external double value;
-  @ffi.Bool()
-  external bool hasValue;
-}
-
-extension _COptional_floatBasicFunctions on _COptional_float {
-  void _releaseIntermediate() {
-    
-  }
-}
-
-extension _COptional_floatToDart on _COptional_float {
-  double? _toDart() {
-    if (!this.hasValue) {
-      return null;
-    }
-    return this.value;
-  }
-}
-
-extension _DartTo_COptional_float on double? {
-  _COptional_float _copyFromDartTo_COptional_float() {
-    final cOptional = _COptional_floatMakeDefault();
-    if (this != null) {
-      cOptional.value = this!;
-      cOptional.hasValue = true;
-    } else {
-      cOptional.hasValue = false;
-    }
-    return cOptional;
-  }
-}
 // MARK: - RouteCamera
 
 /** Структура, описывающая дорожную камеру. */
@@ -50524,6 +50899,379 @@ extension _CArray_CLanesCalloutMapPositionBasicFunctions on _CArray_CLanesCallou
   }
 }
 	
+// MARK: - StatefulChannel<RoadEventMapObjectRouteAttribute> <-> _CStatefulChannel_CRoadEventMapObjectRouteAttribute
+
+class _CStatefulChannel_CRoadEventMapObjectRouteAttributeImpl extends StatefulChannel<RoadEventMapObjectRouteAttribute> {
+  static int instanceCounter = 0;
+  static final instanceMap = <int, StreamController<RoadEventMapObjectRouteAttribute>>{};
+
+  final _CStatefulChannel_CRoadEventMapObjectRouteAttribute _channel;
+
+  _CStatefulChannel_CRoadEventMapObjectRouteAttributeImpl(this._channel);
+
+  @override
+  RoadEventMapObjectRouteAttribute get value {
+    return this._channel._getter();
+  }
+
+  static void valueFunction(_CRoadEventMapObjectRouteAttribute cValue, int instanceId) {
+    final instance = instanceMap[instanceId];
+    if (instance != null) {
+      instance.add(cValue._toDart());
+    }
+    cValue._releaseIntermediate();
+  }
+
+  @override
+  StreamSubscription<RoadEventMapObjectRouteAttribute> listen(void onData(RoadEventMapObjectRouteAttribute event)?,
+      {Function? onError, void onDone()?, bool? cancelOnError}) {
+    final instanceId = instanceCounter;
+    instanceCounter += 1;
+    final valueFunctionCallable = ffi.NativeCallable<ffi.Void Function(_CRoadEventMapObjectRouteAttribute, ffi.Int64)>.listener(valueFunction);
+    final cCancel = this._channel._connect(instanceId, valueFunctionCallable);
+    final cancellable = cCancel._retain();
+    cCancel._releaseIntermediate();
+    final streamController = new StreamController<RoadEventMapObjectRouteAttribute>(
+      onCancel: () {
+        cancellable._cancel();
+        instanceMap.remove(instanceId);
+      },
+    );
+    instanceMap[instanceId] = streamController;
+    return streamController.stream.listen(
+      onData,
+      onError: onError,
+      onDone: onDone,
+      cancelOnError: cancelOnError
+    );
+  }
+}
+
+final class _CStatefulChannel_CRoadEventMapObjectRouteAttribute extends ffi.Struct {
+  external ffi.Pointer<ffi.Void> _impl;
+}
+
+extension _CStatefulChannel_CRoadEventMapObjectRouteAttributeBasicFunctions on _CStatefulChannel_CRoadEventMapObjectRouteAttribute {
+  void _releaseIntermediate() {
+    _CStatefulChannel_CRoadEventMapObjectRouteAttribute_release(this);
+  }
+
+  _CStatefulChannel_CRoadEventMapObjectRouteAttribute _retain() {
+    return _CStatefulChannel_CRoadEventMapObjectRouteAttribute_retain(this);
+  }
+
+  RoadEventMapObjectRouteAttribute _getter() {
+    final cValue = _CStatefulChannel_CRoadEventMapObjectRouteAttributeGetCurrentValue(this);
+    final res = cValue._toDart();
+    cValue._releaseIntermediate();
+    return res;
+  }
+
+  _CCancellable _connect(int instanceId,
+      ffi.NativeCallable<ffi.Void Function(_CRoadEventMapObjectRouteAttribute, ffi.Int64)> callback) {
+    return _CStatefulChannel_CRoadEventMapObjectRouteAttributeConnect(this, instanceId, callback.nativeFunction);
+  }
+}
+
+extension _CStatefulChannel_CRoadEventMapObjectRouteAttributeToDart on _CStatefulChannel_CRoadEventMapObjectRouteAttribute {
+  StatefulChannel<RoadEventMapObjectRouteAttribute> _toDart() {
+    return _CStatefulChannel_CRoadEventMapObjectRouteAttributeImpl(this._retain());
+  }
+}
+
+extension _DartTo_CStatefulChannel_CRoadEventMapObjectRouteAttribute on StatefulChannel<RoadEventMapObjectRouteAttribute> {
+  _CStatefulChannel_CRoadEventMapObjectRouteAttribute _copyFromDartTo_CStatefulChannel_CRoadEventMapObjectRouteAttribute() {
+    return _CStatefulChannel_CRoadEventMapObjectRouteAttributeMakeDefault();
+  }
+}
+	
+// MARK: - RoadEventMapObjectRouteAttribute
+
+/**
+ Контейнер, который описывает точечный атрибут маршрута.
+ Каждый элемент хранится в виде точки на маршруте, в которой этот элемент расположен и значения самого элемента.
+*/
+class RoadEventMapObjectRouteAttribute implements ffi.Finalizable {
+  final ffi.Pointer<ffi.Void> _self;
+
+  /** Количество элементов. */
+  int get size {
+    int res = _CRoadEventMapObjectRouteAttribute_size(_CRoadEventMapObjectRouteAttributeMakeDefault().._impl=_self);
+    return res;
+  }
+  /** Элементы отсутствуют. */
+  bool get isEmpty {
+    bool res = _CRoadEventMapObjectRouteAttribute_isEmpty(_CRoadEventMapObjectRouteAttributeMakeDefault().._impl=_self);
+    return res;
+  }
+  /** Первый элемент. */
+  RoadEventMapObjectRouteEntry? get first {
+    _COptional_CRoadEventMapObjectRouteEntry res = _CRoadEventMapObjectRouteAttribute_first(_CRoadEventMapObjectRouteAttributeMakeDefault().._impl=_self);
+    final t = res._toDart();
+    res._releaseIntermediate();
+    return t;
+  }
+  /** Последний элемент. */
+  RoadEventMapObjectRouteEntry? get last {
+    _COptional_CRoadEventMapObjectRouteEntry res = _CRoadEventMapObjectRouteAttribute_last(_CRoadEventMapObjectRouteAttributeMakeDefault().._impl=_self);
+    final t = res._toDart();
+    res._releaseIntermediate();
+    return t;
+  }
+  /** Все элементы. */
+  List<RoadEventMapObjectRouteEntry> get entries {
+    _CArray_CRoadEventMapObjectRouteEntry res = _CRoadEventMapObjectRouteAttribute_entries(_CRoadEventMapObjectRouteAttributeMakeDefault().._impl=_self);
+    final t = res._toDart();
+    res._releaseIntermediate();
+    return t;
+  }
+
+  static final _finalizer = ffi.NativeFinalizer(_CRoadEventMapObjectRouteAttribute_releasePtr);
+
+  RoadEventMapObjectRouteAttribute._raw(this._self);
+  factory RoadEventMapObjectRouteAttribute._create(ffi.Pointer<ffi.Void> self) {
+    final classObject = RoadEventMapObjectRouteAttribute._raw(self);
+    _finalizer.attach(classObject, self, detach: classObject, externalSize: 10000);
+    return classObject;
+  }
+
+  @override
+  bool operator ==(Object other) =>
+    identical(this, other) || other is RoadEventMapObjectRouteAttribute &&
+    other.runtimeType == runtimeType &&
+    _CRoadEventMapObjectRouteAttribute_cg_objectIdentifier(this._self) == _CRoadEventMapObjectRouteAttribute_cg_objectIdentifier(other._self);
+
+  @override
+  int get hashCode {
+    final identifier = _CRoadEventMapObjectRouteAttribute_cg_objectIdentifier(this._self);
+    return identifier.hashCode;
+  }
+
+  // MARK: RoadEventMapObjectRouteAttribute: Methods
+
+  /**
+   Элементы, попадающие в отрезок [begin, end).
+  
+   - Throws: Exception если begin > end.
+  */
+  List<RoadEventMapObjectRouteEntry> entriesInRange(
+    RoutePoint begin,
+    RoutePoint end
+  )  {
+    var _a1 = begin._copyFromDartTo_CRoutePoint();
+    var _a2 = end._copyFromDartTo_CRoutePoint();
+    _CArray_CRoadEventMapObjectRouteEntry res = _CRoadEventMapObjectRouteAttribute_entriesInRange_CRoutePoint_CRoutePoint(_CRoadEventMapObjectRouteAttributeMakeDefault().._impl=_self, _a1, _a2);
+    final t = res._toDart();
+    res._releaseIntermediate();
+    return t;
+  }
+
+  /**
+   Найти ближайший элемент, позиция которого
+   <
+   = point.
+  
+   - Note: Сложность операции log2(N), где N = size.
+  */
+  RoadEventMapObjectRouteEntry? findNearBackward(
+    RoutePoint point
+  )  {
+    var _a1 = point._copyFromDartTo_CRoutePoint();
+    _COptional_CRoadEventMapObjectRouteEntry res = _CRoadEventMapObjectRouteAttribute_findNearBackward_CRoutePoint(_CRoadEventMapObjectRouteAttributeMakeDefault().._impl=_self, _a1);
+    final t = res._toDart();
+    res._releaseIntermediate();
+    return t;
+  }
+
+  /**
+   Найти ближайший элемент, позиция которого >= point.
+  
+   - Note: Сложность операции log2(N), где N = size.
+  */
+  RoadEventMapObjectRouteEntry? findNearForward(
+    RoutePoint point
+  )  {
+    var _a1 = point._copyFromDartTo_CRoutePoint();
+    _COptional_CRoadEventMapObjectRouteEntry res = _CRoadEventMapObjectRouteAttribute_findNearForward_CRoutePoint(_CRoadEventMapObjectRouteAttributeMakeDefault().._impl=_self, _a1);
+    final t = res._toDart();
+    res._releaseIntermediate();
+    return t;
+  }
+
+}
+
+// MARK: - RoadEventMapObjectRouteAttribute <-> CRoadEventMapObjectRouteAttribute
+
+final class _CRoadEventMapObjectRouteAttribute extends ffi.Struct {
+  external ffi.Pointer<ffi.Void> _impl;
+}
+
+extension _CRoadEventMapObjectRouteAttributeBasicFunctions on _CRoadEventMapObjectRouteAttribute {
+  void _releaseIntermediate() {
+    _CRoadEventMapObjectRouteAttribute_release(_impl);
+  }
+
+  _CRoadEventMapObjectRouteAttribute _retain() {
+    return _CRoadEventMapObjectRouteAttribute_retain(_impl);
+  }
+}
+
+extension _CRoadEventMapObjectRouteAttributeToDart on _CRoadEventMapObjectRouteAttribute {
+  RoadEventMapObjectRouteAttribute _toDart() {
+    return RoadEventMapObjectRouteAttribute._create(_retain()._impl);
+  }
+}
+
+
+extension _DartToCRoadEventMapObjectRouteAttribute on RoadEventMapObjectRouteAttribute {
+  _CRoadEventMapObjectRouteAttribute _copyFromDartTo_CRoadEventMapObjectRouteAttribute() {
+    return (_CRoadEventMapObjectRouteAttributeMakeDefault().._impl=_self)._retain();
+  }
+}
+// MARK: - RoadEventMapObjectRouteEntry
+
+/** Элемент маршрута - точка и значение в ней. */
+class RoadEventMapObjectRouteEntry {
+  final RoutePoint point;
+  final RoadEventMapObject value;
+
+  const RoadEventMapObjectRouteEntry({
+    required this.point,
+    required this.value
+  });
+
+  RoadEventMapObjectRouteEntry copyWith({
+    RoutePoint? point,
+    RoadEventMapObject? value
+  }) {
+    return RoadEventMapObjectRouteEntry(
+      point: point ?? this.point,
+      value: value ?? this.value
+    );
+  }
+  @override
+  bool operator ==(Object other) =>
+    identical(this, other) || other is RoadEventMapObjectRouteEntry &&
+    other.runtimeType == runtimeType &&
+    other.point == point &&
+    other.value == value;
+
+  @override
+  int get hashCode {
+    return Object.hash(point, value);
+  }
+
+}
+final class _CRoadEventMapObjectRouteEntry extends ffi.Struct {
+  external _CRoutePoint point;
+
+  external _CRoadEventMapObject value;
+
+}
+// MARK: - RoadEventMapObjectRouteEntry <-> _CRoadEventMapObjectRouteEntry
+
+extension _CRoadEventMapObjectRouteEntryToDart on _CRoadEventMapObjectRouteEntry {
+  RoadEventMapObjectRouteEntry _toDart() {
+    return RoadEventMapObjectRouteEntry(
+      point: this.point._toDart(),
+      value: this.value._toDart()
+    );
+  }
+}
+
+extension _DartTo_CRoadEventMapObjectRouteEntry on RoadEventMapObjectRouteEntry {
+  _CRoadEventMapObjectRouteEntry _copyFromDartTo_CRoadEventMapObjectRouteEntry() {
+    final res = _CRoadEventMapObjectRouteEntryMakeDefault();
+    res.point = this.point._copyFromDartTo_CRoutePoint();
+    res.value = this.value._copyFromDartTo_CRoadEventMapObject();
+    return res;
+  }
+}
+extension _CRoadEventMapObjectRouteEntryRelease on _CRoadEventMapObjectRouteEntry {
+  void _releaseIntermediate() {
+    value._releaseIntermediate();
+  }
+}
+
+// MARK: - RoadEventMapObjectRouteEntry? <-> _COptional_CRoadEventMapObjectRouteEntry
+
+final class _COptional_CRoadEventMapObjectRouteEntry extends ffi.Struct {
+  
+  external _CRoadEventMapObjectRouteEntry value;
+  @ffi.Bool()
+  external bool hasValue;
+}
+
+extension _COptional_CRoadEventMapObjectRouteEntryBasicFunctions on _COptional_CRoadEventMapObjectRouteEntry {
+  void _releaseIntermediate() {
+    _COptional_CRoadEventMapObjectRouteEntry_release(this);
+  }
+}
+
+extension _COptional_CRoadEventMapObjectRouteEntryToDart on _COptional_CRoadEventMapObjectRouteEntry {
+  RoadEventMapObjectRouteEntry? _toDart() {
+    if (!this.hasValue) {
+      return null;
+    }
+    return this.value._toDart();
+  }
+}
+
+extension _DartTo_COptional_CRoadEventMapObjectRouteEntry on RoadEventMapObjectRouteEntry? {
+  _COptional_CRoadEventMapObjectRouteEntry _copyFromDartTo_COptional_CRoadEventMapObjectRouteEntry() {
+    final cOptional = _COptional_CRoadEventMapObjectRouteEntryMakeDefault();
+    if (this != null) {
+      cOptional.value = this!._copyFromDartTo_CRoadEventMapObjectRouteEntry();
+      cOptional.hasValue = true;
+    } else {
+      cOptional.hasValue = false;
+    }
+    return cOptional;
+  }
+}
+// MARK: - List<RoadEventMapObjectRouteEntry> <-> _CArray_CRoadEventMapObjectRouteEntry
+
+final class _CArray_CRoadEventMapObjectRouteEntry extends ffi.Struct {
+  external ffi.Pointer<ffi.Void> _impl;
+}
+
+extension _CArray_CRoadEventMapObjectRouteEntryToDart on _CArray_CRoadEventMapObjectRouteEntry {
+  List<RoadEventMapObjectRouteEntry> _toDart() {
+    return _fillFromC();
+  }
+}
+
+extension _DartTo_CArray_CRoadEventMapObjectRouteEntry on List<RoadEventMapObjectRouteEntry> {
+  _CArray_CRoadEventMapObjectRouteEntry _copyFromDartTo_CArray_CRoadEventMapObjectRouteEntry() {
+    final cArray = _CArray_CRoadEventMapObjectRouteEntrymakeEmpty();
+    forEach((item) {
+        final cItem = item._copyFromDartTo_CRoadEventMapObjectRouteEntry();
+        _CArray_CRoadEventMapObjectRouteEntryaddElement(cArray, cItem);
+        cItem._releaseIntermediate();
+    });
+    return cArray;
+  }
+}
+
+extension _CArray_CRoadEventMapObjectRouteEntryBasicFunctions on _CArray_CRoadEventMapObjectRouteEntry {
+  void _releaseIntermediate() {
+    _CArray_CRoadEventMapObjectRouteEntry_release(this);
+  }
+
+  static final _listToFill = <RoadEventMapObjectRouteEntry>[];
+
+  static void _iterate(_CRoadEventMapObjectRouteEntry item) {
+    _listToFill.add(item._toDart());
+  }
+
+  List<RoadEventMapObjectRouteEntry> _fillFromC() {
+    _forEach_CArray_CRoadEventMapObjectRouteEntry(this, ffi.Pointer.fromFunction<ffi.Void Function(_CRoadEventMapObjectRouteEntry)>(_iterate));
+    final result = List<RoadEventMapObjectRouteEntry>.from(_listToFill);
+    _listToFill.clear();
+    return result;
+  }
+}
+	
 // MARK: - RouteSourceSettings
 
 /** Настройки источника маршрута. */
@@ -55475,6 +56223,164 @@ extension _DartToCRouteMapSettings on RouteMapSettings {
     return (_CRouteMapSettingsMakeDefault().._impl=_self)._retain();
   }
 }
+// MARK: - RouteMapObjectsProvider
+
+/** Интерфейс для получения объектов маршрута на карте. */
+class RouteMapObjectsProvider implements ffi.Finalizable {
+  final ffi.Pointer<ffi.Void> _self;
+
+  /** Объекты маршрута на карте. */
+  StatefulChannel<List<RouteMapObject>> get objectsChannel {
+    _CStatefulChannel_CArray_CRouteMapObject res = _CRouteMapObjectsProvider_objectsChannel(_CRouteMapObjectsProviderMakeDefault().._impl=_self);
+    final t = res._toDart();
+    res._releaseIntermediate();
+    return t;
+  }
+  /** Объекты маршрута на карте. */
+  List<RouteMapObject> get objects {
+    _CArray_CRouteMapObject res = _CRouteMapObjectsProvider_objects(_CRouteMapObjectsProviderMakeDefault().._impl=_self);
+    final t = res._toDart();
+    res._releaseIntermediate();
+    return t;
+  }
+
+  static final _finalizer = ffi.NativeFinalizer(_CRouteMapObjectsProvider_releasePtr);
+
+  RouteMapObjectsProvider._raw(this._self);
+  factory RouteMapObjectsProvider._create(ffi.Pointer<ffi.Void> self) {
+    final classObject = RouteMapObjectsProvider._raw(self);
+    _finalizer.attach(classObject, self, detach: classObject, externalSize: 10000);
+    return classObject;
+  }
+
+  @override
+  bool operator ==(Object other) =>
+    identical(this, other) || other is RouteMapObjectsProvider &&
+    other.runtimeType == runtimeType &&
+    _CRouteMapObjectsProvider_cg_objectIdentifier(this._self) == _CRouteMapObjectsProvider_cg_objectIdentifier(other._self);
+
+  @override
+  int get hashCode {
+    final identifier = _CRouteMapObjectsProvider_cg_objectIdentifier(this._self);
+    return identifier.hashCode;
+  }
+
+}
+
+// MARK: - RouteMapObjectsProvider <-> CRouteMapObjectsProvider
+
+final class _CRouteMapObjectsProvider extends ffi.Struct {
+  external ffi.Pointer<ffi.Void> _impl;
+}
+
+extension _CRouteMapObjectsProviderBasicFunctions on _CRouteMapObjectsProvider {
+  void _releaseIntermediate() {
+    _CRouteMapObjectsProvider_release(_impl);
+  }
+
+  _CRouteMapObjectsProvider _retain() {
+    return _CRouteMapObjectsProvider_retain(_impl);
+  }
+}
+
+extension _CRouteMapObjectsProviderToDart on _CRouteMapObjectsProvider {
+  RouteMapObjectsProvider _toDart() {
+    return RouteMapObjectsProvider._create(_retain()._impl);
+  }
+}
+
+
+extension _DartToCRouteMapObjectsProvider on RouteMapObjectsProvider {
+  _CRouteMapObjectsProvider _copyFromDartTo_CRouteMapObjectsProvider() {
+    return (_CRouteMapObjectsProviderMakeDefault().._impl=_self)._retain();
+  }
+}
+// MARK: - StatefulChannel<List<RouteMapObject>> <-> _CStatefulChannel_CArray_CRouteMapObject
+
+class _CStatefulChannel_CArray_CRouteMapObjectImpl extends StatefulChannel<List<RouteMapObject>> {
+  static int instanceCounter = 0;
+  static final instanceMap = <int, StreamController<List<RouteMapObject>>>{};
+
+  final _CStatefulChannel_CArray_CRouteMapObject _channel;
+
+  _CStatefulChannel_CArray_CRouteMapObjectImpl(this._channel);
+
+  @override
+  List<RouteMapObject> get value {
+    return this._channel._getter();
+  }
+
+  static void valueFunction(_CArray_CRouteMapObject cValue, int instanceId) {
+    final instance = instanceMap[instanceId];
+    if (instance != null) {
+      instance.add(cValue._toDart());
+    }
+    cValue._releaseIntermediate();
+  }
+
+  @override
+  StreamSubscription<List<RouteMapObject>> listen(void onData(List<RouteMapObject> event)?,
+      {Function? onError, void onDone()?, bool? cancelOnError}) {
+    final instanceId = instanceCounter;
+    instanceCounter += 1;
+    final valueFunctionCallable = ffi.NativeCallable<ffi.Void Function(_CArray_CRouteMapObject, ffi.Int64)>.listener(valueFunction);
+    final cCancel = this._channel._connect(instanceId, valueFunctionCallable);
+    final cancellable = cCancel._retain();
+    cCancel._releaseIntermediate();
+    final streamController = new StreamController<List<RouteMapObject>>(
+      onCancel: () {
+        cancellable._cancel();
+        instanceMap.remove(instanceId);
+      },
+    );
+    instanceMap[instanceId] = streamController;
+    return streamController.stream.listen(
+      onData,
+      onError: onError,
+      onDone: onDone,
+      cancelOnError: cancelOnError
+    );
+  }
+}
+
+final class _CStatefulChannel_CArray_CRouteMapObject extends ffi.Struct {
+  external ffi.Pointer<ffi.Void> _impl;
+}
+
+extension _CStatefulChannel_CArray_CRouteMapObjectBasicFunctions on _CStatefulChannel_CArray_CRouteMapObject {
+  void _releaseIntermediate() {
+    _CStatefulChannel_CArray_CRouteMapObject_release(this);
+  }
+
+  _CStatefulChannel_CArray_CRouteMapObject _retain() {
+    return _CStatefulChannel_CArray_CRouteMapObject_retain(this);
+  }
+
+  List<RouteMapObject> _getter() {
+    final cValue = _CStatefulChannel_CArray_CRouteMapObjectGetCurrentValue(this);
+    final res = cValue._toDart();
+    cValue._releaseIntermediate();
+    return res;
+  }
+
+  _CCancellable _connect(int instanceId,
+      ffi.NativeCallable<ffi.Void Function(_CArray_CRouteMapObject, ffi.Int64)> callback) {
+    return _CStatefulChannel_CArray_CRouteMapObjectConnect(this, instanceId, callback.nativeFunction);
+  }
+}
+
+extension _CStatefulChannel_CArray_CRouteMapObjectToDart on _CStatefulChannel_CArray_CRouteMapObject {
+  StatefulChannel<List<RouteMapObject>> _toDart() {
+    return _CStatefulChannel_CArray_CRouteMapObjectImpl(this._retain());
+  }
+}
+
+extension _DartTo_CStatefulChannel_CArray_CRouteMapObject on StatefulChannel<List<RouteMapObject>> {
+  _CStatefulChannel_CArray_CRouteMapObject _copyFromDartTo_CStatefulChannel_CArray_CRouteMapObject() {
+    return _CStatefulChannel_CArray_CRouteMapObjectMakeDefault();
+  }
+}
+	
 // MARK: - SimulationConstantSpeed
 
 /** Структура для задания режима движения с постоянной скоростью. */
@@ -56661,6 +57567,71 @@ extension _DartToCAlternativeRouteSelector on AlternativeRouteSelector {
     return (_CAlternativeRouteSelectorMakeDefault().._impl=_self)._retain();
   }
 }
+// MARK: - MyLocationMapObjectSourceProvider
+
+/** Провайдер, предоставляющий источник маркера геопозиции. */
+class MyLocationMapObjectSourceProvider implements ffi.Finalizable {
+  final ffi.Pointer<ffi.Void> _self;
+
+  /** Источник, содержащий маркер геопозиции. */
+  MyLocationMapObjectSource get myLocationMapObjectSource {
+    _CMyLocationMapObjectSource res = _CMyLocationMapObjectSourceProvider_myLocationMapObjectSource(_CMyLocationMapObjectSourceProviderMakeDefault().._impl=_self);
+    final t = res._toDart();
+    res._releaseIntermediate();
+    return t;
+  }
+
+  static final _finalizer = ffi.NativeFinalizer(_CMyLocationMapObjectSourceProvider_releasePtr);
+
+  MyLocationMapObjectSourceProvider._raw(this._self);
+  factory MyLocationMapObjectSourceProvider._create(ffi.Pointer<ffi.Void> self) {
+    final classObject = MyLocationMapObjectSourceProvider._raw(self);
+    _finalizer.attach(classObject, self, detach: classObject, externalSize: 10000);
+    return classObject;
+  }
+
+  @override
+  bool operator ==(Object other) =>
+    identical(this, other) || other is MyLocationMapObjectSourceProvider &&
+    other.runtimeType == runtimeType &&
+    _CMyLocationMapObjectSourceProvider_cg_objectIdentifier(this._self) == _CMyLocationMapObjectSourceProvider_cg_objectIdentifier(other._self);
+
+  @override
+  int get hashCode {
+    final identifier = _CMyLocationMapObjectSourceProvider_cg_objectIdentifier(this._self);
+    return identifier.hashCode;
+  }
+
+}
+
+// MARK: - MyLocationMapObjectSourceProvider <-> CMyLocationMapObjectSourceProvider
+
+final class _CMyLocationMapObjectSourceProvider extends ffi.Struct {
+  external ffi.Pointer<ffi.Void> _impl;
+}
+
+extension _CMyLocationMapObjectSourceProviderBasicFunctions on _CMyLocationMapObjectSourceProvider {
+  void _releaseIntermediate() {
+    _CMyLocationMapObjectSourceProvider_release(_impl);
+  }
+
+  _CMyLocationMapObjectSourceProvider _retain() {
+    return _CMyLocationMapObjectSourceProvider_retain(_impl);
+  }
+}
+
+extension _CMyLocationMapObjectSourceProviderToDart on _CMyLocationMapObjectSourceProvider {
+  MyLocationMapObjectSourceProvider _toDart() {
+    return MyLocationMapObjectSourceProvider._create(_retain()._impl);
+  }
+}
+
+
+extension _DartToCMyLocationMapObjectSourceProvider on MyLocationMapObjectSourceProvider {
+  _CMyLocationMapObjectSourceProvider _copyFromDartTo_CMyLocationMapObjectSourceProvider() {
+    return (_CMyLocationMapObjectSourceProviderMakeDefault().._impl=_self)._retain();
+  }
+}
 // MARK: - NavigationManager
 
 /** Корневой публичный интерфейс навигатора. */
@@ -56723,6 +57694,13 @@ class NavigationManager implements ffi.Finalizable {
     res._releaseIntermediate();
     return t;
   }
+  /** Провайдер объектов маршрутов на карте. */
+  RouteMapObjectsProvider get routeMapObjectsProvider {
+    _CRouteMapObjectsProvider res = _CNavigationManager_routeMapObjectsProvider(_CNavigationManagerMakeDefault().._impl=_self);
+    final t = res._toDart();
+    res._releaseIntermediate();
+    return t;
+  }
   /** Настройки симуляции ведения по маршруту. */
   SimulationSettings get simulationSettings {
     _CSimulationSettings res = _CNavigationManager_simulationSettings(_CNavigationManagerMakeDefault().._impl=_self);
@@ -56775,6 +57753,13 @@ class NavigationManager implements ffi.Finalizable {
   /** Выбор альтернативного маршрута. */
   AlternativeRouteSelector get alternativeRouteSelector {
     _CAlternativeRouteSelector res = _CNavigationManager_alternativeRouteSelector(_CNavigationManagerMakeDefault().._impl=_self);
+    final t = res._toDart();
+    res._releaseIntermediate();
+    return t;
+  }
+  /** Провайдер, предоставляющий источник маркера геопозиции. */
+  MyLocationMapObjectSourceProvider get myLocationMapObjectSourceProvider {
+    _CMyLocationMapObjectSourceProvider res = _CNavigationManager_myLocationMapObjectSourceProvider(_CNavigationManagerMakeDefault().._impl=_self);
     final t = res._toDart();
     res._releaseIntermediate();
     return t;
@@ -64740,6 +65725,10 @@ late final _CArray_CConnector_release = _CArray_CConnector_releasePtr.asFunction
 late final _CChargingStationMakeDefaultPtr = _lookup<ffi.NativeFunction<_CChargingStation Function()>>('CChargingStationMakeDefault');
 late final _CChargingStationMakeDefault = _CChargingStationMakeDefaultPtr.asFunction<_CChargingStation Function()>();
 
+
+late final _CRubricIdMakeDefaultPtr = _lookup<ffi.NativeFunction<_CRubricId Function()>>('CRubricIdMakeDefault');
+late final _CRubricIdMakeDefault = _CRubricIdMakeDefaultPtr.asFunction<_CRubricId Function()>();
+
 late final _CItemMarkerInfo_objectIdPtr = _lookup<ffi.NativeFunction<_COptional_CDgisObjectId Function(_CItemMarkerInfo)>>('CItemMarkerInfo_objectId');
 late final _CItemMarkerInfo_objectId = _CItemMarkerInfo_objectIdPtr.asFunction<_COptional_CDgisObjectId Function(_CItemMarkerInfo)>();
 late final _CItemMarkerInfo_geoPointPtr = _lookup<ffi.NativeFunction<_CGeoPointWithElevation Function(_CItemMarkerInfo)>>('CItemMarkerInfo_geoPoint');
@@ -64748,6 +65737,8 @@ late final _CItemMarkerInfo_floorInfoPtr = _lookup<ffi.NativeFunction<_COptional
 late final _CItemMarkerInfo_floorInfo = _CItemMarkerInfo_floorInfoPtr.asFunction<_COptional_CFloorInfo Function(_CItemMarkerInfo)>();
 late final _CItemMarkerInfo_titlePtr = _lookup<ffi.NativeFunction<_COptional_CString Function(_CItemMarkerInfo)>>('CItemMarkerInfo_title');
 late final _CItemMarkerInfo_title = _CItemMarkerInfo_titlePtr.asFunction<_COptional_CString Function(_CItemMarkerInfo)>();
+late final _CItemMarkerInfo_rubricIdsPtr = _lookup<ffi.NativeFunction<_CArray_CRubricId Function(_CItemMarkerInfo)>>('CItemMarkerInfo_rubricIds');
+late final _CItemMarkerInfo_rubricIds = _CItemMarkerInfo_rubricIdsPtr.asFunction<_CArray_CRubricId Function(_CItemMarkerInfo)>();
 
 late final _CItemMarkerInfo_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CItemMarkerInfo_cg_objectIdentifier');
 late final _CItemMarkerInfo_cg_objectIdentifier = _CItemMarkerInfo_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
@@ -64774,6 +65765,19 @@ late final _CGeoPointWithElevationMakeDefault = _CGeoPointWithElevationMakeDefau
 
 late final _COptional_CFloorInfoMakeDefaultPtr = _lookup<ffi.NativeFunction<_COptional_CFloorInfo Function()>>('COptional_CFloorInfoMakeDefault');
 late final _COptional_CFloorInfoMakeDefault = _COptional_CFloorInfoMakeDefaultPtr.asFunction<_COptional_CFloorInfo Function()>();
+
+late final _CArray_CRubricIdmakeEmptyPtr = _lookup<ffi.NativeFunction<_CArray_CRubricId Function()>>('CArray_CRubricId_makeEmpty');
+late final _CArray_CRubricIdmakeEmpty = _CArray_CRubricIdmakeEmptyPtr.asFunction<_CArray_CRubricId Function()>();
+late final _CArray_CRubricIdaddElementPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CArray_CRubricId, _CRubricId)>>('CArray_CRubricId_addElement');
+late final _CArray_CRubricIdaddElement = _CArray_CRubricIdaddElementPtr.asFunction<void Function(_CArray_CRubricId, _CRubricId)>();
+late final _forEach_CArray_CRubricIdPtr = _lookup<ffi.NativeFunction<
+  ffi.Void Function(_CArray_CRubricId, ffi.Pointer<ffi.NativeFunction<ffi.Void Function(_CRubricId)>>)
+>>('CArray_CRubricId_forEachWithFunctionPointer');
+late final _forEach_CArray_CRubricId = _forEach_CArray_CRubricIdPtr.asFunction<
+  void Function(_CArray_CRubricId, ffi.Pointer<ffi.NativeFunction<ffi.Void Function(_CRubricId)
+>>)>();
+late final _CArray_CRubricId_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CArray_CRubricId)>>('CArray_CRubricId_release');
+late final _CArray_CRubricId_release = _CArray_CRubricId_releasePtr.asFunction<void Function(_CArray_CRubricId)>();
 
 late final _CObjectTypeMakeDefaultPtr = _lookup<ffi.NativeFunction<_CObjectType Function()>>('CObjectTypeMakeDefault');
 late final _CObjectTypeMakeDefault = _CObjectTypeMakeDefaultPtr.asFunction<_CObjectType Function()>();
@@ -64865,10 +65869,6 @@ late final _CParkingInfoMakeDefault = _CParkingInfoMakeDefaultPtr.asFunction<_CP
 
 late final _CReviewsMakeDefaultPtr = _lookup<ffi.NativeFunction<_CReviews Function()>>('CReviewsMakeDefault');
 late final _CReviewsMakeDefault = _CReviewsMakeDefaultPtr.asFunction<_CReviews Function()>();
-
-
-late final _CRubricIdMakeDefaultPtr = _lookup<ffi.NativeFunction<_CRubricId Function()>>('CRubricIdMakeDefault');
-late final _CRubricIdMakeDefault = _CRubricIdMakeDefaultPtr.asFunction<_CRubricId Function()>();
 
 
 late final _CSearchResultTypeMakeDefaultPtr = _lookup<ffi.NativeFunction<_CSearchResultType Function()>>('CSearchResultTypeMakeDefault');
@@ -65883,19 +66883,6 @@ late final _CSearchQueryBuilder_retain = _CSearchQueryBuilder_retainPtr.asFuncti
 late final _CSearchQueryBuilderMakeDefaultPtr = _lookup<ffi.NativeFunction<_CSearchQueryBuilder Function()>>('CSearchQueryBuilderMakeDefault');
 late final _CSearchQueryBuilderMakeDefault = _CSearchQueryBuilderMakeDefaultPtr.asFunction<_CSearchQueryBuilder Function()>();
 
-
-late final _CArray_CRubricIdmakeEmptyPtr = _lookup<ffi.NativeFunction<_CArray_CRubricId Function()>>('CArray_CRubricId_makeEmpty');
-late final _CArray_CRubricIdmakeEmpty = _CArray_CRubricIdmakeEmptyPtr.asFunction<_CArray_CRubricId Function()>();
-late final _CArray_CRubricIdaddElementPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CArray_CRubricId, _CRubricId)>>('CArray_CRubricId_addElement');
-late final _CArray_CRubricIdaddElement = _CArray_CRubricIdaddElementPtr.asFunction<void Function(_CArray_CRubricId, _CRubricId)>();
-late final _forEach_CArray_CRubricIdPtr = _lookup<ffi.NativeFunction<
-  ffi.Void Function(_CArray_CRubricId, ffi.Pointer<ffi.NativeFunction<ffi.Void Function(_CRubricId)>>)
->>('CArray_CRubricId_forEachWithFunctionPointer');
-late final _forEach_CArray_CRubricId = _forEach_CArray_CRubricIdPtr.asFunction<
-  void Function(_CArray_CRubricId, ffi.Pointer<ffi.NativeFunction<ffi.Void Function(_CRubricId)
->>)>();
-late final _CArray_CRubricId_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CArray_CRubricId)>>('CArray_CRubricId_release');
-late final _CArray_CRubricId_release = _CArray_CRubricId_releasePtr.asFunction<void Function(_CArray_CRubricId)>();
 
 late final _COptional_CArray_CGeoPointMakeDefaultPtr = _lookup<ffi.NativeFunction<_COptional_CArray_CGeoPoint Function()>>('COptional_CArray_CGeoPointMakeDefault');
 late final _COptional_CArray_CGeoPointMakeDefault = _COptional_CArray_CGeoPointMakeDefaultPtr.asFunction<_COptional_CArray_CGeoPoint Function()>();
@@ -66937,6 +67924,44 @@ late final _CImageLoaderMakeDefaultPtr = _lookup<ffi.NativeFunction<_CImageLoade
 late final _CImageLoaderMakeDefault = _CImageLoaderMakeDefaultPtr.asFunction<_CImageLoader Function()>();
 late final _CImageLoader_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CImageLoader)>>('CImageLoader_release');
 late final _CImageLoader_release = _CImageLoader_releasePtr.asFunction<void Function(_CImageLoader)>();
+late final _CAnimationSettings_animationIndexPtr = _lookup<ffi.NativeFunction<_COptional_int32_t Function(_CAnimationSettings)>>('CAnimationSettings_animationIndex');
+late final _CAnimationSettings_animationIndex = _CAnimationSettings_animationIndexPtr.asFunction<_COptional_int32_t Function(_CAnimationSettings)>();
+late final _CAnimationSettings_setAnimationIndex_COptional_int32_tPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CAnimationSettings, _COptional_int32_t)>>('CAnimationSettings_setAnimationIndex_COptional_int32_t');
+late final _CAnimationSettings_setAnimationIndex_COptional_int32_t = _CAnimationSettings_setAnimationIndex_COptional_int32_tPtr.asFunction<void Function(_CAnimationSettings, _COptional_int32_t)>();
+late final _CAnimationSettings_sceneIndexPtr = _lookup<ffi.NativeFunction<_COptional_int32_t Function(_CAnimationSettings)>>('CAnimationSettings_sceneIndex');
+late final _CAnimationSettings_sceneIndex = _CAnimationSettings_sceneIndexPtr.asFunction<_COptional_int32_t Function(_CAnimationSettings)>();
+late final _CAnimationSettings_setSceneIndex_COptional_int32_tPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CAnimationSettings, _COptional_int32_t)>>('CAnimationSettings_setSceneIndex_COptional_int32_t');
+late final _CAnimationSettings_setSceneIndex_COptional_int32_t = _CAnimationSettings_setSceneIndex_COptional_int32_tPtr.asFunction<void Function(_CAnimationSettings, _COptional_int32_t)>();
+late final _CAnimationSettings_sceneNamePtr = _lookup<ffi.NativeFunction<_COptional_CString Function(_CAnimationSettings)>>('CAnimationSettings_sceneName');
+late final _CAnimationSettings_sceneName = _CAnimationSettings_sceneNamePtr.asFunction<_COptional_CString Function(_CAnimationSettings)>();
+late final _CAnimationSettings_setSceneName_COptional_CStringPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CAnimationSettings, _COptional_CString)>>('CAnimationSettings_setSceneName_COptional_CString');
+late final _CAnimationSettings_setSceneName_COptional_CString = _CAnimationSettings_setSceneName_COptional_CStringPtr.asFunction<void Function(_CAnimationSettings, _COptional_CString)>();
+late final _CAnimationSettings_animationRepeatCountPtr = _lookup<ffi.NativeFunction<_COptional_int32_t Function(_CAnimationSettings)>>('CAnimationSettings_animationRepeatCount');
+late final _CAnimationSettings_animationRepeatCount = _CAnimationSettings_animationRepeatCountPtr.asFunction<_COptional_int32_t Function(_CAnimationSettings)>();
+late final _CAnimationSettings_setAnimationRepeatCount_COptional_int32_tPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CAnimationSettings, _COptional_int32_t)>>('CAnimationSettings_setAnimationRepeatCount_COptional_int32_t');
+late final _CAnimationSettings_setAnimationRepeatCount_COptional_int32_t = _CAnimationSettings_setAnimationRepeatCount_COptional_int32_tPtr.asFunction<void Function(_CAnimationSettings, _COptional_int32_t)>();
+late final _CAnimationSettings_animationSpeedPtr = _lookup<ffi.NativeFunction<_COptional_float Function(_CAnimationSettings)>>('CAnimationSettings_animationSpeed');
+late final _CAnimationSettings_animationSpeed = _CAnimationSettings_animationSpeedPtr.asFunction<_COptional_float Function(_CAnimationSettings)>();
+late final _CAnimationSettings_setAnimationSpeed_COptional_floatPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CAnimationSettings, _COptional_float)>>('CAnimationSettings_setAnimationSpeed_COptional_float');
+late final _CAnimationSettings_setAnimationSpeed_COptional_float = _CAnimationSettings_setAnimationSpeed_COptional_floatPtr.asFunction<void Function(_CAnimationSettings, _COptional_float)>();
+
+late final _CAnimationSettings_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CAnimationSettings_cg_objectIdentifier');
+late final _CAnimationSettings_cg_objectIdentifier = _CAnimationSettings_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
+
+
+late final _CAnimationSettings_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CAnimationSettings_release');
+late final _CAnimationSettings_release = _CAnimationSettings_releasePtr.asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+late final _CAnimationSettings_retainPtr = _lookup<ffi.NativeFunction<_CAnimationSettings Function(ffi.Pointer<ffi.Void>)>>('CAnimationSettings_retain');
+late final _CAnimationSettings_retain = _CAnimationSettings_retainPtr.asFunction<_CAnimationSettings Function(ffi.Pointer<ffi.Void>)>();
+late final _CAnimationSettingsMakeDefaultPtr = _lookup<ffi.NativeFunction<_CAnimationSettings Function()>>('CAnimationSettingsMakeDefault');
+late final _CAnimationSettingsMakeDefault = _CAnimationSettingsMakeDefaultPtr.asFunction<_CAnimationSettings Function()>();
+
+
+late final _COptional_int32_tMakeDefaultPtr = _lookup<ffi.NativeFunction<_COptional_int32_t Function()>>('COptional_int32_tMakeDefault');
+late final _COptional_int32_tMakeDefault = _COptional_int32_tMakeDefaultPtr.asFunction<_COptional_int32_t Function()>();
+
+late final _COptional_floatMakeDefaultPtr = _lookup<ffi.NativeFunction<_COptional_float Function()>>('COptional_floatMakeDefault');
+late final _COptional_floatMakeDefault = _COptional_floatMakeDefaultPtr.asFunction<_COptional_float Function()>();
 
 late final _CBearingFollowController_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CBearingFollowController_cg_objectIdentifier');
 late final _CBearingFollowController_cg_objectIdentifier = _CBearingFollowController_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
@@ -66966,6 +67991,20 @@ late final _CCoordinatesFollowControllerMakeDefaultPtr = _lookup<ffi.NativeFunct
 late final _CCoordinatesFollowControllerMakeDefault = _CCoordinatesFollowControllerMakeDefaultPtr.asFunction<_CCoordinatesFollowController Function()>();
 
 
+late final _COptional_CBearingSourceMakeDefaultPtr = _lookup<ffi.NativeFunction<_COptional_CBearingSource Function()>>('COptional_CBearingSourceMakeDefault');
+late final _COptional_CBearingSourceMakeDefault = _COptional_CBearingSourceMakeDefaultPtr.asFunction<_COptional_CBearingSource Function()>();
+
+late final _CMyLocationControllerSettingsMakeDefaultPtr = _lookup<ffi.NativeFunction<_CMyLocationControllerSettings Function()>>('CMyLocationControllerSettingsMakeDefault');
+late final _CMyLocationControllerSettingsMakeDefault = _CMyLocationControllerSettingsMakeDefaultPtr.asFunction<_CMyLocationControllerSettings Function()>();
+
+
+late final _CMyLocationMapObjectMarkerTypeMakeDefaultPtr = _lookup<ffi.NativeFunction<_CMyLocationMapObjectMarkerType Function()>>('CMyLocationMapObjectMarkerTypeMakeDefault');
+late final _CMyLocationMapObjectMarkerTypeMakeDefault = _CMyLocationMapObjectMarkerTypeMakeDefaultPtr.asFunction<_CMyLocationMapObjectMarkerType Function()>();
+late final _CMyLocationMapObject_animationSettingsPtr = _lookup<ffi.NativeFunction<_CAnimationSettings Function(_CMyLocationMapObject)>>('CMyLocationMapObject_animationSettings');
+late final _CMyLocationMapObject_animationSettings = _CMyLocationMapObject_animationSettingsPtr.asFunction<_CAnimationSettings Function(_CMyLocationMapObject)>();
+late final _CMyLocationMapObject_objectAttributesPtr = _lookup<ffi.NativeFunction<_CAttributes Function(_CMyLocationMapObject)>>('CMyLocationMapObject_objectAttributes');
+late final _CMyLocationMapObject_objectAttributes = _CMyLocationMapObject_objectAttributesPtr.asFunction<_CAttributes Function(_CMyLocationMapObject)>();
+
 late final _CMyLocationMapObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CMyLocationMapObject_cg_objectIdentifier');
 late final _CMyLocationMapObject_cg_objectIdentifier = _CMyLocationMapObject_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
 
@@ -66977,16 +68016,6 @@ late final _CMyLocationMapObject_retain = _CMyLocationMapObject_retainPtr.asFunc
 late final _CMyLocationMapObjectMakeDefaultPtr = _lookup<ffi.NativeFunction<_CMyLocationMapObject Function()>>('CMyLocationMapObjectMakeDefault');
 late final _CMyLocationMapObjectMakeDefault = _CMyLocationMapObjectMakeDefaultPtr.asFunction<_CMyLocationMapObject Function()>();
 
-
-late final _COptional_CBearingSourceMakeDefaultPtr = _lookup<ffi.NativeFunction<_COptional_CBearingSource Function()>>('COptional_CBearingSourceMakeDefault');
-late final _COptional_CBearingSourceMakeDefault = _COptional_CBearingSourceMakeDefaultPtr.asFunction<_COptional_CBearingSource Function()>();
-
-late final _CMyLocationControllerSettingsMakeDefaultPtr = _lookup<ffi.NativeFunction<_CMyLocationControllerSettings Function()>>('CMyLocationControllerSettingsMakeDefault');
-late final _CMyLocationControllerSettingsMakeDefault = _CMyLocationControllerSettingsMakeDefaultPtr.asFunction<_CMyLocationControllerSettings Function()>();
-
-
-late final _CMyLocationMapObjectMarkerTypeMakeDefaultPtr = _lookup<ffi.NativeFunction<_CMyLocationMapObjectMarkerType Function()>>('CMyLocationMapObjectMarkerTypeMakeDefault');
-late final _CMyLocationMapObjectMarkerTypeMakeDefault = _CMyLocationMapObjectMarkerTypeMakeDefaultPtr.asFunction<_CMyLocationMapObjectMarkerType Function()>();
 late final _CMyLocationMapObjectSource_itemPtr = _lookup<ffi.NativeFunction<_CMyLocationMapObject Function(_CMyLocationMapObjectSource)>>('CMyLocationMapObjectSource_item');
 late final _CMyLocationMapObjectSource_item = _CMyLocationMapObjectSource_itemPtr.asFunction<_CMyLocationMapObject Function(_CMyLocationMapObjectSource)>();
 
@@ -67007,6 +68036,8 @@ late final _CRoadEventMapObject_idPtr = _lookup<ffi.NativeFunction<_CDgisObjectI
 late final _CRoadEventMapObject_id = _CRoadEventMapObject_idPtr.asFunction<_CDgisObjectId Function(_CRoadEventMapObject)>();
 late final _CRoadEventMapObject_eventPtr = _lookup<ffi.NativeFunction<_CRoadEvent Function(_CRoadEventMapObject)>>('CRoadEventMapObject_event');
 late final _CRoadEventMapObject_event = _CRoadEventMapObject_eventPtr.asFunction<_CRoadEvent Function(_CRoadEventMapObject)>();
+late final _CRoadEventMapObject_animationSettingsPtr = _lookup<ffi.NativeFunction<_CAnimationSettings Function(_CRoadEventMapObject)>>('CRoadEventMapObject_animationSettings');
+late final _CRoadEventMapObject_animationSettings = _CRoadEventMapObject_animationSettingsPtr.asFunction<_CAnimationSettings Function(_CRoadEventMapObject)>();
 
 late final _CRoadEventMapObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRoadEventMapObject_cg_objectIdentifier');
 late final _CRoadEventMapObject_cg_objectIdentifier = _CRoadEventMapObject_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
@@ -67024,6 +68055,8 @@ late final _CRoadEventTypeMakeDefaultPtr = _lookup<ffi.NativeFunction<_CRoadEven
 late final _CRoadEventTypeMakeDefault = _CRoadEventTypeMakeDefaultPtr.asFunction<_CRoadEventType Function()>();
 late final _CRoadEvent_typePtr = _lookup<ffi.NativeFunction<_CRoadEventType Function(_CRoadEvent)>>('CRoadEvent_type');
 late final _CRoadEvent_type = _CRoadEvent_typePtr.asFunction<_CRoadEventType Function(_CRoadEvent)>();
+late final _CRoadEvent_idPtr = _lookup<ffi.NativeFunction<_CString Function(_CRoadEvent)>>('CRoadEvent_id');
+late final _CRoadEvent_id = _CRoadEvent_idPtr.asFunction<_CString Function(_CRoadEvent)>();
 late final _CRoadEvent_namePtr = _lookup<ffi.NativeFunction<_CString Function(_CRoadEvent)>>('CRoadEvent_name');
 late final _CRoadEvent_name = _CRoadEvent_namePtr.asFunction<_CString Function(_CRoadEvent)>();
 late final _CRoadEvent_authorPtr = _lookup<ffi.NativeFunction<_CAuthorInfo Function(_CRoadEvent)>>('CRoadEvent_author');
@@ -67435,6 +68468,9 @@ late final _CScreenDistanceMakeDefault = _CScreenDistanceMakeDefaultPtr.asFuncti
 late final _CStyleLayerIdMakeDefaultPtr = _lookup<ffi.NativeFunction<_CStyleLayerId Function()>>('CStyleLayerIdMakeDefault');
 late final _CStyleLayerIdMakeDefault = _CStyleLayerIdMakeDefaultPtr.asFunction<_CStyleLayerId Function()>();
 
+
+late final _CTextHorizontalAlignmentMakeDefaultPtr = _lookup<ffi.NativeFunction<_CTextHorizontalAlignment Function()>>('CTextHorizontalAlignmentMakeDefault');
+late final _CTextHorizontalAlignmentMakeDefault = _CTextHorizontalAlignmentMakeDefaultPtr.asFunction<_CTextHorizontalAlignment Function()>();
 
 late final _CTextPlacementMakeDefaultPtr = _lookup<ffi.NativeFunction<_CTextPlacement Function()>>('CTextPlacementMakeDefault');
 late final _CTextPlacementMakeDefault = _CTextPlacementMakeDefaultPtr.asFunction<_CTextPlacement Function()>();
@@ -69135,6 +70171,26 @@ late final _CRasterTileSource_retain = _CRasterTileSource_retainPtr.asFunction<_
 late final _CRasterTileSourceMakeDefaultPtr = _lookup<ffi.NativeFunction<_CRasterTileSource Function()>>('CRasterTileSourceMakeDefault');
 late final _CRasterTileSourceMakeDefault = _CRasterTileSourceMakeDefaultPtr.asFunction<_CRasterTileSource Function()>();
 
+late final _CParkingControlModel_isEnabledChannelPtr = _lookup<ffi.NativeFunction<_CStatefulChannel_bool Function(_CParkingControlModel)>>('CParkingControlModel_isEnabledChannel');
+late final _CParkingControlModel_isEnabledChannel = _CParkingControlModel_isEnabledChannelPtr.asFunction<_CStatefulChannel_bool Function(_CParkingControlModel)>();
+late final _CParkingControlModel_isEnabledPtr = _lookup<ffi.NativeFunction<ffi.Bool Function(_CParkingControlModel)>>('CParkingControlModel_isEnabled');
+late final _CParkingControlModel_isEnabled = _CParkingControlModel_isEnabledPtr.asFunction<bool Function(_CParkingControlModel)>();
+
+late final _CParkingControlModel_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CParkingControlModel_cg_objectIdentifier');
+late final _CParkingControlModel_cg_objectIdentifier = _CParkingControlModel_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
+
+late final _CParkingControlModel_toggleParkingsVisibilityPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CParkingControlModel)>>('CParkingControlModel_toggleParkingsVisibility');
+late final _CParkingControlModel_toggleParkingsVisibility = _CParkingControlModel_toggleParkingsVisibilityPtr.asFunction<void Function(_CParkingControlModel)>();
+late final _CParkingControlModel_C_createWith_CMapPtr = _lookup<ffi.NativeFunction<_CParkingControlModel Function(_CMap)>>('CParkingControlModel_C_createWith_CMap');
+late final _CParkingControlModel_C_createWith_CMap = _CParkingControlModel_C_createWith_CMapPtr.asFunction<_CParkingControlModel Function(_CMap)>();
+
+late final _CParkingControlModel_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CParkingControlModel_release');
+late final _CParkingControlModel_release = _CParkingControlModel_releasePtr.asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+late final _CParkingControlModel_retainPtr = _lookup<ffi.NativeFunction<_CParkingControlModel Function(ffi.Pointer<ffi.Void>)>>('CParkingControlModel_retain');
+late final _CParkingControlModel_retain = _CParkingControlModel_retainPtr.asFunction<_CParkingControlModel Function(ffi.Pointer<ffi.Void>)>();
+late final _CParkingControlModelMakeDefaultPtr = _lookup<ffi.NativeFunction<_CParkingControlModel Function()>>('CParkingControlModelMakeDefault');
+late final _CParkingControlModelMakeDefault = _CParkingControlModelMakeDefaultPtr.asFunction<_CParkingControlModel Function()>();
+
 late final _CPackedMapState_showTrafficPtr = _lookup<ffi.NativeFunction<ffi.Bool Function(_CPackedMapState)>>('CPackedMapState_showTraffic');
 late final _CPackedMapState_showTraffic = _CPackedMapState_showTrafficPtr.asFunction<bool Function(_CPackedMapState)>();
 late final _CPackedMapState_setShowTraffic_boolPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CPackedMapState, ffi.Bool)>>('CPackedMapState_setShowTraffic_bool');
@@ -69291,6 +70347,10 @@ late final _CRouteMapObject_lanesCalloutPositionsChannelPtr = _lookup<ffi.Native
 late final _CRouteMapObject_lanesCalloutPositionsChannel = _CRouteMapObject_lanesCalloutPositionsChannelPtr.asFunction<_CStatefulChannel_CArray_CLanesCalloutMapPosition Function(_CRouteMapObject)>();
 late final _CRouteMapObject_lanesCalloutPositionsPtr = _lookup<ffi.NativeFunction<_CArray_CLanesCalloutMapPosition Function(_CRouteMapObject)>>('CRouteMapObject_lanesCalloutPositions');
 late final _CRouteMapObject_lanesCalloutPositions = _CRouteMapObject_lanesCalloutPositionsPtr.asFunction<_CArray_CLanesCalloutMapPosition Function(_CRouteMapObject)>();
+late final _CRouteMapObject_roadEventObjectsChannelPtr = _lookup<ffi.NativeFunction<_CStatefulChannel_CRoadEventMapObjectRouteAttribute Function(_CRouteMapObject)>>('CRouteMapObject_roadEventObjectsChannel');
+late final _CRouteMapObject_roadEventObjectsChannel = _CRouteMapObject_roadEventObjectsChannelPtr.asFunction<_CStatefulChannel_CRoadEventMapObjectRouteAttribute Function(_CRouteMapObject)>();
+late final _CRouteMapObject_roadEventObjectsPtr = _lookup<ffi.NativeFunction<_CRoadEventMapObjectRouteAttribute Function(_CRouteMapObject)>>('CRouteMapObject_roadEventObjects');
+late final _CRouteMapObject_roadEventObjects = _CRouteMapObject_roadEventObjectsPtr.asFunction<_CRoadEventMapObjectRouteAttribute Function(_CRouteMapObject)>();
 
 late final _CRouteMapObject_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRouteMapObject_cg_objectIdentifier');
 late final _CRouteMapObject_cg_objectIdentifier = _CRouteMapObject_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
@@ -69996,9 +71056,6 @@ late final _COptionSet_CRouteCameraPurposeMakeDefault = _COptionSet_CRouteCamera
 
 late final _CRouteCameraDirectionMakeDefaultPtr = _lookup<ffi.NativeFunction<_CRouteCameraDirection Function()>>('CRouteCameraDirectionMakeDefault');
 late final _CRouteCameraDirectionMakeDefault = _CRouteCameraDirectionMakeDefaultPtr.asFunction<_CRouteCameraDirection Function()>();
-
-late final _COptional_floatMakeDefaultPtr = _lookup<ffi.NativeFunction<_COptional_float Function()>>('COptional_floatMakeDefault');
-late final _COptional_floatMakeDefault = _COptional_floatMakeDefaultPtr.asFunction<_COptional_float Function()>();
 
 late final _CRouteCameraMakeDefaultPtr = _lookup<ffi.NativeFunction<_CRouteCamera Function()>>('CRouteCameraMakeDefault');
 late final _CRouteCameraMakeDefault = _CRouteCameraMakeDefaultPtr.asFunction<_CRouteCamera Function()>();
@@ -71420,6 +72477,80 @@ late final _forEach_CArray_CLanesCalloutMapPosition = _forEach_CArray_CLanesCall
 >>)>();
 late final _CArray_CLanesCalloutMapPosition_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CArray_CLanesCalloutMapPosition)>>('CArray_CLanesCalloutMapPosition_release');
 late final _CArray_CLanesCalloutMapPosition_release = _CArray_CLanesCalloutMapPosition_releasePtr.asFunction<void Function(_CArray_CLanesCalloutMapPosition)>();
+
+late final _CStatefulChannel_CRoadEventMapObjectRouteAttributeMakeDefaultPtr = _lookup<ffi.NativeFunction<_CStatefulChannel_CRoadEventMapObjectRouteAttribute Function()>>('CStatefulChannel_CRoadEventMapObjectRouteAttributeMakeDefault');
+late final _CStatefulChannel_CRoadEventMapObjectRouteAttributeMakeDefault = _CStatefulChannel_CRoadEventMapObjectRouteAttributeMakeDefaultPtr.asFunction<_CStatefulChannel_CRoadEventMapObjectRouteAttribute Function()>();
+late final _CStatefulChannel_CRoadEventMapObjectRouteAttribute_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CStatefulChannel_CRoadEventMapObjectRouteAttribute)>>('CStatefulChannel_CRoadEventMapObjectRouteAttribute_release');
+late final _CStatefulChannel_CRoadEventMapObjectRouteAttribute_release = _CStatefulChannel_CRoadEventMapObjectRouteAttribute_releasePtr.asFunction<void Function(_CStatefulChannel_CRoadEventMapObjectRouteAttribute)>();
+late final _CStatefulChannel_CRoadEventMapObjectRouteAttribute_retainPtr = _lookup<ffi.NativeFunction<_CStatefulChannel_CRoadEventMapObjectRouteAttribute Function(_CStatefulChannel_CRoadEventMapObjectRouteAttribute)>>('CStatefulChannel_CRoadEventMapObjectRouteAttribute_retain');
+late final _CStatefulChannel_CRoadEventMapObjectRouteAttribute_retain = _CStatefulChannel_CRoadEventMapObjectRouteAttribute_retainPtr.asFunction<_CStatefulChannel_CRoadEventMapObjectRouteAttribute Function(_CStatefulChannel_CRoadEventMapObjectRouteAttribute)>();
+late final _CStatefulChannel_CRoadEventMapObjectRouteAttributeGetCurrentValuePtr = _lookup<ffi.NativeFunction<_CRoadEventMapObjectRouteAttribute Function(_CStatefulChannel_CRoadEventMapObjectRouteAttribute)>>('CStatefulChannel_CRoadEventMapObjectRouteAttribute_getCurrentValue');
+late final _CStatefulChannel_CRoadEventMapObjectRouteAttributeGetCurrentValue = _CStatefulChannel_CRoadEventMapObjectRouteAttributeGetCurrentValuePtr.asFunction<_CRoadEventMapObjectRouteAttribute Function(_CStatefulChannel_CRoadEventMapObjectRouteAttribute)>();
+late final _CStatefulChannel_CRoadEventMapObjectRouteAttributeConnectPtr = _lookup<ffi.NativeFunction<
+  _CCancellable Function(
+    _CStatefulChannel_CRoadEventMapObjectRouteAttribute,
+    ffi.Int64,
+    ffi.Pointer<ffi.NativeFunction<ffi.Void Function(_CRoadEventMapObjectRouteAttribute, ffi.Int64)>>
+  )
+>>('CStatefulChannel_CRoadEventMapObjectRouteAttribute_connect');
+late final _CStatefulChannel_CRoadEventMapObjectRouteAttributeConnect = _CStatefulChannel_CRoadEventMapObjectRouteAttributeConnectPtr.asFunction<
+  _CCancellable Function(
+    _CStatefulChannel_CRoadEventMapObjectRouteAttribute,
+    int,
+    ffi.Pointer<ffi.NativeFunction<ffi.Void Function(_CRoadEventMapObjectRouteAttribute, ffi.Int64)>>
+  )
+>();
+late final _CRoadEventMapObjectRouteAttribute_sizePtr = _lookup<ffi.NativeFunction<ffi.Uint64 Function(_CRoadEventMapObjectRouteAttribute)>>('CRoadEventMapObjectRouteAttribute_size');
+late final _CRoadEventMapObjectRouteAttribute_size = _CRoadEventMapObjectRouteAttribute_sizePtr.asFunction<int Function(_CRoadEventMapObjectRouteAttribute)>();
+late final _CRoadEventMapObjectRouteAttribute_isEmptyPtr = _lookup<ffi.NativeFunction<ffi.Bool Function(_CRoadEventMapObjectRouteAttribute)>>('CRoadEventMapObjectRouteAttribute_isEmpty');
+late final _CRoadEventMapObjectRouteAttribute_isEmpty = _CRoadEventMapObjectRouteAttribute_isEmptyPtr.asFunction<bool Function(_CRoadEventMapObjectRouteAttribute)>();
+late final _CRoadEventMapObjectRouteAttribute_firstPtr = _lookup<ffi.NativeFunction<_COptional_CRoadEventMapObjectRouteEntry Function(_CRoadEventMapObjectRouteAttribute)>>('CRoadEventMapObjectRouteAttribute_first');
+late final _CRoadEventMapObjectRouteAttribute_first = _CRoadEventMapObjectRouteAttribute_firstPtr.asFunction<_COptional_CRoadEventMapObjectRouteEntry Function(_CRoadEventMapObjectRouteAttribute)>();
+late final _CRoadEventMapObjectRouteAttribute_lastPtr = _lookup<ffi.NativeFunction<_COptional_CRoadEventMapObjectRouteEntry Function(_CRoadEventMapObjectRouteAttribute)>>('CRoadEventMapObjectRouteAttribute_last');
+late final _CRoadEventMapObjectRouteAttribute_last = _CRoadEventMapObjectRouteAttribute_lastPtr.asFunction<_COptional_CRoadEventMapObjectRouteEntry Function(_CRoadEventMapObjectRouteAttribute)>();
+late final _CRoadEventMapObjectRouteAttribute_entriesPtr = _lookup<ffi.NativeFunction<_CArray_CRoadEventMapObjectRouteEntry Function(_CRoadEventMapObjectRouteAttribute)>>('CRoadEventMapObjectRouteAttribute_entries');
+late final _CRoadEventMapObjectRouteAttribute_entries = _CRoadEventMapObjectRouteAttribute_entriesPtr.asFunction<_CArray_CRoadEventMapObjectRouteEntry Function(_CRoadEventMapObjectRouteAttribute)>();
+
+late final _CRoadEventMapObjectRouteAttribute_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRoadEventMapObjectRouteAttribute_cg_objectIdentifier');
+late final _CRoadEventMapObjectRouteAttribute_cg_objectIdentifier = _CRoadEventMapObjectRouteAttribute_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
+
+late final _CRoadEventMapObjectRouteAttribute_entriesInRange_CRoutePoint_CRoutePointPtr = _lookup<ffi.NativeFunction<_CArray_CRoadEventMapObjectRouteEntry Function(_CRoadEventMapObjectRouteAttribute, _CRoutePoint, _CRoutePoint)>>('CRoadEventMapObjectRouteAttribute_entriesInRange_CRoutePoint_CRoutePoint');
+late final _CRoadEventMapObjectRouteAttribute_entriesInRange_CRoutePoint_CRoutePoint = _CRoadEventMapObjectRouteAttribute_entriesInRange_CRoutePoint_CRoutePointPtr.asFunction<_CArray_CRoadEventMapObjectRouteEntry Function(_CRoadEventMapObjectRouteAttribute, _CRoutePoint, _CRoutePoint)>();
+late final _CRoadEventMapObjectRouteAttribute_findNearBackward_CRoutePointPtr = _lookup<ffi.NativeFunction<_COptional_CRoadEventMapObjectRouteEntry Function(_CRoadEventMapObjectRouteAttribute, _CRoutePoint)>>('CRoadEventMapObjectRouteAttribute_findNearBackward_CRoutePoint');
+late final _CRoadEventMapObjectRouteAttribute_findNearBackward_CRoutePoint = _CRoadEventMapObjectRouteAttribute_findNearBackward_CRoutePointPtr.asFunction<_COptional_CRoadEventMapObjectRouteEntry Function(_CRoadEventMapObjectRouteAttribute, _CRoutePoint)>();
+late final _CRoadEventMapObjectRouteAttribute_findNearForward_CRoutePointPtr = _lookup<ffi.NativeFunction<_COptional_CRoadEventMapObjectRouteEntry Function(_CRoadEventMapObjectRouteAttribute, _CRoutePoint)>>('CRoadEventMapObjectRouteAttribute_findNearForward_CRoutePoint');
+late final _CRoadEventMapObjectRouteAttribute_findNearForward_CRoutePoint = _CRoadEventMapObjectRouteAttribute_findNearForward_CRoutePointPtr.asFunction<_COptional_CRoadEventMapObjectRouteEntry Function(_CRoadEventMapObjectRouteAttribute, _CRoutePoint)>();
+
+late final _CRoadEventMapObjectRouteAttribute_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CRoadEventMapObjectRouteAttribute_release');
+late final _CRoadEventMapObjectRouteAttribute_release = _CRoadEventMapObjectRouteAttribute_releasePtr.asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+late final _CRoadEventMapObjectRouteAttribute_retainPtr = _lookup<ffi.NativeFunction<_CRoadEventMapObjectRouteAttribute Function(ffi.Pointer<ffi.Void>)>>('CRoadEventMapObjectRouteAttribute_retain');
+late final _CRoadEventMapObjectRouteAttribute_retain = _CRoadEventMapObjectRouteAttribute_retainPtr.asFunction<_CRoadEventMapObjectRouteAttribute Function(ffi.Pointer<ffi.Void>)>();
+late final _CRoadEventMapObjectRouteAttributeMakeDefaultPtr = _lookup<ffi.NativeFunction<_CRoadEventMapObjectRouteAttribute Function()>>('CRoadEventMapObjectRouteAttributeMakeDefault');
+late final _CRoadEventMapObjectRouteAttributeMakeDefault = _CRoadEventMapObjectRouteAttributeMakeDefaultPtr.asFunction<_CRoadEventMapObjectRouteAttribute Function()>();
+
+
+late final _CRoadEventMapObjectRouteEntryMakeDefaultPtr = _lookup<ffi.NativeFunction<_CRoadEventMapObjectRouteEntry Function()>>('CRoadEventMapObjectRouteEntryMakeDefault');
+late final _CRoadEventMapObjectRouteEntryMakeDefault = _CRoadEventMapObjectRouteEntryMakeDefaultPtr.asFunction<_CRoadEventMapObjectRouteEntry Function()>();
+
+
+late final _COptional_CRoadEventMapObjectRouteEntryMakeDefaultPtr = _lookup<ffi.NativeFunction<_COptional_CRoadEventMapObjectRouteEntry Function()>>('COptional_CRoadEventMapObjectRouteEntryMakeDefault');
+late final _COptional_CRoadEventMapObjectRouteEntryMakeDefault = _COptional_CRoadEventMapObjectRouteEntryMakeDefaultPtr.asFunction<_COptional_CRoadEventMapObjectRouteEntry Function()>();
+
+late final _COptional_CRoadEventMapObjectRouteEntry_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_COptional_CRoadEventMapObjectRouteEntry)>>('COptional_CRoadEventMapObjectRouteEntry_release');
+late final _COptional_CRoadEventMapObjectRouteEntry_release = _COptional_CRoadEventMapObjectRouteEntry_releasePtr.asFunction<void Function(_COptional_CRoadEventMapObjectRouteEntry)>();
+
+late final _CArray_CRoadEventMapObjectRouteEntrymakeEmptyPtr = _lookup<ffi.NativeFunction<_CArray_CRoadEventMapObjectRouteEntry Function()>>('CArray_CRoadEventMapObjectRouteEntry_makeEmpty');
+late final _CArray_CRoadEventMapObjectRouteEntrymakeEmpty = _CArray_CRoadEventMapObjectRouteEntrymakeEmptyPtr.asFunction<_CArray_CRoadEventMapObjectRouteEntry Function()>();
+late final _CArray_CRoadEventMapObjectRouteEntryaddElementPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CArray_CRoadEventMapObjectRouteEntry, _CRoadEventMapObjectRouteEntry)>>('CArray_CRoadEventMapObjectRouteEntry_addElement');
+late final _CArray_CRoadEventMapObjectRouteEntryaddElement = _CArray_CRoadEventMapObjectRouteEntryaddElementPtr.asFunction<void Function(_CArray_CRoadEventMapObjectRouteEntry, _CRoadEventMapObjectRouteEntry)>();
+late final _forEach_CArray_CRoadEventMapObjectRouteEntryPtr = _lookup<ffi.NativeFunction<
+  ffi.Void Function(_CArray_CRoadEventMapObjectRouteEntry, ffi.Pointer<ffi.NativeFunction<ffi.Void Function(_CRoadEventMapObjectRouteEntry)>>)
+>>('CArray_CRoadEventMapObjectRouteEntry_forEachWithFunctionPointer');
+late final _forEach_CArray_CRoadEventMapObjectRouteEntry = _forEach_CArray_CRoadEventMapObjectRouteEntryPtr.asFunction<
+  void Function(_CArray_CRoadEventMapObjectRouteEntry, ffi.Pointer<ffi.NativeFunction<ffi.Void Function(_CRoadEventMapObjectRouteEntry)
+>>)>();
+late final _CArray_CRoadEventMapObjectRouteEntry_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CArray_CRoadEventMapObjectRouteEntry)>>('CArray_CRoadEventMapObjectRouteEntry_release');
+late final _CArray_CRoadEventMapObjectRouteEntry_release = _CArray_CRoadEventMapObjectRouteEntry_releasePtr.asFunction<void Function(_CArray_CRoadEventMapObjectRouteEntry)>();
 late final _CRouteSourceSettings_getLargeScaleRingroadOffsetMetersPtr = _lookup<ffi.NativeFunction<ffi.Float Function(_CRouteSourceSettings)>>('CRouteSourceSettings_getLargeScaleRingroadOffsetMeters');
 late final _CRouteSourceSettings_getLargeScaleRingroadOffsetMeters = _CRouteSourceSettings_getLargeScaleRingroadOffsetMetersPtr.asFunction<double Function(_CRouteSourceSettings)>();
 late final _CRouteSourceSettings_setLargeScaleRingroadOffsetMeters_floatPtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CRouteSourceSettings, ffi.Float)>>('CRouteSourceSettings_setLargeScaleRingroadOffsetMeters_float');
@@ -72328,6 +73459,45 @@ late final _CRouteMapSettings_retain = _CRouteMapSettings_retainPtr.asFunction<_
 late final _CRouteMapSettingsMakeDefaultPtr = _lookup<ffi.NativeFunction<_CRouteMapSettings Function()>>('CRouteMapSettingsMakeDefault');
 late final _CRouteMapSettingsMakeDefault = _CRouteMapSettingsMakeDefaultPtr.asFunction<_CRouteMapSettings Function()>();
 
+late final _CRouteMapObjectsProvider_objectsChannelPtr = _lookup<ffi.NativeFunction<_CStatefulChannel_CArray_CRouteMapObject Function(_CRouteMapObjectsProvider)>>('CRouteMapObjectsProvider_objectsChannel');
+late final _CRouteMapObjectsProvider_objectsChannel = _CRouteMapObjectsProvider_objectsChannelPtr.asFunction<_CStatefulChannel_CArray_CRouteMapObject Function(_CRouteMapObjectsProvider)>();
+late final _CRouteMapObjectsProvider_objectsPtr = _lookup<ffi.NativeFunction<_CArray_CRouteMapObject Function(_CRouteMapObjectsProvider)>>('CRouteMapObjectsProvider_objects');
+late final _CRouteMapObjectsProvider_objects = _CRouteMapObjectsProvider_objectsPtr.asFunction<_CArray_CRouteMapObject Function(_CRouteMapObjectsProvider)>();
+
+late final _CRouteMapObjectsProvider_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CRouteMapObjectsProvider_cg_objectIdentifier');
+late final _CRouteMapObjectsProvider_cg_objectIdentifier = _CRouteMapObjectsProvider_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
+
+
+late final _CRouteMapObjectsProvider_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CRouteMapObjectsProvider_release');
+late final _CRouteMapObjectsProvider_release = _CRouteMapObjectsProvider_releasePtr.asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+late final _CRouteMapObjectsProvider_retainPtr = _lookup<ffi.NativeFunction<_CRouteMapObjectsProvider Function(ffi.Pointer<ffi.Void>)>>('CRouteMapObjectsProvider_retain');
+late final _CRouteMapObjectsProvider_retain = _CRouteMapObjectsProvider_retainPtr.asFunction<_CRouteMapObjectsProvider Function(ffi.Pointer<ffi.Void>)>();
+late final _CRouteMapObjectsProviderMakeDefaultPtr = _lookup<ffi.NativeFunction<_CRouteMapObjectsProvider Function()>>('CRouteMapObjectsProviderMakeDefault');
+late final _CRouteMapObjectsProviderMakeDefault = _CRouteMapObjectsProviderMakeDefaultPtr.asFunction<_CRouteMapObjectsProvider Function()>();
+
+
+late final _CStatefulChannel_CArray_CRouteMapObjectMakeDefaultPtr = _lookup<ffi.NativeFunction<_CStatefulChannel_CArray_CRouteMapObject Function()>>('CStatefulChannel_CArray_CRouteMapObjectMakeDefault');
+late final _CStatefulChannel_CArray_CRouteMapObjectMakeDefault = _CStatefulChannel_CArray_CRouteMapObjectMakeDefaultPtr.asFunction<_CStatefulChannel_CArray_CRouteMapObject Function()>();
+late final _CStatefulChannel_CArray_CRouteMapObject_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(_CStatefulChannel_CArray_CRouteMapObject)>>('CStatefulChannel_CArray_CRouteMapObject_release');
+late final _CStatefulChannel_CArray_CRouteMapObject_release = _CStatefulChannel_CArray_CRouteMapObject_releasePtr.asFunction<void Function(_CStatefulChannel_CArray_CRouteMapObject)>();
+late final _CStatefulChannel_CArray_CRouteMapObject_retainPtr = _lookup<ffi.NativeFunction<_CStatefulChannel_CArray_CRouteMapObject Function(_CStatefulChannel_CArray_CRouteMapObject)>>('CStatefulChannel_CArray_CRouteMapObject_retain');
+late final _CStatefulChannel_CArray_CRouteMapObject_retain = _CStatefulChannel_CArray_CRouteMapObject_retainPtr.asFunction<_CStatefulChannel_CArray_CRouteMapObject Function(_CStatefulChannel_CArray_CRouteMapObject)>();
+late final _CStatefulChannel_CArray_CRouteMapObjectGetCurrentValuePtr = _lookup<ffi.NativeFunction<_CArray_CRouteMapObject Function(_CStatefulChannel_CArray_CRouteMapObject)>>('CStatefulChannel_CArray_CRouteMapObject_getCurrentValue');
+late final _CStatefulChannel_CArray_CRouteMapObjectGetCurrentValue = _CStatefulChannel_CArray_CRouteMapObjectGetCurrentValuePtr.asFunction<_CArray_CRouteMapObject Function(_CStatefulChannel_CArray_CRouteMapObject)>();
+late final _CStatefulChannel_CArray_CRouteMapObjectConnectPtr = _lookup<ffi.NativeFunction<
+  _CCancellable Function(
+    _CStatefulChannel_CArray_CRouteMapObject,
+    ffi.Int64,
+    ffi.Pointer<ffi.NativeFunction<ffi.Void Function(_CArray_CRouteMapObject, ffi.Int64)>>
+  )
+>>('CStatefulChannel_CArray_CRouteMapObject_connect');
+late final _CStatefulChannel_CArray_CRouteMapObjectConnect = _CStatefulChannel_CArray_CRouteMapObjectConnectPtr.asFunction<
+  _CCancellable Function(
+    _CStatefulChannel_CArray_CRouteMapObject,
+    int,
+    ffi.Pointer<ffi.NativeFunction<ffi.Void Function(_CArray_CRouteMapObject, ffi.Int64)>>
+  )
+>();
 
 late final _CSimulationConstantSpeedMakeDefaultPtr = _lookup<ffi.NativeFunction<_CSimulationConstantSpeed Function()>>('CSimulationConstantSpeedMakeDefault');
 late final _CSimulationConstantSpeedMakeDefault = _CSimulationConstantSpeedMakeDefaultPtr.asFunction<_CSimulationConstantSpeed Function()>();
@@ -72526,6 +73696,20 @@ late final _CAlternativeRouteSelector_retain = _CAlternativeRouteSelector_retain
 late final _CAlternativeRouteSelectorMakeDefaultPtr = _lookup<ffi.NativeFunction<_CAlternativeRouteSelector Function()>>('CAlternativeRouteSelectorMakeDefault');
 late final _CAlternativeRouteSelectorMakeDefault = _CAlternativeRouteSelectorMakeDefaultPtr.asFunction<_CAlternativeRouteSelector Function()>();
 
+late final _CMyLocationMapObjectSourceProvider_myLocationMapObjectSourcePtr = _lookup<ffi.NativeFunction<_CMyLocationMapObjectSource Function(_CMyLocationMapObjectSourceProvider)>>('CMyLocationMapObjectSourceProvider_myLocationMapObjectSource');
+late final _CMyLocationMapObjectSourceProvider_myLocationMapObjectSource = _CMyLocationMapObjectSourceProvider_myLocationMapObjectSourcePtr.asFunction<_CMyLocationMapObjectSource Function(_CMyLocationMapObjectSourceProvider)>();
+
+late final _CMyLocationMapObjectSourceProvider_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CMyLocationMapObjectSourceProvider_cg_objectIdentifier');
+late final _CMyLocationMapObjectSourceProvider_cg_objectIdentifier = _CMyLocationMapObjectSourceProvider_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();
+
+
+late final _CMyLocationMapObjectSourceProvider_releasePtr = _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>('CMyLocationMapObjectSourceProvider_release');
+late final _CMyLocationMapObjectSourceProvider_release = _CMyLocationMapObjectSourceProvider_releasePtr.asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+late final _CMyLocationMapObjectSourceProvider_retainPtr = _lookup<ffi.NativeFunction<_CMyLocationMapObjectSourceProvider Function(ffi.Pointer<ffi.Void>)>>('CMyLocationMapObjectSourceProvider_retain');
+late final _CMyLocationMapObjectSourceProvider_retain = _CMyLocationMapObjectSourceProvider_retainPtr.asFunction<_CMyLocationMapObjectSourceProvider Function(ffi.Pointer<ffi.Void>)>();
+late final _CMyLocationMapObjectSourceProviderMakeDefaultPtr = _lookup<ffi.NativeFunction<_CMyLocationMapObjectSourceProvider Function()>>('CMyLocationMapObjectSourceProviderMakeDefault');
+late final _CMyLocationMapObjectSourceProviderMakeDefault = _CMyLocationMapObjectSourceProviderMakeDefaultPtr.asFunction<_CMyLocationMapObjectSourceProvider Function()>();
+
 late final _CNavigationManager_uiModelPtr = _lookup<ffi.NativeFunction<_CModel Function(_CNavigationManager)>>('CNavigationManager_uiModel');
 late final _CNavigationManager_uiModel = _CNavigationManager_uiModelPtr.asFunction<_CModel Function(_CNavigationManager)>();
 late final _CNavigationManager_indoorDetectorPtr = _lookup<ffi.NativeFunction<_CIndoorDetector Function(_CNavigationManager)>>('CNavigationManager_indoorDetector');
@@ -72542,6 +73726,8 @@ late final _CNavigationManager_routeMapSettingsPtr = _lookup<ffi.NativeFunction<
 late final _CNavigationManager_routeMapSettings = _CNavigationManager_routeMapSettingsPtr.asFunction<_CRouteMapSettings Function(_CNavigationManager)>();
 late final _CNavigationManager_routeSourceSettingsPtr = _lookup<ffi.NativeFunction<_CRouteSourceSettings Function(_CNavigationManager)>>('CNavigationManager_routeSourceSettings');
 late final _CNavigationManager_routeSourceSettings = _CNavigationManager_routeSourceSettingsPtr.asFunction<_CRouteSourceSettings Function(_CNavigationManager)>();
+late final _CNavigationManager_routeMapObjectsProviderPtr = _lookup<ffi.NativeFunction<_CRouteMapObjectsProvider Function(_CNavigationManager)>>('CNavigationManager_routeMapObjectsProvider');
+late final _CNavigationManager_routeMapObjectsProvider = _CNavigationManager_routeMapObjectsProviderPtr.asFunction<_CRouteMapObjectsProvider Function(_CNavigationManager)>();
 late final _CNavigationManager_simulationSettingsPtr = _lookup<ffi.NativeFunction<_CSimulationSettings Function(_CNavigationManager)>>('CNavigationManager_simulationSettings');
 late final _CNavigationManager_simulationSettings = _CNavigationManager_simulationSettingsPtr.asFunction<_CSimulationSettings Function(_CNavigationManager)>();
 late final _CNavigationManager_voiceSelectorPtr = _lookup<ffi.NativeFunction<_CVoiceSelector Function(_CNavigationManager)>>('CNavigationManager_voiceSelector');
@@ -72558,6 +73744,8 @@ late final _CNavigationManager_alternativeRoutesProviderSettingsPtr = _lookup<ff
 late final _CNavigationManager_alternativeRoutesProviderSettings = _CNavigationManager_alternativeRoutesProviderSettingsPtr.asFunction<_CAlternativeRoutesProviderSettings Function(_CNavigationManager)>();
 late final _CNavigationManager_alternativeRouteSelectorPtr = _lookup<ffi.NativeFunction<_CAlternativeRouteSelector Function(_CNavigationManager)>>('CNavigationManager_alternativeRouteSelector');
 late final _CNavigationManager_alternativeRouteSelector = _CNavigationManager_alternativeRouteSelectorPtr.asFunction<_CAlternativeRouteSelector Function(_CNavigationManager)>();
+late final _CNavigationManager_myLocationMapObjectSourceProviderPtr = _lookup<ffi.NativeFunction<_CMyLocationMapObjectSourceProvider Function(_CNavigationManager)>>('CNavigationManager_myLocationMapObjectSourceProvider');
+late final _CNavigationManager_myLocationMapObjectSourceProvider = _CNavigationManager_myLocationMapObjectSourceProviderPtr.asFunction<_CMyLocationMapObjectSourceProvider Function(_CNavigationManager)>();
 
 late final _CNavigationManager_cg_objectIdentifierPtr = _lookup<ffi.NativeFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>>('CNavigationManager_cg_objectIdentifier');
 late final _CNavigationManager_cg_objectIdentifier = _CNavigationManager_cg_objectIdentifierPtr.asFunction<ffi.Pointer<ffi.Void> Function(ffi.Pointer<ffi.Void>)>();

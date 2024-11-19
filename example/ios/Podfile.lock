@@ -38,10 +38,10 @@ SPEC CHECKSUMS:
   dgis_mobile_sdk_full: 11bc72983d4f6926b121cb5174faa35c50d2fef5
   DGisFlutterFullSDK: 4da75262c613a4e8707d535e80788ae3ba568c8a
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  integration_test: ce0a3ffa1de96d1a89ca0ac26fca7ea18a749ef4
+  integration_test: 252f60fa39af5e17c3aa9899d35d908a0721b573
   permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
 
 PODFILE CHECKSUM: ade96bceabe3919b69c16573938e4268fe3a6c9d
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

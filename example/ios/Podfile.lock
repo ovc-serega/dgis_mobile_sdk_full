@@ -1,8 +1,8 @@
 PODS:
-  - dgis_mobile_sdk_full (12.1.3):
-    - DGisFlutterFullSDK (= 12.1.3)
+  - dgis_mobile_sdk_full (12.3.0):
+    - "DGisFlutterFullSDK (= 12.3.0+1)"
     - Flutter
-  - DGisFlutterFullSDK (12.1.3)
+  - "DGisFlutterFullSDK (12.3.0+1)"
   - Flutter (1.0.0)
   - integration_test (0.0.1):
     - Flutter
@@ -35,8 +35,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
-  dgis_mobile_sdk_full: 11bc72983d4f6926b121cb5174faa35c50d2fef5
-  DGisFlutterFullSDK: 4da75262c613a4e8707d535e80788ae3ba568c8a
+  dgis_mobile_sdk_full: 4d6be182bc780bd91cbb5b8082dbeb300b6ee6c6
+  DGisFlutterFullSDK: e69e333bb28d2c15d47ced07fcc0246a775a7ab8
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   integration_test: 252f60fa39af5e17c3aa9899d35d908a0721b573
   permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2

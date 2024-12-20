@@ -1,9 +1,14 @@
+import 'package:dgis_mobile_sdk_full/l10n/generated/dgis_localizations.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'pages/add_objects.dart';
 import 'pages/all_map_controls.dart';
 import 'pages/benchmark.dart';
 import 'pages/calc_position.dart';
 import 'pages/camera_moves.dart';
 import 'pages/clustering.dart';
+import 'pages/common.dart';
 import 'pages/copyright.dart';
 import 'pages/download_territories_page.dart';
 import 'pages/fps_page.dart';
@@ -11,13 +16,11 @@ import 'pages/indoor_widget.dart';
 import 'pages/map_gestures.dart';
 import 'pages/map_objects_identification.dart';
 import 'pages/map_snapshot.dart';
+import 'pages/navigator.dart';
 import 'pages/route_editor.dart';
 import 'pages/search_page.dart';
 import 'pages/stateless_screen_with_map.dart';
 import 'pages/traffic_widget.dart';
-import 'package:flutter/material.dart';
-
-import 'pages/common.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,6 +32,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      supportedLocales: DgisLocalizations.supportedLocales,
+      localizationsDelegates: const [
+        DgisLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
       title: 'Flutter SDK test app',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -85,6 +94,16 @@ class _MyHomePageState extends State<MyHomePage> {
               MaterialPageRoute(
                   builder: (context) => RouteEditorPage(title: 'Route editor')),
             );
+          },
+        ),
+        ListTile(
+          title: buildPageTitle("Navigation Example"),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        NavigatorPage(title: "Navigation Example")));
           },
         )
       ],

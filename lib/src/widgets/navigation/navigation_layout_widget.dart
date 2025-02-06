@@ -126,6 +126,7 @@ class _NavigationLayoutWidgetState
   Timer? hideMapControlsTimer;
   final hideControlsTimerDuration = const Duration(seconds: 20);
   final betterRoutePromptDuration = const Duration(seconds: 30);
+  final dashboardHorizonatalWidthScaleFactor = 2.2;
 
   StreamSubscription<sdk.State>? navigationStateSubscription;
   final ValueNotifier<sdk.State?> navigationState = ValueNotifier(null);
@@ -191,189 +192,396 @@ class _NavigationLayoutWidgetState
         : defaultInset;
   }
 
-  Widget _buildOnGoingNavigationState(BuildContext context) {
+  Widget _mapControlsColumn() {
     return Column(
       children: [
-        SafeArea(
-          child: Row(
-            children: [
-              if (widget._maneuverWidgetBuilder != null)
-                Expanded(
-                  child: Align(
-                    alignment: AlignmentDirectional.topStart,
-                    child:
-                        widget._maneuverWidgetBuilder!.call(maneuverController),
-                  ),
-                ),
-              if (widget._speedLimitWidgetBuilder != null)
-                Expanded(
-                  child: Align(
-                    alignment: AlignmentDirectional.topEnd,
-                    child: widget._speedLimitWidgetBuilder!
-                        .call(speedLimitController),
-                  ),
-                ),
-            ],
-          ),
-        ),
-        Expanded(
-          flex: 20,
-          child: GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            onTapDown: (_) => handleInteraction(),
-            onPanDown: (_) => handleInteraction(),
-            child: Stack(
+        if (widget._parkingWidgetBuilder != null ||
+            widget._trafficWidgetBuilder != null)
+          IntrinsicWidth(
+            child: Column(
               children: [
-                if (widget._trafficLineWidgetBuilder != null)
-                  ValueListenableBuilder(
-                    valueListenable: dashboardSize,
-                    child: widget._trafficLineWidgetBuilder!
-                        .call(trafficLineController),
-                    builder: (context, size, child) {
-                      return Positioned(
-                        left: 0,
-                        bottom: _calculateBottomInset(size),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            top: 16,
-                            bottom: 4,
-                          ),
-                          child: child,
-                        ),
-                      );
-                    },
+                if (widget._parkingWidgetBuilder != null)
+                  widget._parkingWidgetBuilder!.call(
+                    const RoundedCorners.top(),
+                    parkingController,
                   ),
-                ValueListenableBuilder(
-                  valueListenable: dashboardSize,
-                  child: ValueListenableBuilder(
-                    valueListenable: isMapControlsVisible,
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                      child: Column(
-                        children: [
-                          if (widget._parkingWidgetBuilder != null ||
-                              widget._trafficLineWidgetBuilder != null)
-                            IntrinsicWidth(
-                              child: Column(
-                                children: [
-                                  if (widget._parkingWidgetBuilder != null)
-                                    widget._parkingWidgetBuilder!.call(
-                                      const RoundedCorners.top(),
-                                      parkingController,
-                                    ),
-                                  if (widget._parkingWidgetBuilder != null &&
-                                      widget._trafficWidgetBuilder != null)
-                                    const Divider(
-                                      height: 0,
-                                      thickness: 1,
-                                      color: CupertinoColors.separator,
-                                    ),
-                                  if (widget._trafficWidgetBuilder != null)
-                                    widget._trafficWidgetBuilder!.call(
-                                      const RoundedCorners.bottom(),
-                                      trafficController,
-                                    ),
-                                ],
-                              ),
-                            ),
-                          const Spacer(),
-                          if (widget._zoomWidgetBuilder != null)
-                            widget._zoomWidgetBuilder!.call(zoomController),
-                          const Spacer(),
-                          if (widget._compassWidgetBuilder != null)
-                            widget._compassWidgetBuilder!
-                                .call(compassController),
-                          if (widget._myLocationwidgetBuilder != null)
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8),
-                              child: widget._myLocationwidgetBuilder!
-                                  .call(myLocationController),
-                            ),
-                        ],
-                      ),
-                    ),
-                    builder: (context, isVisible, child) {
-                      return TweenAnimationBuilder<double>(
-                        tween: Tween(
-                          begin: isVisible ? 0 : 1,
-                          end: isVisible ? 1 : 0,
-                        ),
-                        duration: const Duration(milliseconds: 300),
-                        child: IgnorePointer(
-                          ignoring: !isVisible,
-                          child: child,
-                        ),
-                        builder: (context, value, child) => Opacity(
-                          opacity: value,
-                          child: Visibility(
-                            visible: value > 0,
-                            child: child!,
-                          ),
-                        ),
-                      );
-                    },
+                if (widget._parkingWidgetBuilder != null &&
+                    widget._trafficWidgetBuilder != null)
+                  const Divider(
+                    height: 0,
+                    thickness: 1,
+                    color: CupertinoColors.separator,
                   ),
-                  builder: (context, size, child) {
-                    return Positioned(
-                      top: 0,
-                      right: 0,
-                      bottom: _calculateBottomInset(size),
-                      child: child!,
-                    );
-                  },
-                ),
-                if (isBetterRoutePrompted.value &&
-                    widget._betterRoutePromptWidgetBuilder != null)
-                  SafeArea(
-                    child: Align(
-                      alignment: AlignmentDirectional.bottomCenter,
-                      child: widget._betterRoutePromptWidgetBuilder!.call(
-                        betterRoutePromptController,
-                        betterRoutePromptDuration,
-                      ),
-                    ),
-                  ),
-                if (widget._dashboardWidgetBuilder != null)
-                  Visibility.maintain(
-                    visible: !isBetterRoutePrompted.value,
-                    child: IgnorePointer(
-                      ignoring: isBetterRoutePrompted.value,
-                      child: ValueListenableBuilder(
-                        valueListenable: navigationState,
-                        child: Align(
-                          alignment: AlignmentDirectional.bottomCenter,
-                          child: widget._dashboardWidgetBuilder!.call(
-                            dashboardController,
-                            (p0) => dashboardSize.value = p0,
-                          ),
-                        ),
-                        builder: (context, state, child) {
-                          if (widget._dashboardWidgetBuilder != null &&
-                              navigationState.value != sdk.State.finished) {
-                            return child!;
-                          } else {
-                            return const SizedBox.shrink();
-                          }
-                        },
-                      ),
-                    ),
+                if (widget._trafficWidgetBuilder != null)
+                  widget._trafficWidgetBuilder!.call(
+                    const RoundedCorners.bottom(),
+                    trafficController,
                   ),
               ],
             ),
           ),
-        ),
+        const Spacer(),
+        if (widget._zoomWidgetBuilder != null)
+          widget._zoomWidgetBuilder!.call(zoomController),
+        const Spacer(),
+        if (widget._compassWidgetBuilder != null)
+          widget._compassWidgetBuilder!.call(compassController),
+        if (widget._myLocationwidgetBuilder != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: widget._myLocationwidgetBuilder!.call(myLocationController),
+          ),
       ],
+    );
+  }
+
+  Widget _buildOnGoingNavigationState(BuildContext context) {
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        if (orientation == Orientation.portrait) {
+          //
+          // Portrait orientation
+          //
+          return Column(
+            children: [
+              SafeArea(
+                child: Row(
+                  children: [
+                    if (widget._maneuverWidgetBuilder != null)
+                      Expanded(
+                        child: Align(
+                          alignment: AlignmentDirectional.topStart,
+                          child: widget._maneuverWidgetBuilder!
+                              .call(maneuverController),
+                        ),
+                      ),
+                    if (widget._speedLimitWidgetBuilder != null)
+                      Expanded(
+                        child: Align(
+                          alignment: AlignmentDirectional.topEnd,
+                          child: widget._speedLimitWidgetBuilder!
+                              .call(speedLimitController),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 20,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  onTapDown: (_) => handleInteraction(),
+                  onPanDown: (_) => handleInteraction(),
+                  child: Stack(
+                    children: [
+                      if (widget._trafficLineWidgetBuilder != null)
+                        ValueListenableBuilder(
+                          valueListenable: dashboardSize,
+                          child: widget._trafficLineWidgetBuilder!
+                              .call(trafficLineController),
+                          builder: (context, size, child) {
+                            return Positioned(
+                              left: 0,
+                              bottom: _calculateBottomInset(size),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                  top: 16,
+                                  bottom: 4,
+                                ),
+                                child: child,
+                              ),
+                            );
+                          },
+                        ),
+                      ValueListenableBuilder(
+                        valueListenable: dashboardSize,
+                        child: ValueListenableBuilder(
+                          valueListenable: isMapControlsVisible,
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: _mapControlsColumn(),
+                          ),
+                          builder: (context, isVisible, child) {
+                            return TweenAnimationBuilder<double>(
+                              tween: Tween(
+                                begin: isVisible ? 0 : 1,
+                                end: isVisible ? 1 : 0,
+                              ),
+                              duration: const Duration(milliseconds: 300),
+                              child: IgnorePointer(
+                                ignoring: !isVisible,
+                                child: child,
+                              ),
+                              builder: (context, value, child) => Opacity(
+                                opacity: value,
+                                child: Visibility(
+                                  visible: value > 0,
+                                  child: child!,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                        builder: (context, size, child) {
+                          return Positioned(
+                            top: 0,
+                            right: 0,
+                            bottom: _calculateBottomInset(size),
+                            child: child!,
+                          );
+                        },
+                      ),
+                      if (isBetterRoutePrompted.value &&
+                          widget._betterRoutePromptWidgetBuilder != null)
+                        SafeArea(
+                          child: Align(
+                            alignment: AlignmentDirectional.bottomCenter,
+                            child: widget._betterRoutePromptWidgetBuilder!.call(
+                              betterRoutePromptController,
+                              betterRoutePromptDuration,
+                            ),
+                          ),
+                        ),
+                      if (widget._dashboardWidgetBuilder != null)
+                        Visibility.maintain(
+                          visible: !isBetterRoutePrompted.value,
+                          child: IgnorePointer(
+                            ignoring: isBetterRoutePrompted.value,
+                            child: ValueListenableBuilder(
+                              valueListenable: navigationState,
+                              child: Align(
+                                alignment: AlignmentDirectional.bottomCenter,
+                                child: widget._dashboardWidgetBuilder!.call(
+                                  dashboardController,
+                                  (p0) => dashboardSize.value = p0,
+                                ),
+                              ),
+                              builder: (context, state, child) {
+                                if (widget._dashboardWidgetBuilder != null &&
+                                    navigationState.value !=
+                                        sdk.State.finished) {
+                                  return child!;
+                                } else {
+                                  return const SizedBox.shrink();
+                                }
+                              },
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          );
+          //
+          // Landscape orientation
+          //
+        } else {
+          return SafeArea(
+            child: Stack(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          if (widget._maneuverWidgetBuilder != null)
+                            Align(
+                              alignment: AlignmentDirectional.topStart,
+                              child: widget._maneuverWidgetBuilder!
+                                  .call(maneuverController),
+                            ),
+                          Expanded(
+                            flex: 20,
+                            child: GestureDetector(
+                              behavior: HitTestBehavior.translucent,
+                              onTapDown: (_) => handleInteraction(),
+                              onPanDown: (_) => handleInteraction(),
+                              child: Align(
+                                alignment: AlignmentDirectional.bottomStart,
+                                child: LayoutBuilder(
+                                  builder: (context, constraints) {
+                                    final newConstraints = constraints.copyWith(
+                                      maxWidth: constraints.maxWidth /
+                                          dashboardHorizonatalWidthScaleFactor,
+                                    );
+                                    return ConstrainedBox(
+                                      constraints: newConstraints,
+                                      child: Stack(
+                                        children: [
+                                          if (isBetterRoutePrompted.value &&
+                                              widget._betterRoutePromptWidgetBuilder !=
+                                                  null)
+                                            SafeArea(
+                                              child: Align(
+                                                alignment: AlignmentDirectional
+                                                    .bottomCenter,
+                                                child: widget
+                                                    ._betterRoutePromptWidgetBuilder!
+                                                    .call(
+                                                  betterRoutePromptController,
+                                                  betterRoutePromptDuration,
+                                                ),
+                                              ),
+                                            ),
+                                          if (widget._dashboardWidgetBuilder !=
+                                              null)
+                                            Visibility.maintain(
+                                              visible:
+                                                  !isBetterRoutePrompted.value,
+                                              child: IgnorePointer(
+                                                ignoring:
+                                                    isBetterRoutePrompted.value,
+                                                child: ValueListenableBuilder(
+                                                  valueListenable:
+                                                      navigationState,
+                                                  child: Align(
+                                                    alignment:
+                                                        AlignmentDirectional
+                                                            .bottomCenter,
+                                                    child: widget
+                                                        ._dashboardWidgetBuilder!
+                                                        .call(
+                                                      dashboardController,
+                                                      (p0) => dashboardSize
+                                                          .value = p0,
+                                                    ),
+                                                  ),
+                                                  builder:
+                                                      (context, state, child) {
+                                                    if (widget._dashboardWidgetBuilder !=
+                                                            null &&
+                                                        navigationState.value !=
+                                                            sdk.State
+                                                                .finished) {
+                                                      return child!;
+                                                    } else {
+                                                      return const SizedBox
+                                                          .shrink();
+                                                    }
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Align(
+                  alignment: AlignmentDirectional.bottomEnd,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Align(
+                        alignment: AlignmentDirectional.topEnd,
+                        child: widget._speedLimitWidgetBuilder!
+                            .call(speedLimitController),
+                      ),
+                      ValueListenableBuilder(
+                        valueListenable: isMapControlsVisible,
+                        builder: (context, isVisible, _) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: TweenAnimationBuilder<double>(
+                              tween: Tween(
+                                begin: isVisible ? 0 : 1,
+                                end: isVisible ? 1 : 0,
+                              ),
+                              duration: const Duration(milliseconds: 300),
+                              builder: (context, value, child) => Opacity(
+                                opacity: value,
+                                child: Visibility(
+                                  visible: value > 0,
+                                  child: IgnorePointer(
+                                    ignoring: !isVisible,
+                                    child: Align(
+                                      alignment: Alignment.centerRight,
+                                      child: _mapControlsColumn(),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                ValueListenableBuilder(
+                  valueListenable: isMapControlsVisible,
+                  builder: (context, isVisible, _) {
+                    return Align(
+                      alignment: AlignmentDirectional.bottomEnd,
+                      child: TweenAnimationBuilder<double>(
+                        tween: Tween(
+                          begin: isVisible ? 1 : 0,
+                          end: isVisible ? 0 : 1,
+                        ),
+                        duration: const Duration(milliseconds: 300),
+                        builder: (context, value, child) => Opacity(
+                          opacity: value,
+                          child: Visibility(
+                            visible: value > 0,
+                            child: IgnorePointer(
+                              ignoring: isVisible,
+                              child: widget._trafficLineWidgetBuilder!.call(
+                                trafficLineController,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          );
+        }
+      },
     );
   }
 
   Widget _buildFinishedNavigationState(BuildContext context) {
     if (widget._finishRouteWidgetBuilder != null) {
+      var offset = Offset.zero;
+
+      if (MediaQuery.orientationOf(context) == Orientation.landscape) {
+        offset = dashboardSize.value ?? Offset.zero;
+      }
       return OverlayPortal(
         controller: overlayController,
         overlayChildBuilder: (context) {
-          return Positioned(
-            child:
-                widget._finishRouteWidgetBuilder!.call(finishRouteController),
+          return OrientationBuilder(
+            builder: (context, orientation) {
+              if (orientation == Orientation.portrait) {
+                return widget._finishRouteWidgetBuilder!
+                    .call(finishRouteController);
+              }
+              return Stack(
+                children: [
+                  Positioned(
+                    left: offset.dx,
+                    width: offset.distance,
+                    top: 0,
+                    bottom: 0,
+                    child: widget._finishRouteWidgetBuilder!
+                        .call(finishRouteController),
+                  ),
+                ],
+              );
+            },
           );
         },
       );
@@ -406,7 +614,7 @@ class _NavigationLayoutWidgetState
     map.camera.setBehaviour(
       widget.navigationManager.mapFollowController.cameraBehaviour,
     );
-    map.camera.positionPoint = const sdk.CameraPositionPoint(y: 5.0 / 6.0);
+    map.camera.positionPoint = const sdk.CameraPositionPoint(y: 5.0 / 6.5);
 
     dashboardController = DashboardController(
       navigationManager: widget.navigationManager,

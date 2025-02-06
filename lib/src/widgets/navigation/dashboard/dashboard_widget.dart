@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
@@ -106,8 +108,13 @@ class _DashboardWidgetState extends ThemedMapControllingWidgetState<
   final _dateFormat = DateFormat('HH:mm');
   final double _headerSize = 60;
 
+  bool get isLandscape =>
+      MediaQuery.orientationOf(context) == Orientation.landscape;
+
   @override
   void initState() {
+    super.initState();
+
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
@@ -127,19 +134,19 @@ class _DashboardWidgetState extends ThemedMapControllingWidgetState<
         curve: Curves.easeOutCubic,
       ),
     );
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
-        final box =
-            headerGlobalKey.currentContext?.findRenderObject() as RenderBox?;
-        final position = box?.localToGlobal(Offset.zero);
-
-        if (position != null) {
-          widget.onHeaderChangeSize.call(position);
-        }
+        _measureWithConsistency(
+          headerGlobalKey,
+          (position) {
+            if (mounted) {
+              widget.onHeaderChangeSize.call(position);
+            }
+          },
+        );
       }
     });
-
-    super.initState();
   }
 
   void _toggleOverlay() {
@@ -165,6 +172,52 @@ class _DashboardWidgetState extends ThemedMapControllingWidgetState<
   void dispose() {
     _animationController.dispose();
     super.dispose();
+  }
+
+  // This function needed because we have to
+  // measure global position of widget after all animations/transitions end
+  // to get right result.
+  // Since we have no idea of external animations, navigation frameworks etc,
+  // we have to create reliable measure here.
+  // We count reliable when 3 measurements in a row returns same result. Then this result is returned.
+  void _measureWithConsistency(
+    GlobalKey key,
+    Function(Offset position) onResult,
+  ) {
+    final measurements = Queue<Offset>();
+    var attempts = 0;
+    const maxAttempts = 100;
+    const requiredConsistent = 3;
+
+    void tryMeasure() {
+      if (key.currentContext != null && !key.currentContext!.mounted) return;
+
+      final box = key.currentContext?.findRenderObject() as RenderBox?;
+      final position = box?.localToGlobal(Offset.zero);
+
+      if (position != null) {
+        measurements.addFirst(position);
+
+        if (measurements.length >= requiredConsistent) {
+          final lastThree = measurements.take(requiredConsistent).toList();
+          if (lastThree.every((offset) => offset == lastThree.first)) {
+            onResult(lastThree.first);
+            return;
+          }
+          measurements.removeLast();
+        }
+      }
+
+      if (attempts < maxAttempts) {
+        attempts++;
+        Future.delayed(
+          const Duration(milliseconds: 20),
+          tryMeasure,
+        );
+      }
+    }
+
+    tryMeasure();
   }
 
   Widget _buildHeader(
@@ -203,7 +256,7 @@ class _DashboardWidgetState extends ThemedMapControllingWidgetState<
             final velocity = details.primaryDelta?.abs() ?? 0;
             final duration =
                 velocity > 0 ? (2000 / velocity).clamp(30, 1000).toInt() : 300;
-            _isDragging = false; // Stop processing drag
+            _isDragging = false;
             _overlayController.show();
             _animationController.animateTo(
               1,
@@ -509,6 +562,18 @@ class _DashboardWidgetState extends ThemedMapControllingWidgetState<
     return OverlayPortal(
       controller: _overlayController,
       overlayChildBuilder: (context) {
+        var globalPosition = Offset.zero;
+        var size = Size.zero;
+
+        if (isLandscape) {
+          final renderBox =
+              headerGlobalKey.currentContext?.findRenderObject() as RenderBox?;
+          if (renderBox != null) {
+            globalPosition = renderBox.localToGlobal(Offset.zero);
+            size = renderBox.size;
+          }
+        }
+
         return Stack(
           children: [
             FadeTransition(
@@ -521,8 +586,8 @@ class _DashboardWidgetState extends ThemedMapControllingWidgetState<
               ),
             ),
             Positioned(
-              left: 0,
-              right: 0,
+              left: globalPosition.dx,
+              right: globalPosition.dx + size.width,
               bottom: 0,
               child: SlideTransition(
                 position: _slideAnimation,

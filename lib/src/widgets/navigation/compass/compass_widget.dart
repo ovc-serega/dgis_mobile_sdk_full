@@ -74,7 +74,7 @@ class _CompassWidgetState extends ThemedMapControllingWidgetState<
         ),
       ),
       builder: (context, state, child) {
-        final angle = pi * state.bearing / 180;
+        final angle = -(pi * state.bearing / 180);
         return AnimatedOpacity(
           opacity: state.bearing == 0 ? 0.0 : 1.0,
           duration: const Duration(milliseconds: 200),

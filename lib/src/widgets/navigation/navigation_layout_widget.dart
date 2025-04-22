@@ -518,33 +518,34 @@ class _NavigationLayoutWidgetState
                     ],
                   ),
                 ),
-                ValueListenableBuilder(
-                  valueListenable: isMapControlsVisible,
-                  builder: (context, isVisible, _) {
-                    return Align(
-                      alignment: AlignmentDirectional.bottomEnd,
-                      child: TweenAnimationBuilder<double>(
-                        tween: Tween(
-                          begin: isVisible ? 1 : 0,
-                          end: isVisible ? 0 : 1,
-                        ),
-                        duration: const Duration(milliseconds: 300),
-                        builder: (context, value, child) => Opacity(
-                          opacity: value,
-                          child: Visibility(
-                            visible: value > 0,
-                            child: IgnorePointer(
-                              ignoring: isVisible,
-                              child: widget._trafficLineWidgetBuilder!.call(
-                                trafficLineController,
+                if (widget._trafficLineWidgetBuilder != null)
+                  ValueListenableBuilder(
+                    valueListenable: isMapControlsVisible,
+                    builder: (context, isVisible, _) {
+                      return Align(
+                        alignment: AlignmentDirectional.bottomEnd,
+                        child: TweenAnimationBuilder<double>(
+                          tween: Tween(
+                            begin: isVisible ? 1 : 0,
+                            end: isVisible ? 0 : 1,
+                          ),
+                          duration: const Duration(milliseconds: 300),
+                          builder: (context, value, child) => Opacity(
+                            opacity: value,
+                            child: Visibility(
+                              visible: value > 0,
+                              child: IgnorePointer(
+                                ignoring: isVisible,
+                                child: widget._trafficLineWidgetBuilder!.call(
+                                  trafficLineController,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                ),
+                      );
+                    },
+                  ),
               ],
             ),
           );

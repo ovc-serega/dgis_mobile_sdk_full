@@ -430,6 +430,7 @@ class MapWidgetState extends State<MapWidget> with WidgetsBindingObserver {
   StreamSubscription<sdk.DevicePpi>? _devicePpiSubscription;
   double _deviceDensity = 1;
   late final ValueNotifier<MapTheme> _mapTheme;
+  late final double devicePixelRatio;
 
   @override
   void initState() {
@@ -445,6 +446,7 @@ class MapWidgetState extends State<MapWidget> with WidgetsBindingObserver {
     if (widget.child != null) {
       mapWidgetController._addMapThemeChangedCallback(_onMapThemeChanged);
     }
+    devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
     _initialize();
   }
 
@@ -532,7 +534,7 @@ class MapWidgetState extends State<MapWidget> with WidgetsBindingObserver {
 
   Future<void> _initialize() async {
     final builder =
-        await sdk.MapBuilder().apply(widget._mapOptions, widget._sdkContext);
+        await sdk.MapBuilder().apply(widget._mapOptions, widget._sdkContext, devicePixelRatio);
     final map = await builder.createMap(widget._sdkContext).value;
     mapWidgetController
       .._map = map
@@ -546,6 +548,7 @@ class MapWidgetState extends State<MapWidget> with WidgetsBindingObserver {
     mapWidgetController
       .._renderer = renderer
       .._updateRendererFps();
+
 
     _updateMapVisibility();
 
@@ -623,6 +626,7 @@ extension _MapBuilderApplyMapOptions on sdk.MapBuilder {
   Future<sdk.MapBuilder> apply(
     MapOptions options,
     sdk.Context sdkContext,
+    double devicePixelRatio
   ) async {
     final builder = sdk.MapBuilder()
         .setPosition(options.position)
@@ -632,13 +636,9 @@ extension _MapBuilderApplyMapOptions on sdk.MapBuilder {
     if (options.devicePPI != null && options.deviceDensity != null) {
       builder.setDevicePpi(options.devicePPI!, options.deviceDensity!);
     } else {
-      final dispatcher = WidgetsBinding.instance.platformDispatcher;
-      final display = dispatcher.displays.first;
-      final deviceDensity = display.devicePixelRatio;
-      final deviceDpi = deviceDensity * 160.0;
       builder.setDevicePpi(
-        sdk.DevicePpi(deviceDpi),
-        sdk.DeviceDensity(deviceDensity),
+        sdk.DevicePpi(devicePixelRatio * 160.0),
+        sdk.DeviceDensity(devicePixelRatio),
       );
     }
 

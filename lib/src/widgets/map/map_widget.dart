@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 
 import '../../generated/dart_bindings.dart' as sdk;
 import '../../generated/native_exception.dart';
+import '../../generated/optional.dart';
 import '../../generated/stateful_channel.dart';
 import '../../platform/map/map.dart';
 import '../../platform/map/map_appearance.dart';
@@ -302,7 +303,48 @@ class MapWidgetController {
 }
 
 /// Widget для работы с картой.
-class MapWidget extends StatefulWidget {
+class MapWidget extends StatelessWidget {
+  final sdk.Context sdkContext;
+  final MapOptions mapOptions;
+  final MapWidgetController? controller;
+  final Widget? child;
+
+  MapWidget({
+    required this.sdkContext,
+    required this.mapOptions,
+    this.controller,
+    this.child,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    // ignore: omit_local_variable_types
+    MapOptions options = mapOptions;
+    if (mapOptions.deviceDensity == null || mapOptions.devicePPI == null) {
+      final density = MediaQuery.of(context).devicePixelRatio;
+      final ppi = density * 160;
+
+      options = mapOptions.copyWith(
+        deviceDensity: mapOptions.deviceDensity == null
+            ? Optional(sdk.DeviceDensity(density))
+            : Optional(mapOptions.deviceDensity),
+        devicePPI: mapOptions.devicePPI == null
+            ? Optional(sdk.DevicePpi(ppi))
+            : Optional(mapOptions.devicePPI),
+      );
+    }
+
+    return _MapWidget(
+      sdkContext: sdkContext,
+      mapOptions: options,
+      controller: controller,
+      child: child,
+    );
+  }
+}
+
+class _MapWidget extends StatefulWidget {
   final sdk.Context _sdkContext;
   final MapOptions _mapOptions;
   final MapWidgetController? _controller;
@@ -312,12 +354,11 @@ class MapWidget extends StatefulWidget {
   // некоторые из параметров – обертки над нативными объектами,
   // и для них это неприменимо
   // ignore: prefer_const_constructors_in_immutables
-  MapWidget({
+  _MapWidget({
     required sdk.Context sdkContext,
     required MapOptions mapOptions,
     MapWidgetController? controller,
     this.child,
-    super.key,
   })  : _sdkContext = sdkContext,
         _mapOptions = mapOptions,
         _controller = controller;
@@ -421,7 +462,7 @@ class _MapGestureController {
   }
 }
 
-class MapWidgetState extends State<MapWidget> with WidgetsBindingObserver {
+class MapWidgetState extends State<_MapWidget> with WidgetsBindingObserver {
   final _controller = _TextureController();
   late final MapWidgetController mapWidgetController;
   int? _textureId;
@@ -430,7 +471,6 @@ class MapWidgetState extends State<MapWidget> with WidgetsBindingObserver {
   StreamSubscription<sdk.DevicePpi>? _devicePpiSubscription;
   double _deviceDensity = 1;
   late final ValueNotifier<MapTheme> _mapTheme;
-  late final double devicePixelRatio;
 
   @override
   void initState() {
@@ -446,7 +486,6 @@ class MapWidgetState extends State<MapWidget> with WidgetsBindingObserver {
     if (widget.child != null) {
       mapWidgetController._addMapThemeChangedCallback(_onMapThemeChanged);
     }
-    devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
     _initialize();
   }
 
@@ -534,7 +573,7 @@ class MapWidgetState extends State<MapWidget> with WidgetsBindingObserver {
 
   Future<void> _initialize() async {
     final builder =
-        await sdk.MapBuilder().apply(widget._mapOptions, widget._sdkContext, devicePixelRatio);
+        await sdk.MapBuilder().apply(widget._mapOptions, widget._sdkContext);
     final map = await builder.createMap(widget._sdkContext).value;
     mapWidgetController
       .._map = map
@@ -548,7 +587,6 @@ class MapWidgetState extends State<MapWidget> with WidgetsBindingObserver {
     mapWidgetController
       .._renderer = renderer
       .._updateRendererFps();
-
 
     _updateMapVisibility();
 
@@ -626,21 +664,12 @@ extension _MapBuilderApplyMapOptions on sdk.MapBuilder {
   Future<sdk.MapBuilder> apply(
     MapOptions options,
     sdk.Context sdkContext,
-    double devicePixelRatio
   ) async {
     final builder = sdk.MapBuilder()
         .setPosition(options.position)
         .setPositionPoint(options.positionPoint)
         .setZoomRestrictions(options.zoomRestrictions);
-
-    if (options.devicePPI != null && options.deviceDensity != null) {
-      builder.setDevicePpi(options.devicePPI!, options.deviceDensity!);
-    } else {
-      builder.setDevicePpi(
-        sdk.DevicePpi(devicePixelRatio * 160.0),
-        sdk.DeviceDensity(devicePixelRatio),
-      );
-    }
+    builder.setDevicePpi(options.devicePPI!, options.deviceDensity!);
 
     if (options.sources != null) {
       options.sources!.forEach(builder.addSource);

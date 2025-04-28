@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'pages/add_objects.dart';
-import 'pages/all_map_controls.dart';
+import 'pages/all_map_widgets.dart';
 import 'pages/benchmark.dart';
 import 'pages/calc_position.dart';
 import 'pages/camera_moves.dart';
@@ -17,6 +17,7 @@ import 'pages/indoor_widget.dart';
 import 'pages/map_gestures.dart';
 import 'pages/map_objects_identification.dart';
 import 'pages/map_snapshot.dart';
+import 'pages/mini_map.dart';
 import 'pages/navigator.dart';
 import 'pages/route_editor.dart';
 import 'pages/search_page.dart';
@@ -106,7 +107,17 @@ class _MyHomePageState extends State<MyHomePage> {
                     builder: (context) =>
                         NavigatorPage(title: "Navigation Example")));
           },
-        )
+        ),
+        ListTile(
+          title: buildPageTitle('Mini Map'),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => MiniMapPage(title: 'Mini Map')),
+            );
+          },
+        ),
       ],
     );
   }
@@ -131,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
               context,
               MaterialPageRoute(
                   builder: (context) =>
-                      AllMapControlsPage(title: 'All map widgets')),
+                      AllMapWidgetsPage(title: 'All map widgets')),
             );
           },
         ),
@@ -244,7 +255,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => MapObjectsIdentificationPage(
+                  builder: (context) => MapObjectsIdentificationFullPage(
                       title: 'Map objects identification')),
             );
           },

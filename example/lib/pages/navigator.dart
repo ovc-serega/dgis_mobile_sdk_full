@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dgis_mobile_sdk_full/dgis.dart' as sdk;
 import 'package:flutter/material.dart';
+
 import 'common.dart';
 
 class NavigatorPage extends StatefulWidget {
@@ -52,7 +53,6 @@ class _NavigatorPageState extends State<NavigatorPage> {
 
     super.initState();
     mapWidgetController.getMapAsync((map) {
-      mapWidgetController.maxFps = sdk.Fps(30);
       unawaited(
         _startNavigation(map),
       );
@@ -153,8 +153,6 @@ class _NavigatorPageState extends State<NavigatorPage> {
         controller: mapWidgetController,
         child: Padding(
           padding: const EdgeInsets.all(16),
-          // NavigationLayout.defaultLayout can be used instead
-          // to just add default widgets with default behaviour.
           child: sdk.NavigationLayoutWidget(
             navigationManager: navigationManager,
             dashboardWidgetBuilder: (controller, onHeaderChangeSize) =>

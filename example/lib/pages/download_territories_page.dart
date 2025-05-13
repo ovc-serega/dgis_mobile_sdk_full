@@ -163,5 +163,20 @@ class _DownloadTerritoriesPageState extends State<DownloadTerritoriesPage> {
         });
       });
     });
+
+// офис 2gis
+    final geoPoint = sdk.GeoPoint(
+      latitude: sdk.Latitude(55.736206),
+      longitude: sdk.Longitude(37.531660),
+    );
+
+  try {
+    print("Find territories!");
+    var territories = territoryManager.findByPoint(geoPoint);
+    print("Territories count: ${territories.length}");
+  } catch (e) {
+    print("Find territory exception: $e");
+  }
   }
 }
+

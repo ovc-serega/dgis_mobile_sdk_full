@@ -41,7 +41,72 @@ class AppContainer {
         systemLevel: sdk.LogLevel.verbose,
         customLevel: sdk.LogLevel.verbose,
       ),
+      locationProvider: _LocationProviderImpl()
     );
     return _sdkContext!;
   }
+}
+
+
+class _LocationProviderImpl implements sdk.LocationProvider {
+  sdk.Location? _location;
+  sdk.LocationNotifier? _locationNotifier;
+
+  final _testLocations = [
+    (const sdk.Location(
+      coordinates: sdk.LocationCoordinates(
+        value: sdk.GeoPoint(
+          latitude: sdk.Latitude(55.759909),
+          longitude: sdk.Longitude(37.618806),
+        ),
+        accuracy: 15,
+      ),
+      altitude: null,
+      course: sdk.LocationCourse(
+        value: sdk.Bearing(20),
+        accuracy: sdk.Bearing(5),
+      ),
+      groundSpeed: null,
+      timestamp: Duration.zero,
+    )),
+    (const sdk.Location(
+      coordinates: sdk.LocationCoordinates(
+        value: sdk.GeoPoint(
+          latitude: sdk.Latitude(55.746962),
+          longitude: sdk.Longitude(37.643073),
+        ),
+        accuracy: 5,
+      ),
+      altitude: null,
+      course: sdk.LocationCourse(
+        value: sdk.Bearing(10),
+        accuracy: sdk.Bearing(5),
+      ),
+      groundSpeed: null,
+      timestamp: Duration(seconds: 10),
+    )),
+  ];
+
+  @override
+  sdk.Location? lastLocation() {
+    return _location;
+  }
+
+  @override
+  void setNotifiers(
+    sdk.LocationNotifier? locationNotifier,
+    sdk.LocationAvailableNotifier? availableNotifier,
+  ) {
+    _locationNotifier = locationNotifier;
+    _location = _testLocations[0];
+    _locationNotifier?.send([_testLocations[0]]);
+    availableNotifier?.send(true);
+    Future.delayed(const Duration(seconds: 10), () {
+      _location = _testLocations[1];
+      _locationNotifier?.send([_testLocations[1]]);
+    });
+  }
+
+  @override
+  void setDesiredAccuracy(sdk.DesiredAccuracy desiredAccuracy) {}
 }
